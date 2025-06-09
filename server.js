@@ -16,9 +16,17 @@ app.get('/constructing', (req, res) => {
   res.sendFile(path.join(__dirname, 'constructing.html'));
 });
 
+app.get('/constructing1', (req, res) => {
+  res.sendFile(path.join(__dirname, 'constructing1.html'));
+});
+
 app.get('/popular.html', (req, res) => {
   res.redirect('error.html?e=popular');
 });
+
+app.get('/contact', (req, res) => {
+  res.sendFile(path.join(__dirname, 'contact.html'));
+})
 
 app.get('/:page/', (req, res) => {
   const pageName = req.params.page;

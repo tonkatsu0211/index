@@ -16,6 +16,10 @@ app.get('/constructing', (req, res) => {
   res.sendFile(path.join(__dirname, 'constructing.html'));
 });
 
+app.get('/popular.html', (req, res) => {
+  res.redirect('error.html?e=popular');
+});
+
 app.get('/:page/', (req, res) => {
   const pageName = req.params.page;
   res.redirect(`/error.html?e=${encodeURIComponent(pageName)}`);

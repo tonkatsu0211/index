@@ -2,18 +2,18 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>_tonkatsu_について</title>
+  <title>_tonkatsu_のページ</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   
-  <header>_tonkatsu_ / tonkatsu0211のマイページ</header>
+  <div id="header-placeholder"></div>
 
   <div class="nav">
     <a href="index.html">自己紹介</a>
     <a href="projects.html">Scratchの作品</a>
     <a href="contact.html" class="active">連絡先</a>
-    <a href="constructing1.html">更新履歴</a>
+    <a href="updates.html">更新履歴</a>
   </div>
   
   <div class="main">
@@ -23,9 +23,21 @@
     <p>主な活動場所(padlet): <a href="https://padlet.com/taketti/padlet-435ffk9qdakbxqo3?__cf_chl_tk=rYDSq.wQfwi_l.OOU8N3coiIvOqQ1wmPnxs90asQGiA-1749270930-1.0.1.1-265rWQ44VhT8_Ohxuyay1GKPlyujHujkydPoHxBrtKw" target="_blank">いろいろ部屋</a></p>
   </div>  
   
+  <div id="footer-placeholder"></div>
+  
+  <script>
+  fetch('/header.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
+
+  fetch('/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer-placeholder').innerHTML = html;
+    });
+</script>
+  
 </body>
-<footer>
-  <p>CC BY-NC-SA 4.0</p>
-  <p>&copy; _tonkatsu_ / tonkatsu0211 All rights reserved.</p>
-</footer>
 </html>

@@ -2,29 +2,40 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>_tonkatsu_について</title>
+  <title>_tonkatsu_のページ</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   
-  <header>_tonkatsu_ / tonkatsu0211のマイページ</header>
-
+  <div id="header-placeholder"></div>
+  
   <div class="nav">
     <a href="index.html">自己紹介</a>
     <a href="projects.html">Scratchの作品</a>
     <a href="contact.html">連絡先</a>
-    <a href="constructing1.html" class="active">更新履歴</a>
+    <a href="updates.html" class="active">更新履歴</a>
   </div>
   
   <div class="main">
     <h2>更新履歴</h2>
     <p>2025/6/9 V1.0.0 公開</p>
-  </div>  
+  </div>
+  
+  <div id="footer-placeholder"></div>
+  
+  <script>
+  fetch('/header.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
+
+  fetch('/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer-placeholder').innerHTML = html;
+    });
+  </script>
   
 </body>
-<footer>
-  <p>CC BY-NC-SA 4.0</p>
-  <p>&copy; _tonkatsu_ / tonkatsu0211 All rights reserved.</p>
-  <p>V1.0.0</p>
-</footer>
 </html>

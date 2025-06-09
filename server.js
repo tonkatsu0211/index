@@ -28,13 +28,9 @@ app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'contact.html'));
 })
 
-app.get('/:page/', (req, res) => {
+app.get((req, res) => {
   const pageName = req.params.page;
-  res.redirect(`/error.html?e=${encodeURIComponent(pageName)}`);
-});
-
-app.use((req, res) => {
-  res.status(404).send('Not Found');
+  res.status(404).sendFile(path.jpin(__dirname, `/error.html?e=${encodeURIComponent(pageName)}`));
 });
 
 const listener = app.listen(process.env.PORT, () => {

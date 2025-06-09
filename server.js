@@ -12,8 +12,8 @@ app.get('/constructing.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'constructing.html'));
 });
 
-app.get('/popular.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'popular.html'));
+app.get(['/projects.html','popular.html'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'projects.html'));
 });
 
 const listener = app.listen(process.env.PORT, () => {

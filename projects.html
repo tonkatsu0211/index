@@ -5,86 +5,6 @@
   <title>_tonkatsu_について</title>
   <link rel="stylesheet" href="style.css">
   <style>
-    .main a {
-      background-color: #ffffff;
-      text-decoration: none;
-      color: #4c97ff;
-      border-bottom: 1px solid #4c97ff;
-    }
-    .turbowarpLink {
-      background-color: #ffffff;
-      text-decoration: none;
-      color: black;
-      padding-left: 20px;
-      padding-right:20px;
-    }
-    .turbowarpLink a{
-      background-color: #ffffff;
-      text-decoration: none;
-      color: #ff4c4d;
-      border-bottom: 1px solid #ff4c4d;
-    }
-    .date p{
-      background-color: #ffffff;
-      text-decoration: underline;
-      color: #999;
-      padding-left: 20px;
-      padding-right: 20px;
-    }
-    #hiddenPart0 {
-      display: none;
-      background-color: #fff;
-      text-decoration: none;
-    }
-    #showButton0 {
-      padding: 4px 6px;
-      border: 2px solid #333;
-      background-color: #4c97ff;
-      color: #fff;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 20px;
-    }
-
-    #showButton0:hover {
-      background-color: #ddd;
-    }
-    #hiddenPart1 {
-      display: none;
-      background-color: #fff;
-      text-decoration: none;
-    }
-    #showButton1 {
-      padding: 4px 6px;
-      border: 2px solid #333;
-      background-color: #ff4c4d;
-      color: #fff;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 20px;
-    }
-
-    #showButton1:hover {
-      background-color: #ddd;
-    }
-    #hiddenPart2 {
-      display: none;
-      background-color: #fff;
-      text-decoration: none;
-    }
-    #showButton2 {
-      padding: 4px 6px;
-      border: 2px solid #333;
-      background-color: #ff4c4d;
-      color: #fff;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 20px;
-    }
-
-    #showButton2:hover {
-      background-color: #ddd;
-    }
   </style>
 </head>
 <body>
@@ -97,20 +17,22 @@
   </div>
 
   <div class="main">
-  <h1>注目のプロジェクト</h1>
-  <h2>【京急】京急パタパタ再現 V1.0.1</h2>
-  <div class="date">
-  <p>2025/6/5公開 2025/6/9追加</p>
+  <h1>Scratchの作品</h1>
+    <div class="project1">
+      <h2>【京急】京急パタパタ再現 V1.0.1</h2>
+        <div class="date">
+        <p>2025/6/5公開 2025/6/9追加</p>
+        </div>
+      <img src="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/popular.png?v=1749449611231" width="500">
+      <p>京急青物横丁駅に設置されているデジタルパタパタを再現しています! turbowarpを使ってフレームレートを変更することで回転速度を調整できます!</p>
+      <p>1段を1スプライトに収めているため、簡単な改造で他のプロジェクトに追加したり、上りと下り3段づつで6段にすることもできます!</p>
+      <p>さらに、もちろん表示内容のカスタマイズも可能! ウソ電を作って楽しむもよし、実際の時刻表と同じ内容を表示して駅員ごっこ(?)をするもよし!</p>
+      <h2><button class="scratchButton" onclick="window.open('https://scratch.mit.edu/projects/1181550198', '_blank')">Scratchでプレイ</button></h2>
+      <h2><button class="turbowarpButton" onclick="window.open('https://turbowarp.org/1181550198?fps=60&interpolate', '_blank')">2倍速でプレイ(Turbowarp)</button></h2>
+      <h2><button class="turbowarpButton" onclick="window.open('https://mirror.turbowarp.xyz/?fps=60&interpolate#1181550198', '_blank')">2倍速でプレイ(ミラーTurbowarp)</button></h2>
+    </div>
   </div>
-  <img src="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/popular.png?v=1749449611231" width="500">
-  <p>京急青物横丁駅に設置されているデジタルパタパタを再現しています! turbowarpを使ってフレームレートを変更することで回転速度を調整できます!</p>
-  <p>1段を1スプライトに収めているため、簡単な改造で他のプロジェクトに追加したり、上りと下り3段づつで6段にすることもできます!</p>
-  <p>さらに、もちろん表示内容のカスタマイズも可能! ウソ電を作って楽しむもよし、実際の時刻表と同じ内容を表示して駅員ごっこ(?)をするもよし!</p>
-  <h2><button id="scratchButton" onclick="window.open('https://scratch.mit.edu/projects/1181550198', '_blank')">Scratchでプレイ</button></h2>
-  <h2><button id="turbowarpButton" onclick="window.open('https://turbowarp.org/1181550198?fps=60&interpolate', '_blank')">2倍速でプレイ(Turbowarp)</button></h2>
-  <h2><button id="turbowarpButton" onclick="window.open('https://mirror.turbowarp.xyz/?fps=60&interpolate#1181550198', '_blank')" target="_blank">https://mirror.turbowarp.xyz/?fps=60&interpolate#1181550198</a></span><button id="showButton2" onclick="showPart2()">2倍速でプレイ(ミラーTurbowarp)</button></h2>
-  </div>
-  
+
   <script>
     function showPart0() {
       document.getElementById("hiddenPart0").style.display = "inline";

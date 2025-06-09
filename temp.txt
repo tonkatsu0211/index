@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>画像テスト</title>
+</head>
+<body>
+  <h1>画像の表示テスト</h1>
+
+  <img src="https://cdn.glitch.global/123abc45-def6-7890-ghij-klmnopqrstuv/sample.png?v=1710000000000" alt="テスト画像" width="300">
+
+</body>
+</html>

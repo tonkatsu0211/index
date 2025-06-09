@@ -12,7 +12,7 @@
       font-size: 30px;
     }
     body {
-      font-family: Arial, sans-serif;
+      font-family: sans-serif;
       margin: 0px;
     }
     .nav {
@@ -61,12 +61,12 @@
       color: #ff4c4d;
       border-bottom: 1px solid #ff4c4d;
     }
-    .date {
+    .date p{
       background-color: #ffffff;
-      text-decoration: none;
-      color: #a0a0a0;
+      text-decoration: underline;
+      color: #999;
       padding-left: 20px;
-      padding-right:20px;
+      padding-right: 20px;
     }
     #hiddenPart0 {
       display: none;
@@ -80,7 +80,7 @@
       color: #fff;
       cursor: pointer;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 20px;
     }
 
     #showButton0:hover {
@@ -98,7 +98,7 @@
       color: #fff;
       cursor: pointer;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 20px;
     }
 
     #showButton1:hover {
@@ -116,7 +116,7 @@
       color: #fff;
       cursor: pointer;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 20px;
     }
 
     #showButton2:hover {
@@ -145,19 +145,19 @@
   <div class="main">
   <h1>注目のプロジェクト</h1>
   <h2>【京急】京急パタパタ再現 V1.0.1</h2>
+  <div class="date">
+  <p>2025/6/5公開 2025/6/9追加</p>
+  </div>
   <img src="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/popular.png?v=1749449611231" width="500">
   <p>京急青物横丁駅に設置されているデジタルパタパタを再現しています!turbowarpを使ってフレームレートを変更することで回転速度を調整できます!</p>
   <p>1段を1スプライトに収めているため、簡単な改造で他のプロジェクトに追加したり、上りと下り3段づつで6段にすることもできます!</p>
   <p>さらに、もちろん表示内容のカスタマイズも可能!ウソ電を作って楽しむもよし、実際の時刻表と同じ内容を表示して駅員ごっこ(?)をするもよし!</p>
-  <h2><span id="hiddenPart0"><a href="https://scratch.mit.edu/projects/1181550198">https://scratch.mit.edu/projects/1181550198</a></span><button id="showButton0" onclick="showPart0()">Scratchでプレイ</button></h2>
+  <h2><span id="hiddenPart0"><a href="https://scratch.mit.edu/projects/1181550198" target="_blank">https://scratch.mit.edu/projects/1181550198</a></span><button id="showButton0" onclick="showPart0()">Scratchでプレイ</button></h2>
   </div>
   <div class="turbowarpLink">
-  <h2><span id="hiddenPart1"><a href="https://turbowarp.org/1181550198?fps=60&interpolate">https://turbowarp.org/1181550198?fps=60&interpolate</a></span><button id="showButton1" onclick="showPart1()">2倍速でプレイ(Turbowarp)</button></h2>
-  <h2><span id="hiddenPart2"><a href="https://mirror.turbowarp.xyz/fps=60&interpolate#1181550198">https://mirror.turbowarp.xyz/fps=60&interpolate#1181550198</a></span><button id="showButton2" onclick="showPart2()">2倍速でプレイ(ミラーTurbowarp)</button></h2>
+  <h2><span id="hiddenPart1"><a href="https://turbowarp.org/1181550198?fps=60&interpolate" target="_blank">https://turbowarp.org/1181550198?fps=60&interpolate</a></span><button id="showButton1" onclick="showPart1()">2倍速でプレイ(Turbowarp)</button></h2>
+  <h2><span id="hiddenPart2"><a href="https://mirror.turbowarp.xyz/?fps=60&interpolate#1181550198" target="_blank">https://mirror.turbowarp.xyz/?fps=60&interpolate#1181550198</a></span><button id="showButton2" onclick="showPart2()">2倍速でプレイ(ミラーTurbowarp)</button></h2>
   </div>
-  <div class="date">
-  <p>2025/6/5公開 2025/6/9追加</p>
-  </div>  
   
   <script>
     function showPart0() {

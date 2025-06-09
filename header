@@ -1,67 +1,17 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>ヘッダー付きページ</title>
-  <style>
-    /* ヘッダーのスタイル */
-    header {
-      background-color: #333;
-      color: white;
-      padding: 15px;
-      text-align: center;
-      font-size: 20px;
-    }
+<div id="header-placeholder"></div>
 
-    /* ページ全体の余白を調整 */
-    body {
-      margin: 0;
-      font-family: sans-serif;
-    }
+<div id="footer-placeholder"></div>
 
-    /* 以下は前のボタン表示用スタイル */
-    #hiddenPart {
-      display: none;
-      font-weight: bold;
-    }
+<script>
+  fetch('/header.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
 
-    #showButton {
-      padding: 6px 12px;
-      border: 2px solid #333;
-      background-color: #f0f0f0;
-      color: #000;
-      cursor: pointer;
-      border-radius: 4px;
-      font-size: 14px;
-    }
-
-    #showButton:hover {
-      background-color: #ddd;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ヘッダー -->
-  <header>
-    🌟 私のWebページへようこそ 🌟
-  </header>
-
-  <!-- コンテンツ -->
-  <main style="padding: 20px;">
-    <h1>セリフの一部を表示（記憶なし）</h1>
-
-    <p>
-      〇〇:「<span id="hiddenPart">この部分のみボタンで表示</span>」です
-      <button id="showButton" onclick="showPart()">表示</button>
-    </p>
-  </main>
-
-  <script>
-    function showPart() {
-      document.getElementById("hiddenPart").style.display = "inline";
-      document.getElementById("showButton").style.display = "none";
-    }
-  </script>
-</body>
-</html>
+  fetch('/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer-placeholder').innerHTML = html;
+    });
+</script>

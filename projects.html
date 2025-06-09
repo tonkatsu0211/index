@@ -14,7 +14,8 @@
   <div class="nav">
     <a href="index.html">自己紹介</a>
     <a href="projects.html" class="active">Scratchの作品</a>
-    <a href="contact.html">連絡先</a>
+    <a href="constructing.html">連絡先</a>
+    <a href="constructing1.html">更新履歴</a>
   </div>
 
   <div class="main">
@@ -34,26 +35,20 @@
       <h2><button class="turbowarpButton" onclick="window.open('https://mirror.turbowarp.xyz/?fps=60&interpolate#1181550198', '_blank')">2倍速でプレイ(ミラーTurbowarp)</button></h2>
     </div>
   </div>
+  
+<script>
+  fetch('/header.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
 
-  <script>
-    function showPart0() {
-      document.getElementById("hiddenPart0").style.display = "inline";
-      document.getElementById("showButton0").style.display = "none";
-    }
-    function showPart1() {
-      document.getElementById("hiddenPart1").style.display = "inline";
-      document.getElementById("showButton1").style.display = "none";
-    }
-    function showPart2() {
-      document.getElementById("hiddenPart2").style.display = "inline";
-      document.getElementById("showButton2").style.display = "none";
-    }
-  </script>
-
+  fetch('/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer-placeholder').innerHTML = html;
+    });
+</script>
   
 </body>
-<footer>
-  <p>CC BY-NC-SA 4.0</p>
-  <p>&copy; _tonkatsu_ / tonkatsu0211 All rights reserved.</p>
-</footer>
 </html>

@@ -9,15 +9,18 @@
       color: white;
       padding: 15px;
       text-align: center;
-      font-size: 20px;
+      font-size: 30px;
     }
     body {
       font-family: Arial, sans-serif;
-      margin: 20px;
+      margin: 0px;
     }
     .nav {
       display: flex;
       margin-bottom: 20px;
+      padding-left: 20px;
+      padding-right:20px;
+      padding-top: 10px;
     }
     .nav a {
       padding: 10px 20px;
@@ -36,6 +39,8 @@
       background-color: #ffffff;
       text-decoration: none;
       color: black;
+      padding-left: 20px;
+      padding-right:20px;
     }
     .main a {
       background-color: #ffffff;
@@ -47,6 +52,46 @@
       background-color: #ffffff;
       text-decoration: none;
       color: #a0a0a0;
+      padding-left: 20px;
+      padding-right:20px;
+    }
+    #hiddenPart1 {
+      display: none;
+      background-color: #ffffff;
+      text-decoration: none;
+      color: black;
+    }
+    #showButton1 {
+      padding: 4px 6px;
+      border: 2px solid #333;
+      background-color: #f0f0f0;
+      color: #000;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    #showButton1:hover {
+      background-color: #ddd;
+    }
+    #hiddenPart2 {
+      display: none;
+      background-color: #ffffff;
+      text-decoration: none;
+      color: black;
+    }
+    #showButton2 {
+      padding: 4px 6px;
+      border: 2px solid #333;
+      background-color: #f0f0f0;
+      color: #000;
+      cursor: pointer;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    #showButton2:hover {
+      background-color: #ddd;
     }
     footer {
     background-color: #f1f1f1;
@@ -61,7 +106,7 @@
 </head>
 <body>
   
-  <header>_tonkatsu_ / tonkatsu0211の自己紹介</header>
+  <header>_tonkatsu_ / tonkatsu0211のマイページ</header>
 
   <div class="nav">
     <a href="index.html">自己紹介</a>
@@ -75,13 +120,29 @@
   <p>京急青物横丁駅に設置されているデジタルパタパタを再現しています!turbowarpを使ってフレームレートを変更することで回転速度を調整できます!</p>
   <p>1段を1スプライトに収めているため、簡単な改造で他のプロジェクトに追加したり、上りと下り3段づつで6段にすることもできます!</p>
   <p>さらに、もちろん表示内容のカスタマイズも可能!ウソ電を作って楽しむもよし、実際の時刻表と同じ内容を表示して駅員ごっこ(?)をするもよし!</p>
-  <h2><a href="https://scratch.mit.edu/projects/1181550198">プレイはこちら</a></h2>
-  <h2><a href="https://turbowarp.org/1181550198?fps=60&interpolate">2倍速モードはこちら</a></h2>
-  <h2><a href="https://mirror.turbowarp.xyz/fps=60&interpolate#1181550198">turbowarpがブロックされている人用の2倍速モード</a></h2>
+    <h2><span id="hiddenPart0"><a href="https://scratch.mit.edu/projects/1181550198">https://scratch.mit.edu/projects/1181550198</a></span><button id=""</h2>
+  <h2><span id="hiddenPart1"><a href="https://turbowarp.org/1181550198?fps=60&interpolate">https://turbowarp.org/1181550198?fps=60&interpolate</a></span><button id="showButton1" onclick="showPart1()">2倍速でプレイ(Turbowarp)</button></h2>
+  <h2><span id="hiddenPart2"><a href="https://mirror.turbowarp.xyz/fps=60&interpolate#1181550198">https://mirror.turbowarp.xyz/fps=60&interpolate#1181550198</a></span><button id="showButton2" onclick="showPart2()">2倍速でプレイ(ミラーTurbowarp)</button></h2>
   </div>
   <div class="date">
   <p>2025/6/5公開 2025/6/9追加</p>
   </div>  
+  
+  <script>
+    function showPart0() {
+      document.getElementById("hiddenPart0").style.display = "inline";
+      document.getElementById("showButton0").style.display = "none";
+    }
+    function showPart1() {
+      document.getElementById("hiddenPart1").style.display = "inline";
+      document.getElementById("showButton1").style.display = "none";
+    }
+    function showPart2() {
+      document.getElementById("hiddenPart2").style.display = "inline";
+      document.getElementById("showButton2").style.display = "none";
+    }
+  </script>
+
   
 </body>
 <footer>

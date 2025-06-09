@@ -8,6 +8,14 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
+app.get('/constructing.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'constructing.html'));
+});
+
+app.get('/popular.html', (req, res) => {
+  res.sendFile(path.join(__dirname, 'popular.html'));
+});
+
 const listener = app.listen(process.env.PORT, () => {
   console.log('Listening on port ' + listener.address().port);
 });

@@ -4,6 +4,12 @@
   <meta charset="UTF-8">
   <title>_tonkatsu_のページ</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/icon.ico?v=1749512639750" type="image/x-icon">
+  <style>
+    #hiddenErrorText {
+      display= none;
+    }
+  </style>
 </head>
 <body>
   
@@ -19,10 +25,10 @@
   </div>
   
   <div class="main">
-    <h1>404 Not Found</h1>
-    <h3>このページはURLが変更されたか存在しません。</h3>
-    <p id="error"></p>
-    <p id="hiddenErrorText">あなた、意図的にこのサイトにアクセスしたか404のタブをクリックしましたね?ここには何もありませんよ。</p>
+    <img src="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/Not Found.png?v=1749532095238" width="1000">
+    <h1 id="text">このページはURLが変更されたか存在しません。</h1>
+    <h3 id="error"></h3>
+    <h3 id="hiddenErrorText">あなた、意図的にこのサイトにアクセスしたか404のタブをクリックしましたね?ここには何もありませんよ。</h3>
   </div>
   
 </body>
@@ -39,11 +45,12 @@
   document.getElementById("error").textContent = `アクセスしたURL: ${accessURL}`;
   
   if (!e) {
-    document.getElementById("hiddenErrorText").style.display = "none" ;
-    document.getElementById("error").style.display = "inline" ;
-  } else {
     document.getElementById("hiddenErrorText").style.display = "inline" ;
     document.getElementById("error").style.display = "none" ;
+    document.getElementById("text").textContent = "意☆味☆不☆明";
+  } else {
+    document.getElementById("hiddenErrorText").style.display = "none" ;
+    document.getElementById("error").style.display = "inline" ;
   }
   
 </script>

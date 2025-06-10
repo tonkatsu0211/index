@@ -12,7 +12,7 @@
   
   <div class="nav">
     <a href="index.html" class="active">自己紹介</a>
-    <a href="projects.html">Scratchの作品</a>
+    <a href="projects.html">作品</a>
     <a href="contact.html">連絡先</a>
     <a href="updates.html">更新履歴</a>
     <a href="lobby.html">履歴破壊</a>
@@ -45,17 +45,6 @@
       document.getElementById("hiddenPart").style.display = "inline";
       document.getElementById("showButton").style.display = "none";
     }
-    fetch('/header.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('header-placeholder').innerHTML = html;
-      });
-    fetch('/footer.html')
-      .then(res => res.text())
-      .then(html => {
-        document.getElementById('footer-placeholder').innerHTML = html;
-      });
-
   </script>
   
 </body>

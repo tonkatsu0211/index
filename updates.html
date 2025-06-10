@@ -12,7 +12,7 @@
   
   <div class="nav">
     <a href="index.html">自己紹介</a>
-    <a href="projects.html">Scratchの作品</a>
+    <a href="projects.html">作品</a>
     <a href="contact.html">連絡先</a>
     <a href="updates.html" class="active">更新履歴</a>
     <a href="lobby.html">履歴破壊</a>
@@ -20,7 +20,7 @@
   
   <div class="main">
     <h2>更新履歴</h2>
-    <p>2025/6/10 V1.0.1 フッター調整、履歴破壊プログラム追加</p>
+    <p>2025/6/10 V1.0.1 フッターおよびヘッダー調整、履歴破壊プログラム追加</p>
     <p>2025/6/9 V1.0.0 公開</p>
   </div>
   
@@ -34,19 +34,5 @@
   </div>
   </footer>
 
-  <script>
-  fetch('/header.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('header-placeholder').innerHTML = html;
-    });
-
-  fetch('/footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer-placeholder').innerHTML = html;
-    });
-  </script>
-  
 </body>
 </html>

@@ -26,19 +26,19 @@ app.get('/popular', (req, res) => {
 
 app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'contact.html'));
-})
+});
 
 app.get('/lobby', (req, res) => {
   res.redirect('lobby.html');
-})
+});
 
 app.get('/breakHistory', (req, res) => {
   res.sendFile(path.join(__dirname, 'lobby.html'));
-})
+});
 
-app.get((req, res) => {
-  const pageName = req.params.page;
-  res.status(404).sendFile(path.jpin(__dirname, `/error.html?e=${encodeURIComponent(pageName)}`));
+app.get('*', (req, res) => {
+  const pathName = req.path.replace(/^\/+/, '');
+  res.redirect(`/error.html?e=${encodeURIComponent(pathName)}`);
 });
 
 const listener = app.listen(process.env.PORT, () => {

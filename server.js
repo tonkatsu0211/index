@@ -1,8 +1,9 @@
+"use strict";
 const express = require('express');
 const app = express();
 const path = require('path');
 
-app.use(express.static('.'));
+app.use(express.static("."));
 
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
@@ -24,8 +25,8 @@ app.get('/popular', (req, res) => {
   res.sendFile(path.join(__dirname, 'popular.html'));
 });
 
-app.get("/app1",(req, res) => {
-  res.render("../public/contact.ejs")
+app.get("/contact",(req, res) => {
+  res.sendFile(path.join(__dirname, "../public/contact.ejs"));
 })
 
 app.get('/lobby', (req, res) => {
@@ -38,7 +39,7 @@ app.get('/breakHistory', (req, res) => {
 
 app.use((req, res) => {
   const pageName = req.path.replace('/', '');
-  res.redirect(`/error.html?e=${encodeURIComponent(pageName)}`);
+  res.status(404).redirect(`/error.html?e=${encodeURIComponent(pageName)}`);
 });
 
 const listener = app.listen(process.env.PORT, () => {

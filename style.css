@@ -30,31 +30,24 @@ body {
   border-bottom: 2px solid blue;
 }
 .main {
-  background-color: #ffffff;
   text-decoration: none;
   color: black;
   padding-left: 20px;
   padding-right:20px;
 }
 .main a{
-  background-color: #ffffff;
   text-decoration: none;
   color: black;
   border-bottom: 1px solid black;
 }
-.option-noBackground-noUnderline {
-  text-decoration: none;
-  color: #999999;
-  padding-left: 20px; 
-}
-.option-noBackground-noPadding-underline {
+.caution {
   text-decoration: underline;
-  color: #999999;
-}
-.option-noBackground-underline {
-  text-decoration: underline;
-  color: #999999;
+  color: #de2020;
   padding-left: 20px;
+}
+.option-noPadding-underline {
+  text-decoration: underline;
+  color: #999999;
 }
 .option-left10-underline {
   background-color: #ffffff;
@@ -69,13 +62,11 @@ body {
   padding-left: 10px; 
 }
 .option-underline {
-  background-color: #ffffff;
   text-decoration: underline;
   color: #999999;
   padding-left: 20px; 
 }
 .option-noUnderline {
-  background-color: #ffffff;
   text-decoration: none;
   color: #999999;
   padding-left: 20px; 

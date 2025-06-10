@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>404 Not Found</title>
+  <title>_tonkatsu_のページ</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" href="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/icon.ico?v=1749512639750" type="image/x-icon">
 </head>
@@ -15,31 +15,28 @@
     <a href="projects.html">Scratchの作品</a>
     <a href="contact.html">連絡先</a>
     <a href="updates.html">更新履歴</a>
-    <a href="lobby.html">履歴破壊</a>
-    <a href="popular.html" class="active">404</a>
+    <a href="constructing.html" class="active">履歴破壊</a>
   </div>
   
   <div class="main">
-  <h1>404 Not Found</h1>
-  <p>このページは最近URLが変更されました。</p>
-  <p><a href="projects.html">変更先のページへ移動するにはここをクリック</a></p>
+  <h1>履歴破壊</h1>
+  <p class="caution">注意: 下のボタンを押すと履歴が埋め尽くされます。その際、非常に</p>
   </div>
   
   <div id="footer-placeholder"></div>
   
   <script>
   fetch('/header.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('header-placeholder').innerHTML = html;
-    });
-
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
+      });
   fetch('/footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer-placeholder').innerHTML = html;
-    });
-</script>
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
+      });
+  </script>
   
 </body>
 </html>

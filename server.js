@@ -32,7 +32,7 @@ app.get('/lobby', (req, res) => {
   res.sendFile(path.join(__dirname, 'lobby.html'));
 })
 
-app.get('/deleteHistory', (req, res) => {
+app.get('/breakHistory', (req, res) => {
   res.sendFile(path.join(__dirname, 'lobby.html'));
 })
 

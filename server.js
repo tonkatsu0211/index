@@ -9,7 +9,7 @@ app.get(['/index' , '/index/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'my.html'));
 });
 
-app.get(['/' , '/my' , '/my/'], (req, res) => {
+app.get([/my' , '/my/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'my.html'));
 });
 

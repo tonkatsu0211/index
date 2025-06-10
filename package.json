@@ -1,0 +1,12 @@
+{
+  "name": "tonkatsu0211-my-page",
+  "version": "1.0.0",
+  "description": "Self introduction site with contact routing",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}

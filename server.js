@@ -3,41 +3,40 @@ const express = require('express');
 const app = express();
 const path = require('path');
 
-// ─── ① すべての GET ルートをここに .................................................................
-app.get(['/', '/index'], (req, res) => {
+app.use(express.static(path.join(__dirname)));
+
+app.get(['/' , '/index' , '/index/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'index.html'));
 });
 
-app.get('/projects', (req, res) => {
+app.get(['/projects' , '/projects/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'projects.html'));
 });
 
-app.get('/constructing', (req, res) => {
+app.get(['/constructing' , '/constructing/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'constructing.html'));
 });
 
-app.get('/constructing1', (req, res) => {
+app.get(['/constructing1' , '/constructing1/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'constructing1.html'));
 });
 
-app.get('/popular', (req, res) => {
+app.get(['/popular' , '/popular/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'popular.html'));
 });
 
-app.get('/contact*', (req, res) => {
-  console.log('CONTACT wildcard match:', req.path);
+app.get(['/contact' , '/contact/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'contact.html'));
 });
 
-app.get('/lobby', (req, res) => {
+app.get(['/lobby' , '/lobby/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'lobby.html'));
 });
 
-app.get('/breakHistory', (req, res) => {
+app.get(['/breakHistory' , '/breakHistory/'], (req, res) => {
   res.sendFile(path.join(__dirname, 'breakHistory.html'));
 });
 
-// ─── ③ 404−リダイレクト処理 ...................................................................
 app.use((req, res) => {
   const pageName = req.path.replace('/', '');
   console.log('Fallback 404 for:', req.path);

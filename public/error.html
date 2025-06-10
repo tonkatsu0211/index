@@ -37,11 +37,13 @@
   const e = params.get("e");
   const accessURL = `${location.origin}/${e}`
   document.getElementById("error").textContent = `アクセスしたURL: ${accessURL}`;
-  document.getElementById("error").style.display = inline;
   
-  if accessURL {
-    document.getElementById("hiddenErrorText").style.display = none ;
+  if (!e) {
+    document.getElementById("hiddenErrorText").style.display = "none" ;
+    document.getElementById("error").style.display = "inline" ;
   } else {
-    document.getElementById("hiddenErrorText").style.display = inline ;
+    document.getElementById("hiddenErrorText").style.display = "inline" ;
+    document.getElementById("error").style.display = "none" ;
   }
+  
 </script>

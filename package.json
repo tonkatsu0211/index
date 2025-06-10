@@ -1,6 +1,6 @@
 {
   "name": "tonkatsu0211-my-page",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Self introduction site with contact routing",
   "main": "server.js",
   "scripts": {

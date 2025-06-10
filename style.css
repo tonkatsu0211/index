@@ -56,6 +56,15 @@ body {
   padding-top: 0;
   padding-bottom: 0;
 }
+.caution-bold {
+  text-decoration: underline;
+  font-weight: bold;
+  color: #de2020;
+  padding-left: 20px;
+  margin: 0;
+  padding-top: 0;
+  padding-bottom: 0;
+}
 .option-noPadding-underline {
   text-decoration: underline;
   color: #999999;

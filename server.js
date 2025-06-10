@@ -29,16 +29,16 @@ app.get('/contact', (req, res) => {
 });
 
 app.get('/lobby', (req, res) => {
-  res.redirect('lobby.html');
-});
-
-app.get('/breakHistory', (req, res) => {
   res.sendFile(path.join(__dirname, 'lobby.html'));
 });
 
-app.get('*', (req, res) => {
-  const pathName = req.path.replace(/^\/+/, '');
-  res.redirect(`/error.html?e=${encodeURIComponent(pathName)}`);
+app.get('/breakHistory', (req, res) => {
+  res.sendFile(path.join(__dirname, 'breakHistory.html'));
+});
+
+app.use((req, res) => {
+  const pageName = req.path.replace('/', '');
+  res.redirect(`/error.html?e=${encodeURIComponent(pageName)}`);
 });
 
 const listener = app.listen(process.env.PORT, () => {

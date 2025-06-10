@@ -42,6 +42,20 @@ body {
   color: black;
   border-bottom: 1px solid black;
 }
+.option-noBackground-noUnderline {
+  text-decoration: none;
+  color: #999999;
+  padding-left: 20px; 
+}
+.option-noBackground-noPadding-underline {
+  text-decoration: underline;
+  color: #999999;
+}
+.option-noBackground-underline {
+  text-decoration: underline;
+  color: #999999;
+  padding-left: 20px;
+}
 .option-left10-underline {
   background-color: #ffffff;
   text-decoration: underline;

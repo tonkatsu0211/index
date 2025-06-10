@@ -5,8 +5,12 @@ const path = require('path');
 
 app.use(express.static(path.join(__dirname)));
 
-app.get(['/' , '/index' , '/index/'], (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
+app.get(['/index' , '/index/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'my.html'));
+});
+
+app.get(['/' , '/my' , '/my/'], (req, res) => {
+  res.sendFile(path.join(__dirname, 'my.html'));
 });
 
 app.get(['/projects' , '/projects/'], (req, res) => {

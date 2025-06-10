@@ -13,6 +13,11 @@ body {
   margin: 0px;
   overflow: visible;
 }
+.a00 {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 .nav {
   display: flex;
   margin-bottom: 20px;
@@ -222,7 +227,7 @@ body {
   text-decoration: none;
   color: black;
 }
-#showButton {
+.normalButton {
   padding: 4px 6px;
   border: 2px solid #333333;
   background-color: #f0f0f0;
@@ -231,8 +236,7 @@ body {
   border-radius: 4px;
   font-size: 14px;
 }
-
-#showButton:hover {
+.normalButton:hover {
   background-color: #dddddd;
 }
 footer {

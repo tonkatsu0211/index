@@ -26,7 +26,7 @@ app.get('/popular', (req, res) => {
 });
 
 app.get("/contact",(req, res) => {
-  res.sendFile(path.join(__dirname, "../public/contact.ejs"));
+  res.sendFile(path.join(__dirname, "contact.html"));
 })
 
 app.get('/lobby', (req, res) => {

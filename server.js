@@ -29,7 +29,7 @@ app.get('/contact', (req, res) => {
 })
 
 app.get('/lobby', (req, res) => {
-  res.sendFile(path.join(__dirname, 'lobby.html'));
+  res.redirect('lobby.html');
 })
 
 app.get('/breakHistory', (req, res) => {

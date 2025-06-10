@@ -8,7 +8,7 @@
 </head>
 <body>
   
-  <div id="header-placeholder"></div>
+  <header>_tonkatsu_ / tonkatsu0211のマイページ</header>
   
   <div class="nav">
     <a href="index.html">自己紹介</a>
@@ -25,21 +25,27 @@
   <p><a href="projects.html">変更先のページへ移動するにはここをクリック</a></p>
   </div>
   
-  <div id="footer-placeholder"></div>
-  
+  <footer>
+  <div class="option-noUnderline">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" class="option-noPadding-underline">CC BY-NC-SA 4.0</a>
+    <p>&copy; _tonkatsu_ / <a href="https://scratch.mit.edu/users/tonkatsu0211" target="_blank" class="option-noPadding-underline">tonkatsu0211</a> All rights reserved.</p>
+    <p>V1.0.1</p>
+  </div>
+  </footer>
+
   <script>
-  fetch('/header.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('header-placeholder').innerHTML = html;
+    fetch('/header.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('header-placeholder').innerHTML = html;
     });
 
-  fetch('/footer.html')
-    .then(res => res.text())
-    .then(html => {
-      document.getElementById('footer-placeholder').innerHTML = html;
+    fetch('/footer.html')
+      .then(res => res.text())
+      .then(html => {
+        document.getElementById('footer-placeholder').innerHTML = html;
     });
-</script>
+  </script>
   
 </body>
 </html>

@@ -35,10 +35,14 @@ body {
   padding-left: 20px;
   padding-right:20px;
 }
-.main a{
+.main a {
   text-decoration: none;
   color: black;
   border-bottom: 1px solid black;
+}
+.project1 {
+  text-decoration: none;
+  padding-left: 0px;
 }
 .caution {
   text-decoration: underline;

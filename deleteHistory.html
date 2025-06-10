@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>デジタル時計</title>
+  <link rel="icon" href="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/icon.ico?v=1749512639750" type="image/x-icon">
+  <style>
+    body {
+      font-family: monospace;
+      background-color: #111;
+      color: #0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    #clock {
+      font-size: 5em;
+    }
+    #url {
+      margin-top: 20px;
+      font-size: 1.2em;
+      color: #0ff;
+    }
+  </style>
+</head>
+<body>
+  <div id="clock">00:00:00</div>
+  <div id="url">現在のURL: <span id="urlText"></span></div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      const s = String(now.getSeconds()).padStart(2, '0');
+      document.getElementById('clock').textContent = `${h}:${m}:${s}`;
+    }
+
+    function updateUrlDisplay() {
+      document.getElementById('urlText').textContent = window.location.href;
+    }
+
+    function changeUrl() {
+      const randomStr = Math.random().toString(36).substring(2, 8);
+      const newUrl = window.location.origin + window.location.pathname + '?id=' + randomStr;
+      window.history.pushState({}, '', newUrl);
+      updateUrlDisplay();
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        changeUrl();
+      }
+    });
+
+    setInterval(updateClock, 1000);
+
+    // 0秒ごとのURL変更（できるだけ短い間隔）
+    setInterval(changeUrl, 1);
+
+    updateClock();
+    updateUrlDisplay();
+  </script>
+</body>
+</html>

@@ -21,8 +21,12 @@ app.get('/constructing1', (req, res) => {
 });
 
 app.get('/popular.html', (req, res) => {
-  res.redirect('error.html?e=popular');
+  res.redirect('popular.html');
 });
+
+app.get('/contact', (req, res) => {
+  res.sendFile(path.join(__dirname, 'contact.html'));
+})
 
 app.get('/contact', (req, res) => {
   res.sendFile(path.join(__dirname, 'contact.html'));

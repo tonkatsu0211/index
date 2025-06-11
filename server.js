@@ -9,15 +9,15 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 app.get(["/", "/index", "/index/", "/top", "/top/"], (req, res) => {
-  res.render("index", { title: "_tonkatsu_のページ", page: "index", top: "_tonkatsu_ / tonkatsu0211の"});
+  res.render("index", { title: "_tonkatsu_のページ", page: "index", top: "_tonkatsu_ / tonkatsu0211のページにようこそ!!"});
 });
 
 app.get(["/my", "/my/"], (req, res) => {
-  res.render("my", { title: "自己紹介(事故紹介)", page: "my"});
+  res.render("my", { title: "自己紹介(事故紹介)", page: "my", top: "自己紹介(事故紹介)"});
 });
 
 app.get(["/projects", "/projects/"], (req, res) => {
-  res.render("projects", { title: "作品", page: "projects"});
+  res.render("projects", { title: "作品", page: "projects", top: "Scratchの作品"});
 });
 
 app.get(["/constructing", "/constructing/"], (req, res) => {
@@ -29,15 +29,15 @@ app.get(["/constructing1", "/constructing1/"], (req, res) => {
 });
 
 app.get(["/contact", "/contact/"], (req, res) => {
-  res.render("contact", { title: "連絡先", page: "contact"});
+  res.render("contact", { title: "連絡先", page: "contact", top: "マイリンク・連絡先"});
 });
 
 app.get(["/beforeBreak", "/beforeBreak/"], (req, res) => {
-  res.render("beforeBreak", { title: "_tonkatsu_のページ", page: "beforeBreak"});
+  res.render("beforeBreak", { title: "_tonkatsu_のページ", page: "beforeBreak", top: "履歴破壊"});
 });
 
 app.get(["/updates", "/updates/"], (req, res) => {
-  res.render("updates", { title: "ページ更新履歴", page: "updates"});
+  res.render("updates", { title: "ページ更新履歴", page: "updates", top: "ページ更新履歴"});
 });
 
 app.get(["/error", "/error/"], (req, res) => {

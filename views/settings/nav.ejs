@@ -5,4 +5,12 @@
   <a href="contact" class="<%= page === 'contact' ? 'active' : '' %>">連絡先</a>
   <a href="updates" class="<%= page === 'updates' ? 'active' : '' %>">更新履歴</a>
   <a href="beforeBreak" class="<%= page === 'beforeBreak' ? 'active' : '' %>">履歴破壊</a>
+
+  <% if (page === 'constructing') { %>
+    <a href="constructing" class="active">建設中</a>
+  <% } %>
+
+  <% if (page === 'error') { %>
+    <a href="error" class="active">404</a>
+  <% } %>
 </div>

@@ -1,44 +1,45 @@
+"use strict";
 const express = require('express');
 const app = express();
 const path = require('path');
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'public'));
 
 app.get(["/", "/index", "/index/", "/top", "/top/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "index.html"));
+  res.render("index.html", { title: "_tonkatsu_のページ"});
 });
 
 app.get(["/my", "/my/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "my.html"));
+  res.render("my.html", { title: "_tonkatsu_の自己紹介(事故紹介)"});
 });
 
 app.get(["/projects", "/projects/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "projects.html"));
+  res.render("projects.html", { title: "tonkatsu0211の作品"});
 });
 
 app.get(["/constructing", "/constructing/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "constructing.html"));
+  res.render("constructing.html", { title: "建設中のページ"});
 });
 
 app.get(["/constructing1", "/constructing1/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "constructing1.html"));
+  res.render("constructing1.html", { title: "建設中のページ"});
 });
 
 app.get(["/contact", "/contact/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "contact.html"));
+  res.render("contact.html", { title: "_tonkatsu_への連絡先"});
 });
 
 app.get(["/beforeBreak", "/beforeBreak/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "beforeBreak.html"));
+  res.render("beforeBreak.html", { title: "_tonkatsu_のページ"});
 });
 
 app.get(["/updates", "/updates/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "updates.html"));
+  res.render("updates.html", { title: "ページ更新履歴"});
 });
 
 app.get(["/error", "/error/"], (req, res) => {
-  res.render(__dirname, "public", "error.html");
+  res.render("error.html", { title: "404 Not Found"});
 });
 
 app.use((req, res) => {

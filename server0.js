@@ -1,9 +1,10 @@
-const express = require('express');
+"use strict";
+const express = require("express");
 const app = express();
-const path = require('path');
+const path = require("path");
 
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.use(express.static("public"));
+app.use(express.static("settings"));
 
 app.get(["/", "/index", "/index/", "/top", "/top/"], (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -38,23 +39,18 @@ app.get(["/updates", "/updates/"], (req, res) => {
 });
 
 app.get(["/error", "/error/"], (req, res) => {
-  res.render(__dirname, "public", "error.html");
+  res.sendFile(path.join(__dirname, "public", "error.html"));
+});
+
+app.get(["/footer", "/footer/"], (req, res) => {
+  res.sendFile(path.join(__dirname, "settings", "error.html"))
 });
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
-  res.status(404).render(`/error?e=${encodeURIComponent(pageName)}`, { title: "404 Not Found"});
+  res.status(404).redirect(`/error?e=${encodeURIComponent(pageName)}`);
 });
 
-const port = process.env.PORT || 3000;
 const listener = app.listen(process.env.PORT, () => {
   console.log("App listening on port " + listener.address().port);
-});
-
-app.get('/', (req, res) => {
-  res.render('index', { title: 'ホーム' });
-});
-
-app.get('/contact', (req, res) => {
-  res.render('contact', { title: '連絡先' });
 });

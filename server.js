@@ -4,6 +4,7 @@ const app = express();
 const path = require("path");
 
 app.use(express.static("public"));
+app.use(express.static("settings"));
 
 app.get(["/", "/index", "/index/", "/top", "/top/"], (req, res) => {
   res.sendFile(path.join(__dirname, "public", "index.html"));
@@ -33,12 +34,16 @@ app.get(["/beforeBreak", "/beforeBreak/"], (req, res) => {
   res.sendFile(path.join(__dirname, "public", "beforeBreak.html"));
 });
 
-app.get(["/breakHistory", "/breakHistory/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "breakHistory.html"));
+app.get(["/updates", "/updates/"], (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "updates.html"));
 });
 
 app.get(["/error", "/error/"], (req, res) => {
   res.sendFile(path.join(__dirname, "public", "error.html"));
+});
+
+app.get(["/footer", "/footer/"], (req, res) => {
+  res.sendFile(path.join(__dirname, "settings", "error.html"))
 });
 
 app.use((req, res) => {

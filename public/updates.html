@@ -35,6 +35,9 @@
         </button>
       </div>
       <p>
+        2025/6/11 V1.0.2 URL改良、履歴破壊を5系統の別サイト運用に変更
+      </p>
+      <p>
         2025/6/10 V1.0.1
         フッターおよびヘッダー調整、履歴破壊プログラム、トップページ、404ページ追加、ページ更新ボタン追加
       </p>
@@ -42,27 +45,16 @@
     </div>
 
     <p class="option-noUnderline">※情報更新は含まない</p>
-
-    <footer>
-      <div class="option-noUnderline">
-        <a
-          href="https://creativecommons.org/licenses/by-nc-sa/4.0/"
-          target="_blank"
-          class="option-noPadding-underline"
-          >CC BY-NC-SA 4.0</a
-        >
-        <p>
-          &copy; _tonkatsu_ /
-          <a
-            href="https://scratch.mit.edu/users/tonkatsu0211"
-            target="_blank"
-            class="option-noPadding-underline"
-            >tonkatsu0211</a
-          >
-          All rights reserved.
-        </p>
-        <p>V1.0.1</p>
-      </div>
-    </footer>
+    
+    <div id="footer-placeholder"></div>
+    
+    <script>
+      fetch('/footer.html')
+        .then(res => res.text())
+        .then(html => {
+          document.getElementById('footer-placeholder').innerHTML = html;
+      });
+    </script>
+    
   </body>
 </html>

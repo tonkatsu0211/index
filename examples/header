@@ -8,7 +8,22 @@
     .then(html => {
       document.getElementById('header-placeholder').innerHTML = html;
     });
+  fetch('/footer.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('footer-placeholder').innerHTML = html;
+    });
+</script>
 
+<script>
+  fetch('/header.html')
+    .then(res => res.text())
+    .then(html => {
+      document.getElementById('header-placeholder').innerHTML = html;
+    });
+</script>
+
+<script>
   fetch('/footer.html')
     .then(res => res.text())
     .then(html => {

@@ -29,8 +29,8 @@ app.get(["/contact", "/contact/"], (req, res) => {
   res.sendFile(path.join(__dirname, "contact.html"));
 });
 
-app.get(["/lobby", "/lobby/"], (req, res) => {
-  res.sendFile(path.join(__dirname, "lobby.html"));
+app.get(["/beforeBreak", "/beforeBreak/"], (req, res) => {
+  res.sendFile(path.join(__dirname, "beforeBreak.html"));
 });
 
 app.get(["/breakHistory", "/breakHistory/"], (req, res) => {

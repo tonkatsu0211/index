@@ -209,10 +209,14 @@ body {
   border-radius: 4px;
   font-size: 30px;
   text-decoration: none;
-  display: inline-block;
+  display: flex;
   text-align: center;
   user-select: none;
   box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 0px !important;
+  margin: 10px;
 }
 .warnButton-h1 {
   padding-left: 20px;

@@ -1,7 +1,7 @@
 {
   "name": "tonkatsu0211-my-page",
   "version": "1.0.2",
-  "description": "Self introduction site with contact routing",
+  "description": "_tonkatsu_ / tonkatsu0211 self introduction",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"

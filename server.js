@@ -13,11 +13,11 @@ app.get(["/", "/index", "/index/", "/top", "/top/"], (req, res) => {
 });
 
 app.get(["/my", "/my/"], (req, res) => {
-  res.render("my", { title: "_tonkatsu_の自己紹介(事故紹介)"});
+  res.render("my", { title: "自己紹介(事故紹介)"});
 });
 
 app.get(["/projects", "/projects/"], (req, res) => {
-  res.render("projects", { title: "tonkatsu0211の作品"});
+  res.render("projects", { title: "作品"});
 });
 
 app.get(["/constructing", "/constructing/"], (req, res) => {
@@ -29,7 +29,7 @@ app.get(["/constructing1", "/constructing1/"], (req, res) => {
 });
 
 app.get(["/contact", "/contact/"], (req, res) => {
-  res.render("contact", { title: "_tonkatsu_への連絡先"});
+  res.render("contact", { title: "連絡先"});
 });
 
 app.get(["/beforeBreak", "/beforeBreak/"], (req, res) => {
@@ -41,7 +41,7 @@ app.get(["/updates", "/updates/"], (req, res) => {
 });
 
 app.get(["/error", "/error/"], (req, res) => {
-  res.render("error", { title: "404 Not Found"});
+  res.render("error", { title: "404 Not Found", page: "error"});
 });
 
 app.use((req, res) => {

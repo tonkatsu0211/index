@@ -49,9 +49,17 @@ body {
   color: black;
   border-bottom: 1px solid black;
 }
+.smallP {
+  font-size: 10px;
+  color: #999999;
+}
 .project1 {
   text-decoration: none;
-  padding-left: 0px;
+  padding-left: 0;
+}
+.project2 {
+  text-decoration: none;
+  padding-left: 0;
 }
 .caution {
   text-decoration: underline;

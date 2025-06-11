@@ -1,24 +1,5 @@
-<!DOCTYPE html>
-<html lang="ja">
-  <head>
-    <meta charset="UTF-8" />
-    <title>_tonkatsu_の自己紹介(事故紹介)</title>
-    <link rel="stylesheet" href="style.css" />
-    <link
-      rel="icon"
-      href="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/icon.png?v=1749463611859"
-      type="image/png"
-    />
-    <link
-      rel="icon"
-      href="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/icon.ico?v=1749512639750"
-      type="image/x-icon"
-    />
-  </head>
-  <body>
-    <header>_tonkatsu_ / tonkatsu0211のマイページ</header>
+<%- include("settings/header") %>
 
-    <div class="nav">
       <a href="index">TOP</a>
       <a href="my" class="active">自己紹介</a>
       <a href="projects">作品</a>
@@ -59,19 +40,5 @@
       </p>
     </div>
 
-    <div id="footer-placeholder"></div>
-    
-    <script>
-      fetch('/settings/footer.html')
-        .then(res => res.text())
-        .then(html => {
-          document.getElementById('footer-placeholder').innerHTML = html;
-      });
-      function showPart() {
-        document.getElementById("hiddenPart").style.display = "inline";
-        document.getElementById("showButton").style.display = "none";
-      }
-    </script>
-    
-  </body>
-</html>
+
+<%- include("settings/footer") %>

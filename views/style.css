@@ -231,6 +231,9 @@ body {
   text-decoration: none;
   color: black;
 }
+#hiddenErrorText {
+  display: none;
+}
 .normalButton {
   padding: 4px 6px;
   border: 2px solid #333333;

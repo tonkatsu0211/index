@@ -2,7 +2,7 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const session = require('express-session');
+//const session = require('express-session');
 
 //app.use(session({
     //secret: "tonkatsu0211",
@@ -48,9 +48,9 @@ app.get(["/updates", "/updates/"], (req, res) => {
   res.render("updates", { title: "ページ更新履歴", page: "updates", top: "ページ更新履歴"});
 });
 
-app.get(["/snow", "/snow/"], (req, res) => {
-  res.render("snow", { title: "tonkatsu0211のページ"});
-});
+//app.get(["/snow", "/snow/"], (req, res) => {
+  //res.render("snow", { title: "tonkatsu0211のページ"});
+//});
 
 app.get(["/error", "/error/"], (req, res) => {
   res.render("error", { title: "404 Not Found", page: "error"});

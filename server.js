@@ -16,24 +16,24 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
-app.get(["/", "/index", "/index/", "/top", "/top/"], (req, res) => {
+app.get(["/", "/index", "/index/", "/top", "/top/", "/index.html"], (req, res) => {
   const from = req.query.f || "";
   res.render("index", { from, title: "_tonkatsu_のページ", page: "index", top: "_tonkatsu_ / tonkatsu0211のページにようこそ!!"});
 });
 
-app.get(["/my", "/my/"], (req, res) => {
+app.get(["/my", "/my/", "/my.html"], (req, res) => {
   res.render("my", { title: "自己紹介(事故紹介)", page: "my", top: "自己紹介(事故紹介)"});
 });
 
-app.get(["/projects", "/projects/"], (req, res) => {
+app.get(["/projects", "/projects/", "/projects.html"], (req, res) => {
   res.render("projects", { title: "作品", page: "projects", top: "Scratchの作品"});
 });
 
-app.get(["/constructing", "/constructing/"], (req, res) => {
+app.get(["/constructing", "/constructing/", "/const", "", "constructing.html"], (req, res) => {
   res.render("constructing", { title: "建設中のページ", page: "constructing"});
 });
 
-app.get(["/constructing1", "/constructing1/"], (req, res) => {
+app.get(["/constructing1", "/constructing1/", "constructing1.html"], (req, res) => {
   res.render("constructing1", { title: "建設中のページ", page: "constructing"});
 });
 

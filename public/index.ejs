@@ -3,7 +3,7 @@
 <%- include("settings/top") %>
 
       <% if (from) { %>
-        <p style="color: red; ">※<%= from %>.glitch.me は tonkatsu0211.glitch.me に変更されました。</p>
+        <h2 style="color: red; font-weight: bold">※<%= from %>.glitch.me は tonkatsu0211.glitch.me に変更されました。</h2>
       <% } %>
   
       <p>
@@ -36,9 +36,5 @@
         </button>
       </h2>
     </div>
-    
-    <script>
-      document.getElementById("bold").style.font-weight = bold
-    </script>
 
 <%- include("settings/footer") %>

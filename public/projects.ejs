@@ -12,16 +12,19 @@
         <br>
         <button
           class="scratchButton"
-          id="">
+          id="p2PreviewButton"
+          onclick="p2preview()">
           プレビュー
         </button>
         <iframe 
           src="https://scratch.mit.edu/projects/1104087073/embed"
           allowtransparency="true"
-          width="480"
-          height="400"
+          width="500"
+          height="420"
           frameborder="0"
           scrolling="no"
+          class="scPreview"
+          id="p2Preview"
           allowfullscreen>
         </iframe>
         <br>
@@ -72,15 +75,53 @@
           width="500"
         />
         <br>
+        <button
+          class="scratchButton"
+          id="p1PreviewButton"
+          onclick="p1preview()">
+          プレビュー
+        </button>
         <iframe 
           src="https://scratch.mit.edu/projects/1181550198/embed"
           allowtransparency="true"
-          width="480"
-          height="400"
+          width="500"
+          height="420"
           frameborder="0"
           scrolling="no"
+          class="scPreview"
+          id="p1Preview"
           allowfullscreen>
         </iframe>
+        <h3>
+          操作方法
+        </h3>
+        <div class="scPreTutorial" id="p1Tutorial">
+          <p>
+            z...一段目設定
+          </p>
+          <p>
+            x...二段目設定
+          </p>
+          <p>
+            c...三段目設定
+          </p>
+          <p>
+            a...一段目動作
+          </p>
+          <p>
+            s...二段目動作
+          </p>
+          <p>
+            d...三段目動作
+          </p>
+          <p>
+            ↑...次々発設定&先発発車
+          </p>
+          <p>
+            f...一斉動作
+          </p>
+        </div>
+        <br>
         <p>
           京急青物横丁駅に設置されているデジタルパタパタを再現しています!
           turbowarpを使ってフレームレートを変更することで回転速度を調整できます!
@@ -119,9 +160,18 @@
       </div>
     </div>
   <script>
+    
     function p2preview() {
-      
+      document.getElementById("p2Preview").style.display = "inline";
+      document.getElementById("p2PreviewButton").style.display = "none";
     }
+    
+    function p1preview() {
+      document.getElementById("p1Preview").style.display = "inline";
+      document.getElementById("p1Tutorial").st
+      document.getElementById("p1PreviewButton").style.display = "none";
+    }
+    
   </script>  
   
 <%- include("settings/footer") %>

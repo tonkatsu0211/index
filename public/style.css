@@ -104,6 +104,13 @@ body {
   color: #999999;
   padding-left: 20px;
 }
+.scPreview {
+  display: none;
+}
+.scPreTutorial{
+  font-size: 10px;
+  display: none;
+}
 .blackButton20 {
   padding: 4px 6px;
   border: 2px solid #333333;

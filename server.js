@@ -29,7 +29,7 @@ app.get(["/constructing1", "/constructing1/"], (req, res) => {
 });
 
 app.get(["/contact", "/contact/"], (req, res) => {
-  res.render("contact", { title: "連絡先", page: "contact", top: "マイリンク・連絡先"});
+  res.render("contact", { title: "お問い合わせ", page: "contact", top: "お問い合わせ"});
 });
 
 app.get(["/beforeBreak", "/beforeBreak/"], (req, res) => {

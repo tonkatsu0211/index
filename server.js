@@ -21,20 +21,28 @@ app.get(["/", "/index", "/index/", "/top", "/top/", "/index.html"], (req, res) =
   res.render("index", { from, title: "_tonkatsu_のページ", page: "index", top: "_tonkatsu_ / tonkatsu0211のページにようこそ!!"});
 });
 
-app.get(["/my", "/my/", "/my.html"], (req, res) => {
+app.get("/my/", (req,res) => {
+  res.redirect(301, "/my");
+});
+
+app.get(["/my", "/my.html"], (req, res) => {
   res.render("my", { title: "自己紹介(事故紹介)", page: "my", top: "自己紹介(事故紹介)"});
+});
+
+app.get("/project/", (req, res) => {
+  
 });
 
 app.get(["/projects", "/projects/", "/projects.html"], (req, res) => {
   res.render("projects", { title: "作品", page: "projects", top: "Scratchの作品"});
 });
 
-app.get(["/constructing", "/constructing/", "/const", "", "constructing.html"], (req, res) => {
-  res.render("constructing", { title: "建設中のページ", page: "constructing"});
+app.get(["/constructing", "/constructing/", "/const", "/const/", "constructing.html"], (req, res) => {
+  res.render("constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
 });
 
-app.get(["/constructing1", "/constructing1/", "constructing1.html"], (req, res) => {
-  res.render("constructing1", { title: "建設中のページ", page: "constructing"});
+app.get(["/constructing1", "/constructing1/", "/const1", "/const1/", "constructing1.html"], (req, res) => {
+  res.render("constructing1", { title: "建設中のページ", page: "constructing1", top: "建設中"});
 });
 
 app.get(["/contact", "/contact/"], (req, res) => {

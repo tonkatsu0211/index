@@ -2,6 +2,14 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const session = require('express-session');
+
+//app.use(session({
+    //secret: "tonkatsu0211",
+    //resave: false,
+    //saveUninitialized: true,
+    //cookie: { maxAge: 5 * 24 * 60 * 60 * 1000 }
+//}));
 
 app.use(express.static("public"));
 
@@ -38,6 +46,10 @@ app.get(["/beforeBreak", "/beforeBreak/"], (req, res) => {
 
 app.get(["/updates", "/updates/"], (req, res) => {
   res.render("updates", { title: "ページ更新履歴", page: "updates", top: "ページ更新履歴"});
+});
+
+app.get(["/snow", "/snow/"], (req, res) => {
+  res.render("snow", { title: "tonkatsu0211のページ"});
 });
 
 app.get(["/error", "/error/"], (req, res) => {

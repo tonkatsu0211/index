@@ -16,7 +16,15 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
-app.get(["/", "/index", "/index/", "/top", "/top/", "/index.html"], (req, res) => {
+app.get("/index/", (req, res) => {
+  res.redirect(301, "/index");
+});
+
+app.get("/top/", (req, res) => {
+  res.redirect(301, "/top");
+});
+
+app.get(["/", "/index", "/top", "/index.html"], (req, res) => {
   const from = req.query.f || "";
   res.render("index", { from, title: "_tonkatsu_のページ", page: "index", top: "_tonkatsu_ / tonkatsu0211のページにようこそ!!"});
 });
@@ -30,32 +38,64 @@ app.get(["/my", "/my.html"], (req, res) => {
 });
 
 app.get("/project/", (req, res) => {
-  
+  res.redirect(301, "/projects");
 });
 
-app.get(["/projects", "/projects/", "/projects.html"], (req, res) => {
+app.get(["/projects", "/projects.html"], (req, res) => {
   res.render("projects", { title: "作品", page: "projects", top: "Scratchの作品"});
 });
 
-app.get(["/constructing", "/constructing/", "/const", "/const/", "constructing.html"], (req, res) => {
+app.get("/constructing/", (req, res) => {
+  res.redirect(301, "/constructing");
+});
+
+app.get("/const/", (req, res) => {
+  res.direct(301, "/const");
+});
+
+app.get(["/constructing", "/const", "constructing.html"], (req, res) => {
   res.render("constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
 });
 
-app.get(["/constructing1", "/constructing1/", "/const1", "/const1/", "constructing1.html"], (req, res) => {
+app.get("/constructing1/", (req, res) => {
+  res.redirect(301, "/constructing1");
+});
+
+app.get("/const1/", (req, res) => {
+  res.direct(301, "/const1");
+});
+
+app.get(["/constructing1", "/const1", "constructing1.html"], (req, res) => {
   res.render("constructing1", { title: "建設中のページ", page: "constructing1", top: "建設中"});
 });
 
-app.get(["/contact", "/contact/"], (req, res) => {
+app.get("/contact/", (req, res) => {
+  res.redirect(301, "/contact");
+});
+
+app.get(["/contact", "/contact.html"], (req, res) => {
   res.render("contact", { title: "お問い合わせ", page: "contact", top: "お問い合わせ"});
 });
 
-app.get(["/beforeBreak", "/beforeBreak/"], (req, res) => {
+app.get("/beforeBreak/", (req, res) => {
+  res.redirect(301, "/beforeBreak")
+})
+
+app.get(["/beforeBreak", "/beforeBreak.html"], (req, res) => {
   res.render("beforeBreak", { title: "_tonkatsu_のページ", page: "beforeBreak", top: "履歴破壊"});
 });
 
-app.get(["/updates", "/updates/"], (req, res) => {
+app.get("/updates/", (req, res) => {
+  res.redirect(301, "/updates")
+})
+
+app.get(["/updates", "/updates.html"], (req, res) => {
   res.render("updates", { title: "ページ更新履歴", page: "updates", top: "ページ更新履歴"});
 });
+
+app.get("/snow/" (req, res) => {
+  res
+})
 
 //app.get(["/snow", "/snow/"], (req, res) => {
   //res.render("snow", { title: "tonkatsu0211のページ"});

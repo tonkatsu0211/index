@@ -2,6 +2,10 @@
 <%- include("settings/nav") %>
 <%- include("settings/top") %>
 
+      <% if (from) { %>
+        <p style="color: red; ">※<%= from %>.glitch.me は tonkatsu0211.glitch.me に変更されました。</p>
+      <% } %>
+  
       <p>
         このページは_tonkatsu_(tonkatsu0211)が勝手にいろいろ書いてるページです。
       </p>
@@ -32,5 +36,9 @@
         </button>
       </h2>
     </div>
+    
+    <script>
+      document.getElementById("bold").style.font-weight = bold
+    </script>
 
 <%- include("settings/footer") %>

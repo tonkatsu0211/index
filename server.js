@@ -17,7 +17,8 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
 app.get(["/", "/index", "/index/", "/top", "/top/"], (req, res) => {
-  res.render("index", { title: "_tonkatsu_のページ", page: "index", top: "_tonkatsu_ / tonkatsu0211のページにようこそ!!"});
+  const from = req.query.f
+  res.render("index", { title: "_tonkatsu_のページ", page: "index", top: "_tonkatsu_ / tonkatsu0211のページにようこそ!!", from: {from}});
 });
 
 app.get(["/my", "/my/"], (req, res) => {

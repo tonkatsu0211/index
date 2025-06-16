@@ -67,8 +67,11 @@ app.get(["/games", "/games.html"], (req, res) => {
 });
 
 app.get(["/snow", "/snow.html"], (req, res) => {
-  const user = req.cookies.user || null;
-  render(res, "snow", { user,  title: "tonkatsu0211のページ"});
+  render(res, "snow", { title: "tonkatsu0211のページ"});
+});
+
+app.get(["/stickman", "/stickman.html"], (req, res) => {
+  render(res, "stickman", { title: "tonkatsu0211のページ"});
 });
 
 app.get(["/error", "/error.html"], (req, res) => {

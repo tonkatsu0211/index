@@ -77,7 +77,7 @@ app.get(["/error", "/error.html"], (req, res) => {
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
-  res.status(404).redirct(`/error?e=${encodeURIComponent(pageName)}`);
+  res.status(404).redirect(`/error?e=${encodeURIComponent(pageName)}`, { title: "404 Not Found", page: "error"});
 });
 
 const port = process.env.PORT || 3000;

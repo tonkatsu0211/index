@@ -1,7 +1,8 @@
 <%- include("settings/header") %>
 <%- include("settings/nav") %>
 <%- include("settings/top") %>
-
+      
+      <div
       <div class="project2">
         <h2>EBM-3.5-turbo</h2>
         <p class="option-left10-underline">2024/11/30公開 2025/6/11追加</p>
@@ -163,6 +164,9 @@
         </h2>
       </div>
     </div>
+
+  <button id="toTopButton" class="toTopButton" title="ページの先頭へ戻る">↑</button>
+
   <script>
     
     function p2preview() {
@@ -175,7 +179,20 @@
       document.getElementById("p1Tutorial").style.display = "inline";
       document.getElementById("p1PreviewButton").style.display = "none";
     }
-    
-  </script>  
+
+  const toTopBtn = document.getElementById("toTopBtn");
+
+  window.onscroll = function () {
+    if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+      toTopButton.style.display = "block";
+    } else {
+      toTopButton.style.display = "none";
+    }
+  };
+
+  toTopButton.onclick = function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+</script>
   
 <%- include("settings/footer") %>

@@ -11,22 +11,24 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
+app.use(express.json());
+
+app.post('/log', (req, res) => {
+  console.log(req.body.message);
+  res.json({ status: 'ok' });
+});
 
 function render(req, res, view, data = {}) {
     const qE = req.query.e || "";
-    const qR = req.query.reload || "";
     if (view == "error" && qE){
       console.log(`redirect by 404 to /error?e=${qE}`)
     }
     res.render(view, data, (err, html) => {
       if (err) {
         console.log(`404 in /${view}`)
-        res.status(404).redirect(`/error?e=${view}`); 
+        res.status(404).render('/error', {title}); 
       } else {
-        if (qR) {
-          console.log(`reload on /${view}`)
-        }
-        console.log(`access to /${view} is normal`)
+        console.log(`access to /${view} ... OK`)
         res.send(html);
       }
     });
@@ -91,8 +93,8 @@ app.get(["/error", "/error.html"], (req, res) => {
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
-  console.log(`404 in ${encodeURIComponent(pageName)}`)
-  res.status(404).redirect(`/error?e=${encodeURIComponent(pageName)}`);
+  console.log(`404 in /${encodeURIComponent(pageName)}`)
+  res.status(404).render(`/error?e=${encodeURIComponent(pageName)}`);
 });
 
 const port = process.env.PORT || 3000;

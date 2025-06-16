@@ -26,7 +26,7 @@ function render(req, res, view, data = {}) {
     res.render(view, data, (err, html) => {
       if (err) {
         console.log(`404 in /${view}`)
-        res.status(404).render('/error', { title: "404 Not Found", page: "error", e: view}); 
+        res.status(404).render('error', { title: "404 Not Found", page: "error", ec: view}); 
       } else {
         console.log(`access to /${view} ... OK`)
         res.send(html);
@@ -88,13 +88,13 @@ app.get(["/stickman", "/stickman.html"], (req, res) => {
 });
 
 app.get(["/error", "/error.html"], (req, res) => {
-  render(req, res, "error", { title: "404 Not Found", page: "error"});
+  render(req, res, "error", { title: "404 Not Found", page: "error", ec: "none"});
 });
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
   console.log(`404 in /${encodeURIComponent(pageName)}`)
-  res.status(404).render('/error', { title: "404 Not Found", page: "error", e:encodeURIComponent(pageName)});
+  res.status(404).render('error', { title: "404 Not Found", page: "error", ec:encodeURIComponent(pageName)});
 });
 
 const port = process.env.PORT || 3000;

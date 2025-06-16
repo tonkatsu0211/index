@@ -17,7 +17,7 @@
         </button>
       </h2>
       <h2>
-        <button onclick="location.href='/'" class="blueButton30" id="errorReload">
+        <button onclick="location.reload()" class="blueButton30" id="errorReload">
           当該ページに再アクセス(404が再表示される可能性が高いです)
         </button>
       </h2>
@@ -26,9 +26,16 @@
   <script>
     const params = new URLSearchParams(window.location.search);
     const e = params.get("e");
-    const accessURL = `${location.origin}/${e}`;
 
     if (e) {
+      const accessURL = `${location.origin}/${e}`;
+      document.getElementById("error").textContent = `アクセスしたURL: ${accessURL}`;
+      document.getElementById("hiddenErrorText").style.display = "none";
+      document.getElementById("errorReload").onclick = function () {
+        location.href = accessURL;
+      };
+    } else if ("<%= ec %>" !== "none"){
+      const accessURL = `${location.origin}/<%= ec %>`
       document.getElementById("error").textContent = `アクセスしたURL: ${accessURL}`;
       document.getElementById("hiddenErrorText").style.display = "none";
       document.getElementById("errorReload").onclick = function () {

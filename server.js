@@ -11,6 +11,18 @@ app.use(express.static("public"));
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
+function safeRender(res, view, data = {}) {
+  try {
+    res.render(view, data);
+  } catch (error) {
+    console.error(`レンダリング失敗 (${view}):`, error.message);
+    res.status(500).render(`/error?e=${view}`, {
+      title: "404 Not Found",
+      page: "error"
+    });
+  }
+}
+
 app.get(["/", "/index", "/top", "/index.html"], (req, res) => {
   const from = req.query.f || "";
   res.render("index", { from, title: "_tonkatsu_のページ", page: "index", top: "_tonkatsu_ / tonkatsu0211のページにようこそ!!"});
@@ -67,7 +79,7 @@ app.get(["/error", "/error.html"], (req, res) => {
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
-  res.status(404).render(`/error?e=${encodeURIComponent(pageName)}`, { title: "404 Not Found"});
+  res.status(404).render(`/error?e=${encodeURIComponent(pageName)}`, { title: "404 Not Found", page: "error"});
 });
 
 const port = process.env.PORT || 3000;

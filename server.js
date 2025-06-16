@@ -12,9 +12,12 @@ app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'public'));
 
 function render(res, view, data = {}) {
+    console.log(`access to /${view}`)
     res.render(view, data, (err, html) => {
       if (err) {
-       res.status(404).redirect(`/error?e=${view}`); 
+        const e = 
+        console.log(`404 in /${view}`)
+        res.status(404).redirect(`/error?e=${view}`); 
       } else {
         res.send(html);
       }
@@ -80,6 +83,7 @@ app.get(["/error", "/error.html"], (req, res) => {
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
+  console.log(`404 in ${encodeURIComponent(pageName)}`)
   res.status(404).redirect(`/error?e=${encodeURIComponent(pageName)}`);
 });
 

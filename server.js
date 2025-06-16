@@ -3,7 +3,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cookieParser = require("cookie-parser");
-var e = "none";
 
 app.use(cookieParser());
 
@@ -15,21 +14,19 @@ app.set('views', path.join(__dirname, 'public'));
 
 function render(req, res, view, data = {}) {
     const qE = req.query.e || "";
-    if (e != "none") {
-      console.log(`redirect by 404 to /error?e=${view}`)
-    } else {
-      console.log(`access to /${view}`)
-    }
+    const qR = req.query.reload || "";
     if (view == "error" && qE){
       console.log(`redirect by 404 to /error?e=${qE}`)
     }
     res.render(view, data, (err, html) => {
       if (err) {
-        var e = view
         console.log(`404 in /${view}`)
         res.status(404).redirect(`/error?e=${view}`); 
       } else {
-        var e = "none";
+        if (qR) {
+          console.log(`reload on /${view}`)
+        }
+        console.log(`access to /${view} is normal`)
         res.send(html);
       }
     });
@@ -99,6 +96,6 @@ app.use((req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-const listener = app.listen(process.env.PORT, () => {
+const listener = app.listen(port, () => {
   console.log("App listening on port " + listener.address().port);
 });

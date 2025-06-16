@@ -14,10 +14,11 @@ app.set('views', path.join(__dirname, 'public'));
 function render(res, view, data = {}) {
     res.render(view, data, (err, html) => {
       if (err) {
-        
+       res.status(500).redirect(`/error?e=${view}`); 
+      } else {
+        res.send(html);
       }
     });
-    res.status(500).redirect(`/error?e=${view}`);
 }
 
 app.get(["/", "/index", "/top", "/index.html"], (req, res) => {
@@ -76,7 +77,7 @@ app.get(["/error", "/error.html"], (req, res) => {
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
-  res.status(404).render(`/error?e=${encodeURIComponent(pageName)}`, { title: "404 Not Found", page: "error"});
+  res.status(404).redirct(`/error?e=${encodeURIComponent(pageName)}`);
 });
 
 const port = process.env.PORT || 3000;

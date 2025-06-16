@@ -62,8 +62,8 @@ app.get(["/updates", "/updates.html"], (req, res) => {
   render(res, "updates", { title: "ページ更新履歴", page: "updates", top: "ページ更新履歴"});
 });
 
-app.get(["/lobby", "/lobby.html"], (req, res) => {
-  render(res, "lobby", { title: "tonkatsu0211のページ", page: "lobby", top: "snowball.ioをプレイ"});
+app.get(["/games", "/games.html"], (req, res) => {
+  render(res, "games", { title: "tonkatsu0211のページ", page: "games", top: "ゲームをプレイ"});
 });
 
 app.get(["/snow", "/snow.html"], (req, res) => {

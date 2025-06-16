@@ -52,6 +52,10 @@ app.get(["/updates", "/updates.html"], (req, res) => {
   res.render("updates", { title: "ページ更新履歴", page: "updates", top: "ページ更新履歴"});
 });
 
+app.get(["/lobby", "/lobby.html"], (req, res) => {
+  res.render("lobby", { title: "tonkatsu0211のページ", page: "lobby", top: "snowball.ioをプレイ"});
+});
+
 app.get(["/snow", "/snow.html"], (req, res) => {
   const user = req.cookies.user || null;
   res.render("snow", { user,  title: "tonkatsu0211のページ"});

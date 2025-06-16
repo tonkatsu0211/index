@@ -1,5 +1,5 @@
 <div class="main">
   <div class="a00">
     <h1><%= top %></h1>
-    <button class="normalButton" onclick="location.reload()">ページを再読み込み</button>
+    <button class="normalButton" onclick="console.log('reload on /<%= page %>'); setTimeout(() => location.reload(), 100);">ページを再読み込み</button>
   </div>

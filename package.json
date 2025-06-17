@@ -1,6 +1,6 @@
 {
   "name": "tonkatsu0211-my-page",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "_tonkatsu_ / tonkatsu0211 self introduction",
   "main": "server.js",
   "scripts": {

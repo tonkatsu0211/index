@@ -98,7 +98,7 @@ app.get(["/empass/error", "/empass/error/.html"], (req, res) => {
 
 app.use((req, res) => {
   console.log("access in maintenancing")
-  res.render("emer", { title: "_tonkatsu_のページ", page: "emer", top: "メンテナンス中"});
+  res.render("emer", { title: "_tonkatsu_のページ", page: "emer", top: "メンテナンス中", em: "true"});
 });
 
 const port = process.env.PORT || 3000;

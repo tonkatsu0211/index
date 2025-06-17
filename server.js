@@ -91,7 +91,6 @@ app.get(["/games/:id", "/games/:id.html"], (req, res) => {
   render(req, res, gameId, {}, "games");
 });
 
-
 app.get(["/error", "/error.html"], (req, res) => {
   render(req, res, "error", { title: "404 Not Found", page: "error", ec: "none"});
 });

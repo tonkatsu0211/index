@@ -24,9 +24,9 @@ function render(req, res, view, data = {}, locate = "") {
     console.log(`redirect by 404 to /error?e=${qE}`);
   }
   const name = locate ? `${locate}/${view}` : view;
-  res.render(name, data, (err, html) => {
+  res.render(name, {data, em: "false"}, (err, html) => {
     if (err) {
-      console.log(`404 in /${name}`);
+      console.log(`404 at /${name}`);
       res.status(404).render('error', {
         title: "404 Not Found",
         page: "error",
@@ -57,7 +57,7 @@ app.get("/const", (req, res) => {
   render(req, res, "constructing", { title: "建設中のページ", page: "const", top: "建設中"});
 });
 
-app.get(["/constructing", "/const", "constructing.html"], (req, res) => {
+app.get(["/constructing", "/const", "/constructing.html"], (req, res) => {
   render(req, res, "constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
 });
 
@@ -65,7 +65,7 @@ app.get("/const1", (req, res) => {
   render(req, res, "constructing", { title: "建設中のページ", page: "const1", top: "建設中"});
 });
 
-app.get(["/constructing1", "/const1", "constructing1.html"], (req, res) => {
+app.get(["/constructing1", "/const1", "/constructing1.html"], (req, res) => {
   render(req, res, "constructing1", { title: "建設中のページ", page: "constructing1", top: "建設中"});
 });
 

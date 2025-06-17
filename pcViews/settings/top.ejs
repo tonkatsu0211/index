@@ -10,7 +10,7 @@
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ message: 'reload on /<%= page %> ... OK' })
   }).then(() => {
-    location.href = 'em === `true` ? `/empass/${page}` : `/${page}`'
+    location.href = '<%= em === `true` ? `/empass/${page}` : `/${page}` %>'
   });
 ">
   ページを再読み込み

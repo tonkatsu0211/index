@@ -2,9 +2,19 @@
 <%- include("settings/nav") %>
 <%- include("settings/top") %>
       
-      <div
+      <p>
+        各プロジェクトの場所に移動します。
+      </p>
+        <button class="blueButton30" id="project2Button" onclick="document.getElementByID('p2Title').scrollIntoView({ behavior: 'smooth'});" style="font-weight: bold !important;">
+          EBM-3.5-turbo
+        </button>
+        <button class="blueButton30" id="project1Button" onclick="document.getElementByID('p1Title').scrollIntoView({ behavior: 'smooth' });" style="background-color: #f22020 !important; color: #ffffe8 !important; font-weight: bold !important;">
+          【京急】京急パタパタ再現 V1.0.1
+        </button>
+      <br>
+      <br>
       <div class="project2">
-        <h2>EBM-3.5-turbo</h2>
+        <h2 id="p2Title">EBM-3.5-turbo</h2>
         <p class="option-left10-underline">2024/11/30公開 2025/6/11追加</p>
         <br>
         <p class="smallP">
@@ -71,7 +81,7 @@
       <br>
       <br>
       <div class="project1">
-        <h2>【京急】京急パタパタ再現 V1.0.1</h2>
+        <h2 id="p1Title">【京急】京急パタパタ再現 V1.0.1</h2>
         <p class="option-left10-underline">2025/6/5公開 2025/6/9追加</p>
         <img
           src="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/patapata.png?v=1749449611231"

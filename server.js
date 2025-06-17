@@ -18,26 +18,27 @@ app.post('/log', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-function render(req, res, view, data = {}, locate) {
-    const qE = req.query.e || "";
-    if (view == "error" && qE){
-      console.log(`redirect by 404 to /error?e=${qE}`)
-    }
-    if (locate == "games") {
-      const name = `games/${view}`
+function render(req, res, view, data = {}, locate = "") {
+  const qE = req.query.e || "";
+  if (view == "error" && qE) {
+    console.log(`redirect by 404 to /error?e=${qE}`);
+  }
+  const name = locate ? `${locate}/${view}` : view;
+  res.render(name, data, (err, html) => {
+    if (err) {
+      console.log(`404 in /${name}`);
+      res.status(404).render('error', {
+        title: "404 Not Found",
+        page: "error",
+        ec: view
+      });
     } else {
-      const name = view
+      console.log(`access to /${name} ... OK`);
+      res.send(html);
     }
-    res.render(name, data, (err, html) => {
-      if (err) {
-        console.log(`404 in /${name}`)
-        res.status(404).render('error', { title: "404 Not Found", page: "error", ec: view}); 
-      } else {
-        console.log(`access to /${name} ... OK`)
-        res.send(html);
-      }
-    });
+  });
 }
+
 
 app.get(["/", "/index", "/top", "/index.html"], (req, res) => {
   const from = req.query.f || "";
@@ -87,7 +88,7 @@ app.get(["/games", "/games.html"], (req, res) => {
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {
   let gameId = req.params.id;
   gameId = gameId.replace(/\.(html|ejs)$/, "");
-  render(req, res, gameId, {}, games);
+  render(req, res, gameId, {}, "games");
 });
 
 

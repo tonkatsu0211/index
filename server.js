@@ -79,11 +79,15 @@ app.get(["/games", "/games.html"], (req, res) => {
   render(req, res, "games", { title: "tonkatsu0211のページ", page: "games", top: "ゲームをプレイ"});
 });
 
-app.get(["/snow", "/snow.html"], (req, res) => {
+app.get(["/games/snow", "/games/snow.html"], (req, res) => {
   render(req, res, "snow", { title: "tonkatsu0211のページ"});
 });
 
-app.get(["/stickman", "/stickman.html"], (req, res) => {
+app.get(["/games/pingpong", "/games/pingpong.html"], (req, res) => {
+  render(req, res, "pingpong", { title: "tonkatsu0211のページ"});
+});
+
+app.get(["/games/stickman", "/games/stickman.html"], (req, res) => {
   render(req, res, "stickman", { title: "tonkatsu0211のページ"});
 });
 

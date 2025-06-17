@@ -98,7 +98,7 @@ app.get(["/error", "/error.html"], (req, res) => {
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
-  console.log(`404 in /${encodeURIComponent(pageName)}`)
+  console.log(`404 at /${encodeURIComponent(pageName)}`)
   res.status(404).render('error', { title: "404 Not Found", page: "error", ec:encodeURIComponent(pageName)});
 });
 

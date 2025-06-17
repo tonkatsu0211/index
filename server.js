@@ -76,19 +76,23 @@ app.get(["/updates", "/updates.html"], (req, res) => {
 });
 
 app.get(["/games", "/games.html"], (req, res) => {
-  render(req, res, "games", { title: "tonkatsu0211のページ", page: "games", top: "ゲームをプレイ"});
+  render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
 });
 
 app.get(["/games/snow", "/games/snow.html"], (req, res) => {
-  render(req, res, "snow", { title: "tonkatsu0211のページ"});
-});
-
-app.get(["/games/pingpong", "/games/pingpong.html"], (req, res) => {
-  render(req, res, "pingpong", { title: "tonkatsu0211のページ"});
+  render(req, res, "snow", {});
 });
 
 app.get(["/games/stickman", "/games/stickman.html"], (req, res) => {
-  render(req, res, "stickman", { title: "tonkatsu0211のページ"});
+  render(req, res, "stickman", {});
+});
+
+app.get(["/games/pingpong", "/games/pingpong.html"], (req, res) => {
+  render(req, res, "pingpong", {});
+});
+
+app.get(["/games/slime", "/games/slime.html"], (req, res) => {
+  render(req, res, "slime", {});
 });
 
 app.get(["/error", "/error.html"], (req, res) => {

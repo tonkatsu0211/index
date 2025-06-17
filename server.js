@@ -80,9 +80,11 @@ app.get(["/games", "/games.html"], (req, res) => {
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {
-  const gameId = req.params.id
+  let gameId = req.params.id;
+  gameId = gameId.replace(/\.(html|ejs)$/, "");
   render(req, res, gameId, {});
 });
+
 
 app.get(["/error", "/error.html"], (req, res) => {
   render(req, res, "error", { title: "404 Not Found", page: "error", ec: "none"});

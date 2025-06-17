@@ -5,10 +5,10 @@
       <p style="font-size: 20px; padding-bottom: 0; margin: 0;">
         ※このボタンを押すと各プロジェクトの場所に移動します。
       </p>
-        <button class="blueButton30" id="project2Button" onclick="document.getElementById('p2Title').scrollIntoView({ behavior: 'smooth'});" style="padding-top: 0; margin: 0; font-weight: bold !important;">
+        <button class="blueButton30" id="project2Button" onclick="setTimeout(() => document.getElementById('p2Title').scrollIntoView({ behavior: 'smooth'}), 200);" style="padding-top: 0; margin: 0; font-weight: bold !important;">
           EBM-3.5-turbo
         </button>
-        <button class="blueButton30" id="project1Button" onclick="document.getElementById('p1Title').scrollIntoView({ behavior: 'smooth' });" style="padding-top: 0; margin: 0; background-color: #f22020 !important; color: #ffffe8 !important; font-weight: bold !important;">
+        <button class="blueButton30" id="project1Button" onclick="document.getElementById('p')setTimeout(() => document.getElementById('p1Title').scrollIntoView({ behavior: 'smooth' }), 200);" style="padding-top: 0; margin: 0; background-color: #f22020 !important; color: #ffffe8 !important; font-weight: bold !important;">
           【京急】京急パタパタ再現 V1.0.1
         </button>
       <br>
@@ -29,7 +29,7 @@
           プレビュー
         </button>
         <iframe 
-          src="https://scratch.mit.edu/projects/1104084277/embed"
+          data-src="https://scratch.mit.edu/projects/1104084277/embed"
           allowtransparency="true"
           width="500"
           height="420"
@@ -96,7 +96,7 @@
           プレビュー
         </button>
         <iframe 
-          src="https://scratch.mit.edu/projects/1181550198/embed"
+          data-src="https://scratch.mit.edu/projects/1181550198/embed"
           allowtransparency="true"
           width="500"
           height="420"
@@ -180,12 +180,16 @@
   <script>
     
     function p2preview() {
-      document.getElementById("p2Preview").style.display = "inline";
+      const p2Pv = document.getElementById("p2Preview")
+      p2Pv.src = p2Pv.dataset.src
+      p2Pv.style.display = "inline";
       document.getElementById("p2PreviewButton").style.display = "none";
     }
     
     function p1preview() {
-      document.getElementById("p1Preview").style.display = "inline";
+      const p1Pv = document.getElementById("p1Preview");
+      p1Pv.src = p1Pv.dataset.src
+      p1Pv.style.display = "inline";
       document.getElementById("p1Tutorial").style.display = "inline";
       document.getElementById("p1PreviewButton").style.display = "none";
     }

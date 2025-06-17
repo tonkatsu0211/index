@@ -235,9 +235,27 @@ body {
   font-size: 20px;
   box-sizing: border-box;
 }
-.warnButton {
+.warnButton2 {
   padding: 4px 6px;
   border: 2px solid #333333;
+  background-color: #de2020;
+  color: #ffffff !important;
+  cursor: pointer;
+  border-radius: 4px;
+  font-size: 30px;
+  text-decoration: none;
+  display: flex;
+  text-align: center;
+  user-select: none;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 0px !important;
+  margin: 10px;
+}
+.warnButton3 {
+  padding: 4px 6px;
+  border: 3px solid #333333;
   background-color: #de2020;
   color: #ffffff !important;
   cursor: pointer;

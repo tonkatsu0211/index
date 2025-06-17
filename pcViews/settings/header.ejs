@@ -14,6 +14,14 @@
       href="https://cdn.glitch.global/76a1f4d2-2815-4fbf-afcd-888d6db7e806/icon.ico?v=1749512639750"
       type="image/x-icon"
     />
+    <script>
+      if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+      }
+      window.addEventListener("beforeunload", () => {
+        window.scrollTo(0, 0);
+      });
+    </script>
   </head>
   <body>
     <header>_tonkatsu_ / tonkatsu0211のマイページ</header>

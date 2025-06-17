@@ -5,10 +5,10 @@
       <p style="font-size: 20px; padding-bottom: 0; margin: 0;">
         ※このボタンを押すと各プロジェクトの場所に移動します。
       </p>
-        <button class="blueButton30" id="project2Button" onclick="setTimeout(() => document.getElementById('p2Title').scrollIntoView({ behavior: 'smooth'}), 200);" style="padding-top: 0; margin: 0; font-weight: bold !important;">
+        <button class="blueButton30" id="project2Button" onclick="setTimeout(() => document.getElementById('p2Title').scrollIntoView({ behavior: 'smooth' }), 150);" style="padding-top: 0; margin: 0; font-weight: bold !important;">
           EBM-3.5-turbo
         </button>
-        <button class="blueButton30" id="project1Button" onclick="document.getElementById('p')setTimeout(() => document.getElementById('p1Title').scrollIntoView({ behavior: 'smooth' }), 200);" style="padding-top: 0; margin: 0; background-color: #f22020 !important; color: #ffffe8 !important; font-weight: bold !important;">
+        <button class="blueButton30" id="project1Button" onclick="setTimeout(() => document.getElementById('p1Title').scrollIntoView({ behavior: 'smooth' }), 150);" style="padding-top: 0; margin: 0; background-color: #f22020 !important; color: #ffffe8 !important; font-weight: bold !important;">
           【京急】京急パタパタ再現 V1.0.1
         </button>
       <br>
@@ -178,6 +178,8 @@
   <button id="toTopButton" class="toTopButton" title="ページの先頭へ戻る">↑</button>
 
   <script>
+    
+    window.scrollTo({ top: 0, behavior: 'smooth' });
     
     function p2preview() {
       const p2Pv = document.getElementById("p2Preview")

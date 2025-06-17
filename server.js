@@ -79,20 +79,9 @@ app.get(["/games", "/games.html"], (req, res) => {
   render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
 });
 
-app.get(["/games/snow", "/games/snow.html"], (req, res) => {
-  render(req, res, "snow", {});
-});
-
-app.get(["/games/stickman", "/games/stickman.html"], (req, res) => {
-  render(req, res, "stickman", {});
-});
-
-app.get(["/games/pingpong", "/games/pingpong.html"], (req, res) => {
-  render(req, res, "pingpong", {});
-});
-
-app.get(["/games/slime", "/games/slime.html"], (req, res) => {
-  render(req, res, "slime", {});
+app.get(["/games/:id", "/games/:id.html"], (req, res) => {
+  const gameId = req.params.id
+  render(req, res, gameId, {});
 });
 
 app.get(["/error", "/error.html"], (req, res) => {

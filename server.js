@@ -82,7 +82,7 @@ app.get(["/updates", "/updates.html"], (req, res) => {
 });
 
 app.get(["/games", "/games.html"], (req, res) => {
-  render(req, res, "constructing", { title: "_tonkatsu_のページ", page: "games", top: "建設中"});
+  render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {

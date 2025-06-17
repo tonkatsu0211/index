@@ -18,17 +18,22 @@ app.post('/log', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-function render(req, res, view, data = {}) {
+function render(req, res, view, data = {}, locate) {
     const qE = req.query.e || "";
     if (view == "error" && qE){
       console.log(`redirect by 404 to /error?e=${qE}`)
     }
-    res.render(view, data, (err, html) => {
+    if (locate == "games") {
+      const name = `games/${view}`
+    } else {
+      const name = view
+    }
+    res.render(name, data, (err, html) => {
       if (err) {
-        console.log(`404 in /${view}`)
+        console.log(`404 in /${name}`)
         res.status(404).render('error', { title: "404 Not Found", page: "error", ec: view}); 
       } else {
-        console.log(`access to /${view} ... OK`)
+        console.log(`access to /${name} ... OK`)
         res.send(html);
       }
     });
@@ -82,7 +87,7 @@ app.get(["/games", "/games.html"], (req, res) => {
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {
   let gameId = req.params.id;
   gameId = gameId.replace(/\.(html|ejs)$/, "");
-  render(req, res, gameId, {});
+  render(req, res, gameId, {}, games);
 });
 
 

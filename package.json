@@ -2,13 +2,16 @@
   "name": "tonkatsu0211-my-page",
   "version": "1.0.4",
   "description": "_tonkatsu_ / tonkatsu0211 self introduction",
-  "main": "server.js",
+  "main": "emer.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node emer.js"
   },
   "dependencies": {
     "express": "^4.18.2",
     "ejs": "^3.1.10",
-    "cookie-parser": "^1.4.7"
+    "cookie-parser": "^1.4.7",
+    "bcrypt": "^6.0.0",
+    "express-session": "^1.18.1",
+    "body-parser": "^2.2.0"
   }
 }

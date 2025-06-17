@@ -3,6 +3,15 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cookieParser = require("cookie-parser");
+const session = require('express-session');
+const bcrypt = require('bcrypt');
+
+
+app.use(session({
+  secret: 'tonkatsu-0211',
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use(cookieParser());
 
@@ -83,6 +92,10 @@ app.get(["/updates", "/updates.html"], (req, res) => {
 
 app.get(["/games", "/games.html"], (req, res) => {
   render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
+});
+
+app.get(["/login", "/login.html"], (req, res) => {
+  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン"});
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {

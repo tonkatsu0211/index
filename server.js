@@ -24,7 +24,7 @@ function render(req, res, view, data = {}, locate = "") {
     console.log(`redirect by 404 to /error?e=${qE}`);
   }
   const name = locate ? `${locate}/${view}` : view;
-  res.render(name, {data, em: "false"}, (err, html) => {
+  res.render(name, { ...data, em: "false"}, (err, html) => {
     if (err) {
       console.log(`404 at /${name}`);
       res.status(404).render('error', {
@@ -82,7 +82,7 @@ app.get(["/updates", "/updates.html"], (req, res) => {
 });
 
 app.get(["/games", "/games.html"], (req, res) => {
-  render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
+  render(req, res, "constructing", { title: "_tonkatsu_のページ", page: "games", top: "建設中"});
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {
@@ -98,8 +98,8 @@ app.get(["/error", "/error.html"], (req, res) => {
 
 app.use((req, res) => {
   const pageName = req.path.replace("/", "");
-  console.log(`404 at /${encodeURIComponent(pageName)}`)
-  res.status(404).render('error', { title: "404 Not Found", page: "error", ec:encodeURIComponent(pageName)});
+  console.log(`404 at /${pageName}`)
+  res.status(404).render('error', { title: "404 Not Found", page: "error", ec: pageName, em: "false"});
 });
 
 const port = process.env.PORT || 3000;

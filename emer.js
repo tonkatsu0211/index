@@ -24,7 +24,7 @@ function render(req, res, view, data = {}, locate = "") {
     console.log(`redirect by 404 to /error?e=${qE} in maintenancing`);
   }
   const name = locate ? `${locate}/${view}` : view;
-  res.render(name, {data , em: "true"}, (err, html) => {
+  res.render(name, { ...data , em: "true"}, (err, html) => {
     if (err) {
       console.log(`404 at /${name} in maintenancing`);
       res.status(404).render('error', {

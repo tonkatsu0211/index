@@ -119,30 +119,29 @@
   }
   
   function appendMessage(msg) {
-  const item = document.createElement('div');
-  item.classList.add('message-item');
-  item.setAttribute('data-id', msg.id);
-
-  const username = getCookie("user") || "匿名";
-
-  const isOwner = username === msg.username;
-  const isAdmin = username === 'admin';//!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
-  const deleteButton = (isOwner || isAdmin)
-    ? `<button class="delete-btn" data-id="${msg.id}">削除</button>`
-    : '';
-
-  item.innerHTML = `
-    <div class="meta" style="font-size: 0.8em; color: #999;">
-      ${escapeHtml(msg.username)} [${escapeHtml(msg.timestamp)}]
-    </div>
-    <div class="text">${escapeHtml(msg.message)}</div>
-    ${deleteButton}
-  `;
-
-  messages.appendChild(item);
-  messages.scrollTop = messages.scrollHeight;
+    const item = document.createElement('div');
+    item.classList.add('message-item');
+  
+    const currentUser = getCookie("user");
+    const isAdmin = currentUser === "admin"; // 管理者判定
+    const isOwner = currentUser === msg.username;
+  
+    let deleteButton = '';
+    if (isAdmin || isOwner) {
+      deleteButton = `<button class="delete-btn" data-id="${msg.id}">削除</button>`;
+    }
+  
+    item.innerHTML = `
+      <div class="meta" style="color:#999;font-size:0.8em;">
+        <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
+      </div>
+      <div class="text">${escapeHtml(msg.message)}</div>
+      ${deleteButton}
+    `;
+    messages.appendChild(item);
+    messages.scrollTop = messages.scrollHeight;
   }
+
 
   function escapeHtml(text) {
     const div = document.createElement('div');
@@ -162,8 +161,13 @@
   });
 
   socket.on('delete message', (id) => {
-    const item = document.querySelector(`[data-id="${id}"]`);
-    if (item) item.remove();
+    const allMessages = document.querySelectorAll('.message-item');
+    allMessages.forEach(item => {
+      const button = item.querySelector('.delete-btn');
+      if (button && button.getAttribute('data-id') === id) {
+        item.remove();
+      }
+    });
   });
 </script>
 <script src="/chat.js"></script>

@@ -14,6 +14,8 @@ const historyPath = path.join(__dirname, 'chatHistory.json');
 
 let chatHistory = [];
 
+const { v4: uuidv4 } = require('uuid');
+
 try {
   if (fs.existsSync(historyPath)) {
     const data = fs.readFileSync(historyPath, 'utf-8');
@@ -27,32 +29,31 @@ io.on('connection', (socket) => {
   socket.emit('chat history', chatHistory);
 
   socket.on('chat message', (msg) => {
-    const messageData = {
-      id: Date.now().toString(),
-      username: socket.handshake.auth.username,
-      message: msg,
-      timestamp: new Date().toLocaleString("ja-JP", {
-        timeZone: "Asia/Tokyo",
-        hour12: false
-      })
-    };
+    const username = socket.handshake.auth.username || '匿名';
+    const timestamp = new Date().toLocaleString('ja-JP', {
+      timeZone: 'Asia/Tokyo',
+      hour12: false
+  });
+  
+  const messageData = {
+    id: uuidv4(), //ここ重要
+    username: username,
+    message: msg,
+    timestamp: timestamp
+  };
 
-    chatHistory.push(messageData);
-    if (chatHistory.length > 100) chatHistory.shift();
-
+  chatHistory.push(messageData);
+  if (chatHistory.length > 100) chatHistory.shift();
     io.emit('chat message', messageData);
   });
 
-  socket.on('delete message', (id, requester) => {
-  
-    const index = chatHistory.findIndex(m => m.id === id);
-    if (index !== -1) {
-      const message = chatHistory[index];
-      const isAdmin = requester === 'admin';//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-      const isOwner = requester === message.username;
-
-      if (isAdmin || isOwner) {
-        chatHistory.splice(index, 1);
+  socket.on('delete message', (id, username) => {
+    const messageIndex = chatHistory.findIndex(m => m.id === id);
+    if (messageIndex !== -1) {
+      const message = chatHistory[messageIndex];
+      
+      if (message.username === username || username === 'admin') {
+        chatHistory.splice(messageIndex, 1);
         io.emit('delete message', id);
       }
     }

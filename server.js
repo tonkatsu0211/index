@@ -66,7 +66,8 @@ function render(req, res, view, data = {}, locate = "") {
       res.status(404).render('error', {
         title: "404 Not Found",
         page: "error",
-        ec: view
+        ec: view, 
+        em: "false"
       });
     } else {
       console.log(`access to /${name} ... OK`);
@@ -118,7 +119,7 @@ app.get(["/games", "/games.html"], (req, res) => {
 //});
 
 app.get(["/login", "/login.html"], (req, res) => {
-  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: "none" });
+  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: "none"});
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {

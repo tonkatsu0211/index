@@ -4,10 +4,13 @@
   <a href="<%= em === 'true' ? '/empass/projects' : '/projects' %>" class="<%= page === 'projects' ? 'active' : '' %>">作品</a>
   <a href="<%= em === 'true' ? '/empass/contact' : '/contact' %>" class="<%= page === 'contact' ? 'active' : '' %>">お問い合わせ</a>
   <a href="<%= em === 'true' ? '/empass/games' : '/games' %>" class="<%= page === 'games' ? 'active' : '' %>">ゲーム</a>
-  <a href="<%= em === 'true' ? '/empass/constructing' : '/constructing' %>" class="<%= page === 'constructing' ? 'active' : '' %>">チャット</a>
   <a href="<%= em === 'true' ? '/empass/updates' : '/updates' %>" class="<%= page === 'updates' ? 'active' : '' %>">更新履歴</a>
   <a href="<%= em === 'true' ? '/empass/beforeBreak' : '/beforeBreak' %>" class="<%= page === 'beforeBreak' ? 'active' : '' %>">履歴破壊</a>
-
+  
+  <% if (page === 'chat') { %>
+    <a href="<%= em === 'true' ? '/empass/constructing' : '/constructing' %>" class="<%= page === 'constructing' ? 'active' : '' %>">チャット</a>
+  <% } %>
+  
   <!-- <% if (page === 'constructing') { %>
     <a href="<%= em === 'true' ? '/empass/constructing' : '/constructing' %>" class="active">建設中</a>
   <% } %> -->

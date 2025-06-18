@@ -6,8 +6,7 @@ const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
-const users = allUsers.users;
+const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 
 users['newUser'] = { passwordHash: '...' };
 fs.writeFileSync('users.json', JSON.stringify(users, null, 2));
@@ -136,6 +135,10 @@ app.get(["/games", "/games.html"], (req, res) => {
 
 app.get(["/login", "/login.html"], (req, res) => {
   render(req, res, "login", { title: "ログイン", page: "login", top: "チャットにログイン", err: "none"});
+});
+
+app.get(["/signup", "/signup.html"], (req, res) => {
+  render(req, res, "signup", { title: "サインアップ", page: "signup", top: "サインアップ", err: "none"});
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {

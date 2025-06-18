@@ -88,6 +88,17 @@ body {
   text-decoration: none;
   padding-left: 0;
 }
+.loginText {
+    width: 250px;
+    height: 25px;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    outline: none;
+    transition: 0.3s;
+  }
 .caution {
   text-decoration: underline;
   color: #de2020;

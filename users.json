@@ -1,5 +1,1 @@
-{
-  "newUser": {
-    "passwordHash": "..."
-  }
-}
+{"newUser":{"passwordHash":"..."},"_tonkatsu_":{"passwordHash":"$2b$10$nZLWzjwARFzqG6d.yBMzXOQOATtH0lYbxzQjoLRBQ0EYYgR6zgbXy"}}

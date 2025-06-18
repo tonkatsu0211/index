@@ -3,9 +3,19 @@
 <%- include("settings/top") %>
   
   <form method="POST" action="/login">
-  <input type="text" name="username" placeholder="ユーザー名" required>
-  <input type="password" name="password" placeholder="パスワード" required>
-  <button type="submit">ログイン</button>
+  <h2>
+    <input class="loginText" type="text" name="username" placeholder="ユーザー名" required>
+  </h2>
+  <h2>
+    <input class="loginText" type="password" name="password" placeholder="パスワード" required>
+  </h2>
+  <h2>
+    <button class="blueButton20" type="submit">ログイン</button>
+  </h2>
+  <br>
+  <p>
+    まだアカウントをお持ちでない方は<a href="signup" style="color: #000000; padding: 0; margin: 0;">こちら</a>
+  </p>
 </form>
 <p id="e"><%= err %></p>
   <br>

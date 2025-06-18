@@ -1,12 +1,27 @@
 <%- include("settings/header") %>
 <%- include("settings/nav") %>
 <%- include("settings/top") %>
-
-<form method="POST" action="/signup">
-  <input type="text" name="username" placeholder="ユーザー名" required>
-  <input type="password" name="password" placeholder="パスワード" required>
-  <button type="submit">登録</button>
+  
+  <form method="POST" action="/signup">
+  <h2>
+    <input class="loginText" type="text" name="username" placeholder="ユーザー名" required>
+  </h2>
+  <h2>
+    <input class="loginText" type="password" name="password" placeholder="パスワード" required>
+  </h2>
+  <h2>
+    <button class="blueButton20" type="submit">アカウントを作成</button>
+  </h2>
+  <br>
 </form>
-<p><%= err %></p>
+<p id="e"><%= err %></p>
+  <br>
 
+<script>
+  if ( "<%= err %>" == "none" ){
+    document.getElementById("e").style.display = "none";
+  }
+</script>
+  </div>
+  
 <%- include("settings/footer") %>

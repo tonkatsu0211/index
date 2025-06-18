@@ -70,7 +70,7 @@
 <div id="messages"></div>
   <h2><textarea class="chatText" id="input" maxlength="100" autocomplete="off" placeholder="最大100文字"></textarea></h2>
   <div class="send">
-    <button class="blueButton30" id="sendButton" onclick="if (input) { sendChat() }">送信</button>
+    <button class="blueButton30" id="sendButton" onclick="sendChat()">送信</button>
     <p style="font-size: 20px; font-weight: bold; padding-left: 10px;">
       Enterで改行、Shift+Enterで送信
     </p>
@@ -80,19 +80,8 @@
 </div> <!-- headerにある<div class="main"> を閉じているので正常です -->
 
 <script src="/socket.io/socket.io.js"></script>
+<script src="/socket.io/socket.io.js"></script>
 <script>
-  const input = document.getElementById('input');
-  const messages = document.getElementById('messages');
-  
-  input.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-      if (e.shiftKey) {
-        e.preventDefault();
-        sendChat();
-      }
-    }
-  });
-
   function getCookie(name) {
     const cookies = document.cookie.split(';').map(c => c.trim());
     for (const cookie of cookies) {
@@ -114,13 +103,24 @@
     if (adminDiv) adminDiv.style.display = "flex";
   }
 
-  const input = document.getElementById('input');
+  const inputEl = document.getElementById('input');
   const messages = document.getElementById('messages');
+
+  inputEl.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      if (e.shiftKey) {
+        e.preventDefault();
+        sendChat();
+      }
+      
+    }
+  });
 
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
-    return div.innerHTML;
+    let escaped = div.innerHTML;
+    return escaped.replace(/\n/g, '<br>');
   }
 
   function appendMessage(msg) {
@@ -129,11 +129,13 @@
     item.classList.add('message-item');
 
     item.innerHTML = `
-      <div class="meta">
-        <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
+      <div class="message-bubble">
+        <div class="meta">
+          <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
+        </div>
+        <div class="text">${escapeHtml(msg.message)}</div>
+        ${(msg.username === username || isAdmin) ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
       </div>
-      <div class="text">${escapeHtml(msg.message)}</div>
-      ${(msg.username === username || isAdmin) ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
     `;
 
     messages.appendChild(item);
@@ -154,15 +156,16 @@
   });
 
   function sendChat() {
-    const message = input.value.trim();
+    const message = inputEl.value.trim();
+    if (message.length === 0) return;
+
     if (message.length > 100) {
       alert("メッセージは100文字以内で入力してください。");
       return;
     }
-    if (message) {
-      socket.emit('chat message', message);
-      input.value = '';
-    }
+
+    socket.emit('chat message', message);
+    inputEl.value = '';
   }
 
   document.addEventListener('click', function(e) {
@@ -196,5 +199,4 @@
   });
 </script>
 <script src="/chat.js"></script>
-
 <%- include("settings/footer") %>

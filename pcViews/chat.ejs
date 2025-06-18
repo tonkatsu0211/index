@@ -127,20 +127,18 @@
     appendMessage(msg);
   });
   
-    function sendChat() {
-      if (e.target && e.target.id === 'sendButton') {
-        alert("click ... OK");
-        const message = input.value.trim();
-        if (message.length > 100) {
-          alert("メッセージは100文字以内で入力してください。");
-          return;
-        }
-        if (message) {
-          socket.emit('chat message', message);
-          input.value = '';
-        }
-      }
+  function sendChat() {
+    const message = "test"; <!-- input.value.trim() -->
+    alert("click ... OK");
+    if (message.length > 100) {
+      alert("メッセージは100文字以内で入力してください。");
+      return;
     }
+    if (message) {
+      socket.emit('chat message', message);
+      input.value = '';
+    }
+  }
    
   function appendMessage(msg) {
     alert("addendMassage ... OK");
@@ -199,5 +197,6 @@
     messages.scrollTop = messages.scrollHeight;
   });
 </script>
+<script src="/public/chat.js"></script>
 
 <%- include("settings/footer") %>

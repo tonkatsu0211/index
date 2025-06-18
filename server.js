@@ -35,7 +35,7 @@ app.post('/login', async (req, res) => {
     req.session.user = username;
     res.redirect('/');
   } else {
-    render(req, res, 'login', { title: "ログイン", err: "ユーザー名またはパスワードが違います" });
+    render(req, res, 'login', { title: "ログイン", err: "ユーザー名またはパスワードが違います"});
   }
 });
 
@@ -113,13 +113,13 @@ app.get(["/games", "/games.html"], (req, res) => {
   render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
 });
 
-app.get(["/login", "/login.html"], (req, res) => {
-  render(req, res, "constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
-});
-
 //app.get(["/login", "/login.html"], (req, res) => {
-  //render(req, res, "constructing", { title: "ログイン", page: "chat", top: "チャットにログイン", err: null });
+  //render(req, res, "constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
 //});
+
+app.get(["/login", "/login.html"], (req, res) => {
+  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: "none" });
+});
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {
   let gameId = req.params.id;

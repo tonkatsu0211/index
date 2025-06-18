@@ -81,13 +81,13 @@
     return null;
   }
   
-  const isAdmin = getCookie('isAdmin');
+  const isAdmin = getCookie('isAdmin'); === "true"
   const username = getCookie("user");
   const socket = io({
     auth: { username: username }
   });
   
-  if (isAdmin == "true") {
+  if (isAdmin) {
     document.getElementById("admin").style.display = "flex";
   }
   
@@ -136,7 +136,7 @@
         <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
       </div>
       <div class="text">${escapeHtml(msg.message)}</div>
-      ${(msg.username === username || isAdmin == "true") ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
+      ${(msg.username === username || isAdmin ) ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
     `;
     
     messages.appendChild(item);

@@ -6,7 +6,7 @@ const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+const usersPath = path.join(__dirname, 'users.json');
 const http = require('http').createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(http);
@@ -16,11 +16,14 @@ const { v4: uuidv4 } = require('uuid');
 
 let chatHistory = [];
 
+function readUsers () {
+    const allData = fs.readFileSync(usersPath, 'utf-8');
+    return JSON.parse(allData);
+}
+
 try {
-  if (fs.existsSync(historyPath)) {
-    const data = fs.readFileSync(historyPath, 'utf-8');
-    chatHistory = JSON.parse(data);
-  }
+  const data = fs.readFileSync(historyPath, 'utf-8')
+  const chatHistory = JSON.parse(data)
 } catch (err) {
   console.error("チャット履歴の読み込みに失敗しました:", err);
 }
@@ -79,8 +82,8 @@ io.on('connection', (socket) => {
 });
 });
 
-users['newUser'] = { passwordHash: '...' };
-fs.writeFileSync('users.json', JSON.stringify(users, null, 2));
+usersPath['newUser'] = { passwordHash: '...' };
+fs.writeFileSync('users.json', JSON.stringify(usersPath, null, 2));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -107,6 +110,8 @@ app.post('/log', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
+  const data = readUsers();
+  const users = data.users;
 
   if (!users[username]) {
     return render(req, res, "login", { title: "ログイン", page: "login", top: "チャットにログイン", err: 'ユーザー名が存在しません'});

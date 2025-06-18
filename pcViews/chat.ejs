@@ -79,8 +79,9 @@
     if (parts.length === 2) return parts.pop().split(';').shift();
     return null;
   }
-
-  const username = getCookie("user") || "匿名";
+  
+  const isAdmin = document.cookie.includes('isAdmin');
+  const username = getCookie("user");
   const socket = io({
     auth: { username: username }
   });
@@ -123,14 +124,14 @@
     item.classList.add('message-item');
     
     const username = getCookie('user');
-    const isAdmin = username && adminUsers.includes(username);
+    const isAdmin = getCookie('isAdmin');
     
     item.innerHTML = `
       <div class="meta" style="color: #999; font-size: 0.8em;">
         <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
       </div>
       <div class="text">${escapeHtml(msg.message)}</div>
-      ${(msg.username === username || isAdmin) ? `<button class="delete-button" data-id="${msg.id}">削除</button>` : ''}
+      ${(msg.username === username || isAdmin == "true") ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
     `;
     
     messages.appendChild(item);

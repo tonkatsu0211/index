@@ -1,10 +1,12 @@
 {
   "users": {
     "_tonkatsu_": {
-      "passwordHash": "$2b$10$TLJw5CaGFBM8MPt3yXmqlOeERGvlZOYwenhC9QLNfBlIj9XDiw9Bu"
+      "passwordHash": "$2b$10$TLJw5CaGFBM8MPt3yXmqlOeERGvlZOYwenhC9QLNfBlIj9XDiw9Bu",
+      "isAdmin": "true"
     },
     "たけ": {
-      "passwordHash": "$2b$10$PieIThSZCJYupH7QrTBZjuzAI1wP.8c.ATeOJXsdj4xu.0CSqjimm"
+      "passwordHash": "$2b$10$PieIThSZCJYupH7QrTBZjuzAI1wP.8c.ATeOJXsdj4xu.0CSqjimm",
+      "isAdmin": "false"
     }
   },
   "newUser": {

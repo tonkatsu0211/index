@@ -108,21 +108,19 @@ app.post('/log', (req, res) => {
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
-  const users = allUsers.users || {};
-  
-  const userData = users[username];
-  if (!userData) {
-    return render(req, res, 'login', { title: "ログイン", page: "login", top: "チャットにログイン", err: "存在しないユーザー名です。" });
+  if (!users[username]) {
+    return res.send('ユーザー名が存在しません');
   }
 
-  const match = await bcrypt.compare(password, userData.passwordHash);
+  const match = await bcrypt.compare(password, users[username].passwordHash);
+
   if (match) {
-    res.cookie('user', username);
+    res.cookie('username', username, { httpOnly: true });
+    res.cookie('isAdmin', users[username].isAdmin ? 'true' : 'false', { httpOnly: true });
+
     res.redirect('/chat');
-    console.log("login is success")
   } else {
-    render(req, res, 'login', { title: "ログイン", page: "login", top: "チャットにログイン", err: "パスワードが違います。" });
+    res.send('パスワードが違います');
   }
 });
 
@@ -137,7 +135,8 @@ app.post('/signup', async (req, res) => {
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
-  users[username] = { passwordHash };
+  const isAdmin = "false"
+  users[username] = { passwordHash , isAdmin };
 
   fs.writeFileSync('users.json', JSON.stringify({ users }, null, 2));
   

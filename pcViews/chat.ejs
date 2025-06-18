@@ -119,14 +119,7 @@
   const input = document.getElementById('input');
   const messages = document.getElementById('messages');
 
-  socket.on('chat history', (history) => {
-    messages.innerHTML = '';
-    history.forEach(msg => {
-      appendMessage(msg);
-    });
-  });
-
-  socket.on('chat message', (msg) => {
+  socket.on('chat update', (msg) => {
     appendMessage(msg);
   });
   

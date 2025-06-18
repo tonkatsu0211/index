@@ -64,10 +64,12 @@ io.on('connection', (socket) => {
       timestamp: new Date().toLocaleString('ja-JP', { hour12: false }),
     };
     
-    console.log(messageData);
+    console.log("messageData: ", messageData);
     chatHistory.push(messageData);
     if (chatHistory.length > 100) chatHistory.shift();
-    io.emit('chat message', messageData);
+    console.log("chatHistory: ", chatHistory);
+    fs.writeFile(path.join(__dirname, "chatHistory.json"), JSON.stringify(chatHistory, null, 2), "utf-8");
+    io.emit('chat update', chatHistory);
   });
   
   socket.on('delete message', (id) => {

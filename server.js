@@ -6,18 +6,18 @@ const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const usersData = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
 const http = require('http').createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(http);
 const historyPath = path.join(__dirname, 'chatHistory.json');
 const { v4: uuidv4 } = require('uuid');
 const adminUsers = new Set();
+const usersData = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
 for (const [username, info] of Object.entries(usersData.users)) {
   if (info.isAdmin === "true") {
     adminUsers.add(username);
   }
-};
+}
 
 let chatHistory = [];
 

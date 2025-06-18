@@ -46,6 +46,9 @@
   word-break: break-word;
   font-size: 1em;
 }
+.send {
+  display: flex;
+}
 #input {
   flex: 1;
   padding: 10px;
@@ -65,14 +68,31 @@
 
 <div id="chat-container">
 <div id="messages"></div>
-  <h2><input class="chatText" id="input" maxlength="100" autocomplete="off" /></h2>
-  <button class="blueButton30" id="sendButton" onclick="sendChat()">送信</button>
+  <h2><textarea class="chatText" id="input" maxlength="100" autocomplete="off" placeholder="最大100文字"></textarea></h2>
+  <div class="send">
+    <button class="blueButton30" id="sendButton" onclick="if (input) { sendChat() }">送信</button>
+    <p style="font-size: 20px; font-weight: bold; padding-left: 10px;">
+      Enterで改行、Shift+Enterで送信
+    </p>
+  </div>
 <br>
 </div>
 </div> <!-- headerにある<div class="main"> を閉じているので正常です -->
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
+  const input = document.getElementById('input');
+  const messages = document.getElementById('messages');
+  
+  input.addEventListener("keydown", function(e) {
+    if (e.key === "Enter") {
+      if (e.shiftKey) {
+        e.preventDefault();
+        sendChat();
+      }
+    }
+  });
+
   function getCookie(name) {
     const cookies = document.cookie.split(';').map(c => c.trim());
     for (const cookie of cookies) {

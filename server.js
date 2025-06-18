@@ -7,18 +7,22 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
 const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+const server = http.createServer(app);
+const socket = io();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
+const { Server } = require('socket.io');
+const io = new Server(http);
 
 io.on('connection', (socket) => {
-  console.log('ユーザーが接続しました');
+  console.log("ユーザーが接続しました");
 
-  socket.on('chat message', (msg) => {
-    io.emit('chat message', msg);
-  });
-
-  socket.on('disconnect', () => {
-    console.log('ユーザーが切断しました');
+  socket.on('chat message', (text) => {
+    const message = {
+      user: "ゲスト",
+      text,
+      time: new Date().toLocaleString()
+    };
+    io.emit('chat message', message);
   });
 });
 

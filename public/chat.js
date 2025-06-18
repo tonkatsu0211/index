@@ -11,6 +11,21 @@ const http = require('http').createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(http);
 
+function getCookie(name) {
+  const value = `; ${document.cookie}`;
+  const parts = value.split(`; ${name}=`);
+  if (parts.length === 2) return parts.pop().split(';').shift();
+  return null;
+}
+
+document.getElementById('sendButton').addEventListener('click', () => {
+  const msg = document.getElementById('messageInput').value;
+  if (msg.trim() !== "") {
+    socket.emit('chat message', msg);
+    document.getElementById('messageInput').value = '';
+  }
+});
+
 io.on('connection', (socket) => {
   const username = socket.handshake.auth.username || '匿名';
 

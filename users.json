@@ -1,1 +1,10 @@
-{"newUser":{"passwordHash":"..."},"_tonkatsu_":{"passwordHash":"$2b$10$nZLWzjwARFzqG6d.yBMzXOQOATtH0lYbxzQjoLRBQ0EYYgR6zgbXy"}}
+{
+  "users": {
+    "_tonkatsu_": {
+      "passwordHash": "$2b$10$TLJw5CaGFBM8MPt3yXmqlOeERGvlZOYwenhC9QLNfBlIj9XDiw9Bu"
+    }
+  },
+  "newUser": {
+    "passwordHash": "..."
+  }
+}

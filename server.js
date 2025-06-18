@@ -41,7 +41,7 @@ app.post('/login', async (req, res) => {
   const user = users[username];
 
   if (!user) {
-    return res.render('login', { err: "ユーザー名またはパスワードが違います。" });
+    return render(req, res, 'login', { title: "ログイン", page: "login", top: "チャットにログイン", err: "ユーザー名またはパスワードが違います。" });
   }
 
   const match = await bcrypt.compare(password, user.passwordHash);
@@ -54,20 +54,24 @@ app.post('/login', async (req, res) => {
 });
 
 app.post('/signup', async (req, res) => {
-  const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+  const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+  const users = allUsers.users || {};
 
   const { username, password } = req.body;
 
   if (users[username]) {
-    return render('signup', { title: "新規登録", err: "既に存在するユーザー名です" });
+    return render(req, res, 'signup', { title: "サインアップ", page: "signup", top: "サインアップ", err: "既に存在するユーザー名です" });
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
   users[username] = { passwordHash };
-  require('fs').writeFileSync('./users.json', JSON.stringify(users));
 
+  fs.writeFileSync('users.json', JSON.stringify({ users }, null, 2));
+  
+  console.log("make a account success")
+  
   req.session.user = username;
-  res.redirect('/');
+  res.redirect('/chat');
 });
 
 function render(req, res, view, data = {}, locate = "") {

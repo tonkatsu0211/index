@@ -159,13 +159,6 @@ app.post('/signup', async (req, res) => {
     }
   });
   
-  
-  fs.writeFile(path.join(__dirname, "users.json"), JSON.stringify({newUser: {passwordHash: '...'}}, null, 2), (err) => {
-    if (err) {
-      console.error("errorrrrrrrrrrrr!!!!!  lol");
-    }
-  });
-  
   console.log("signup is success")
   
   res.cookie('user', username, { httpOnly: false, path: "/" });

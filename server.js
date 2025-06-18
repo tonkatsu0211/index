@@ -7,6 +7,20 @@ const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
 const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+const http = require('http').createServer(app);
+const io = require('socket.io')(http);
+
+io.on('connection', (socket) => {
+  console.log('ユーザーが接続しました');
+
+  socket.on('chat message', (msg) => {
+    io.emit('chat message', msg);
+  });
+
+  socket.on('disconnect', () => {
+    console.log('ユーザーが切断しました');
+  });
+});
 
 users['newUser'] = { passwordHash: '...' };
 fs.writeFileSync('users.json', JSON.stringify(users, null, 2));
@@ -37,19 +51,21 @@ app.post('/log', (req, res) => {
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
-  const user = users[username];
-
-  if (!user) {
-    return render(req, res, 'login', { title: "ログイン", page: "login", top: "チャットにログイン", err: "ユーザー名またはパスワードが違います。" });
+  const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+  const users = allUsers.users || {};
+  
+  const userData = users[username];
+  if (!userData) {
+    return render(req, res, 'login', { title: "ログイン", page: "login", top: "チャットにログイン", err: "存在しないユーザー名です。" });
   }
 
-  const match = await bcrypt.compare(password, user.passwordHash);
+  const match = await bcrypt.compare(password, userData.passwordHash);
   if (match) {
     res.cookie('user', username);
-    res.redirect('/empass');
+    res.redirect('/chat');
+    console.log("login is success")
   } else {
-    render(req, res, 'login', { title: "ログイン", page: "login", top: "チャットにログイン", err: "ユーザー名またはパスワードが違います。" });
+    render(req, res, 'login', { title: "ログイン", page: "login", top: "チャットにログイン", err: "パスワードが違います。" });
   }
 });
 
@@ -68,7 +84,7 @@ app.post('/signup', async (req, res) => {
 
   fs.writeFileSync('users.json', JSON.stringify({ users }, null, 2));
   
-  console.log("make a account success")
+  console.log("make a account is success")
   
   req.session.user = username;
   res.redirect('/chat');
@@ -133,9 +149,12 @@ app.get(["/games", "/games.html"], (req, res) => {
   render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
 });
 
-//app.get(["/login", "/login.html"], (req, res) => {
-  //render(req, res, "constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
-//});
+app.get("/chat", (req, res) => {
+  if (!req.cookies.user) {
+    return res.redirect("/login?f=chat");
+  }
+  render(req, res, "chat", { title: "チャット", page: "chat", username: req.cookies.user });
+});
 
 app.get(["/login", "/login.html"], (req, res) => {
   render(req, res, "login", { title: "ログイン", page: "login", top: "チャットにログイン", err: "none"});
@@ -162,6 +181,6 @@ app.use((req, res) => {
 });
 
 const port = process.env.PORT || 3000;
-const listener = app.listen(port, () => {
-  console.log("App listening on port " + listener.address().port);
+http.listen(port, () => {
+  console.log("App listening on port " + port);
 });

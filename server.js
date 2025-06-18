@@ -120,7 +120,9 @@ app.post('/login', async (req, res) => {
   
   if (match) {
     res.cookie('user', username, { httpOnly: true });
-    res.cookie('isAdmin', users[username].isAdmin === "true" ? 'true' : 'false', { httpOnly: true });
+    res.cookie('isAdmin', usersData.users[username].isAdmin === "true" ? 'true' : 'false', { httpOnly: false, path: "/" });
+    console.log('Login:', username, 'isAdmin:', usersData.users[username].isAdmin);
+    console.log("login success")
     return res.redirect('/chat');
   }
 });

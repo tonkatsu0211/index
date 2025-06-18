@@ -1,81 +1,23 @@
 "use strict";
-const express = require('express');
-const app = express();
-const server = http.createServer(app);
+
 const socket = io();
+
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
-const chatHistory = [];
-const http = require('http').createServer(app);
-const { Server } = require('socket.io');
-const io = new Server(http);
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
-  return null;
-}
-
-document.getElementById('sendButton').addEventListener('click', () => {
-  const msg = document.getElementById('messageInput').value;
-  if (msg.trim() !== "") {
-    socket.emit('chat message', msg);
-    document.getElementById('messageInput').value = '';
-  }
-});
-
-io.on('connection', (socket) => {
-  const username = socket.handshake.auth.username || '匿名';
-
-  socket.emit('chat history', chatHistory);
-
-  socket.on('chat message', (msg) => {
-    const messageData = {
-      username: username,
-      message: msg,
-      timestamp: new Date().toLocaleString()
-    };
-
-    chatHistory.push(messageData);
-    if (chatHistory.length > 100) {
-      chatHistory.shift();
-    }
-
-    io.emit('chat message', messageData);
+socket.on('chat history', (history) => {
+  messages.innerHTML = '';
+  history.forEach(msg => {
+    appendMessage(msg);
   });
 });
 
-form.addEventListener('submit', function (e) {
-  e.preventDefault();
-  if (input.value) {
-    socket.emit('chat message', input.value);
-    input.value = '';
-  }
+socket.on('chat message', (msg) => {
+  appendMessage(msg);
 });
 
-socket.on('chat message', function (msg) {
-  const item = document.createElement('li');
-  item.textContent = msg;
-  messages.appendChild(item);
-  window.scrollTo(0, document.body.scrollHeight);
-});
-
-io.on('connection', (socket) => {
-  const username = socket.handshake.auth.username || '匿名';
-
-  socket.on('chat message', (msg) => {
-    const messageData = {
-      username: username,
-      message: msg,
-      timestamp: new Date().toLocaleString()
-    };
-    io.emit('chat message', messageData);
-  });
-});
-
-form.addEventListener('submit', function (e) {
+form.addEventListener('submit', function(e) {
   e.preventDefault();
   const message = input.value.trim();
 
@@ -83,9 +25,22 @@ form.addEventListener('submit', function (e) {
     alert("メッセージは100文字以内で入力してください。");
     return;
   }
-
   if (message) {
     socket.emit('chat message', message);
     input.value = '';
   }
 });
+
+function appendMessage(msg) {
+  const item = document.createElement('div');
+  item.classList.add('message-item');
+  item.innerHTML = `<strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]: <br> ${escapeHtml(msg.message)}`;
+  messages.appendChild(item);
+  messages.scrollTop = messages.scrollHeight;
+}
+
+function escapeHtml(text) {
+  const div = document.createElement('div');
+  div.textContent = text;
+  return div.innerHTML;
+}

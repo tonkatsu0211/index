@@ -55,6 +55,7 @@ form {
   height: 70px;
 }
 </style>
+
 <div id="chat-container">
 <div id="messages"></div>
   <h2><input class="chatText" id="input" maxlength="100" autocomplete="off" /></h2>
@@ -65,79 +66,49 @@ form {
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  const socket = io({
-    auth: {
-      username: "<%= username %>"
-    }
-  });
+  const socket = io();
 
   const form = document.getElementById('form');
   const input = document.getElementById('input');
   const messages = document.getElementById('messages');
 
-  form.addEventListener('submit', function (e) {
+  socket.on('chat history', (history) => {
+    messages.innerHTML = '';
+    history.forEach(msg => {
+      appendMessage(msg);
+    });
+  });
+
+  socket.on('chat message', (msg) => {
+    appendMessage(msg);
+  });
+
+  form.addEventListener('submit', function(e) {
     e.preventDefault();
-    if (input.value) {
-      socket.emit('chat message', input.value);
+    const message = input.value.trim();
+
+    if (message.length > 100) {
+      alert("メッセージは100文字以内で入力してください。");
+      return;
+    }
+    if (message) {
+      socket.emit('chat message', message);
       input.value = '';
     }
   });
 
-  socket.on('chat message', function (data) {
-    const msgDiv = document.createElement('div');
-    msgDiv.className = 'message-bubble';
-
-    msgDiv.innerHTML = `
-      <div class="meta">
-        <span class="username">${data.username}</span>
-        <span class="timestamp">${data.timestamp}</span>
-      </div>
-      <div class="text">${data.message}</div>
-    `;
-
-    messages.appendChild(msgDiv);
+  function appendMessage(msg) {
+    const item = document.createElement('div');
+    item.classList.add('message-item');
+    item.innerHTML = `<strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]: <br> ${escapeHtml(msg.message)}`;
+    messages.appendChild(item);
     messages.scrollTop = messages.scrollHeight;
-  });
-  
-  const socket = io({
-    auth: {
-      username: "<%= username %>"
-    }
-  });
+  }
 
-  const form = document.getElementById('form');
-  const input = document.getElementById('input');
-  const messages = document.getElementById('messages');
-
-  form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (input.value) {
-      socket.emit('chat message', input.value);
-      input.value = '';
-    }
-  });
-
-  socket.on('chat history', function (history) {
-    history.forEach(data => appendMessage(data));
-    messages.scrollTop = messages.scrollHeight;
-  });
-
-  socket.on('chat message', function (data) {
-    appendMessage(data);
-    messages.scrollTop = messages.scrollHeight;
-  });
-
-  function appendMessage(data) {
-    const msgDiv = document.createElement('div');
-    msgDiv.className = 'message-bubble';
-    msgDiv.innerHTML = `
-      <div class="meta">
-        <span class="username">${data.username}</span>
-        <span class="timestamp">${data.timestamp}</span>
-      </div>
-      <div class="text">${data.message}</div>
-    `;
-    messages.appendChild(msgDiv);
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
   }
 </script>
 <script src="/chat.js"></script>

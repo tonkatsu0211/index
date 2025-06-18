@@ -149,14 +149,22 @@ app.post('/signup', async (req, res) => {
   const isAdmin = "false";
   users[username] = { passwordHash, isAdmin };
   
+  const usersData = users
+  
   fs.writeFile(path.join(__dirname, "users.json"), JSON.stringify(users, null, 2), (err) => {
     if (err) {
-      console.error("cannot saved");
+      console.error("cannot signed up");
     } else {
-      console.log("saved chatHistory");
+      console.log("saved user data: ", users);
     }
   });
-
+  
+  
+  fs.writeFile(path.join(__dirname, "users.json"), JSON.stringify({newUser: {passwordHash: '...'}}, null, 2), (err) => {
+    if (err) {
+      console.error("errorrrrrrrrrrrr!!!!!  lol");
+    }
+  });
   
   console.log("signup is success")
   

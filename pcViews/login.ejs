@@ -8,10 +8,11 @@
   <button type="submit">ログイン</button>
 </form>
 <p id="e"><%= err %></p>
+  <br>
 
 <script>
-  if ("<%= err %>" == "none"){
-    document.getElementById("e").style.display = none;
+  if ( "<%= err %>" == "none" ){
+    document.getElementById("e").style.display = "none";
   }
 </script>
   </div>

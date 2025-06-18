@@ -119,7 +119,7 @@ app.get(["/games", "/games.html"], (req, res) => {
 //});
 
 app.get(["/login", "/login.html"], (req, res) => {
-  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: "none"});
+  render(req, res, "login", { title: "ログイン", page: "login", top: "チャットにログイン", err: "none"});
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {

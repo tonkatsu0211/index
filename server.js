@@ -94,9 +94,6 @@ io.on('connection', (socket) => {
 });
 });
 
-usersData['newUser'] = { passwordHash: '...' };
-fs.writeFileSync(path.join(__dirname, "users.json"), JSON.stringify(usersData, null, 2), "utf-8")
-
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
@@ -149,11 +146,17 @@ app.post('/signup', async (req, res) => {
   }
   
   const passwordHash = await bcrypt.hash(password, 10);
-  console.log("hashed password: ", passwordHash);
   const isAdmin = "false";
   users[username] = { passwordHash, isAdmin };
   
-  fs.writeFileSync('users.json', JSON.stringify({ users }, null, 2));
+  fs.writeFile(path.join(__dirname, "users.json"), JSON.stringify(users, null, 2), (err) => {
+    if (err) {
+      console.error("cannot saved");
+    } else {
+      console.log("saved chatHistory");
+    }
+  });
+
   
   console.log("signup is success")
   

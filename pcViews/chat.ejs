@@ -1,12 +1,51 @@
 <%- include("settings/header") %>
 <%- include("settings/nav") %>
+<%- include("settings/top") %>
 
-<h2>チャット</h2>
-<ul id="messages"></ul>
+<div id="messages"></div>
 <form id="form" action="">
-  <input id="input" autocomplete="off" /><button>送信</button>
+  <h2><input class="chatText" id="input" maxlength="100" autocomplete="off" /></h2>
+  <button class="blueButton20">送信</button>
 </form>
+<br>
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io({
+    auth: {
+      username: "<%= username %>" // EJSで渡す
+    }
+  });
+
+  const form = document.getElementById('form');
+  const input = document.getElementById('input');
+  const messages = document.getElementById('messages');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (input.value) {
+      socket.emit('chat message', input.value);
+      input.value = '';
+    }
+  });
+
+  socket.on('chat message', function (data) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'message-bubble';
+
+    msgDiv.innerHTML = `
+      <div class="meta">
+        <span class="username">${data.username}</span>
+        <span class="timestamp">${data.timestamp}</span>
+      </div>
+      <div class="text">${data.message}</div>
+    `;
+
+    messages.appendChild(msgDiv);
+    messages.scrollTop = messages.scrollHeight;
+  });
+</script>
 <script src="/chat.js"></script>
+
+<%- include("settings/footer") %>

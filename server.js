@@ -153,7 +153,8 @@ app.get("/chat", (req, res) => {
   if (!req.cookies.user) {
     return res.redirect("/login?f=chat");
   }
-  render(req, res, "chat", { title: "チャット", page: "chat", username: req.cookies.user });
+  const username = req.cookies.user || "匿名";
+  render(req, res, "chat", { title: "チャット", page: "chat", top: "チャット", username: req.cookies.user, username});
 });
 
 app.get(["/login", "/login.html"], (req, res) => {

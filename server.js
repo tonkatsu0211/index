@@ -6,10 +6,14 @@ const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+const users = allUsers.users;
 
 users['newUser'] = { passwordHash: '...' };
 fs.writeFileSync('users.json', JSON.stringify(users, null, 2));
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
 app.use(session({
   secret: 'tonkatsu-0211',
@@ -31,20 +35,28 @@ app.post('/log', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
-  const user = users.find(u => u.username === username && u.password === password);
+  const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+  const user = users[username];
 
-  if (user) {
-    res.cookie('user', user.username);
+  if (!user) {
+    return res.render('login', { err: "ユーザー名またはパスワードが違います。" });
+  }
+
+  const match = await bcrypt.compare(password, user.passwordHash);
+  if (match) {
+    res.cookie('user', username);
     res.redirect('/empass');
   } else {
-    res.render('login', { err: "ユーザー名またはパスワードが違います。" });
+    render(req, res, 'login', { title: "ログイン", page: "login", top: "チャットにログイン", err: "ユーザー名またはパスワードが違います。" });
   }
 });
 
 app.post('/signup', async (req, res) => {
+  const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+
   const { username, password } = req.body;
 
   if (users[username]) {
@@ -80,7 +92,6 @@ function render(req, res, view, data = {}, locate = "") {
     }
   });
 }
-
 
 app.get(["/", "/index", "/top", "/index.html"], (req, res) => {
   const from = req.query.f || "";

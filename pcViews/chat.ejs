@@ -66,10 +66,10 @@
 <div id="chat-container">
 <div id="messages"></div>
   <h2><input class="chatText" id="input" maxlength="100" autocomplete="off" /></h2>
-  <button class="blueButton30" id="sendButton" onclick="alert('push');">送信</button>
+  <button class="blueButton30" id="sendButton" onclick="sendChat()">送信</button>
 <br>
 </div>
-</div>
+</div> <!-- headerにある<div class="main"> を閉じているので正常です -->
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
@@ -127,21 +127,21 @@
     appendMessage(msg);
   });
   
-  document.addEventListener('DOMContentLoaded', () => {
-    document.getElementById('sendButton').addEventListener('click', () => {
-      const message = input.value.trim();
-      alert("click ... OK");
-      if (message.length > 100) {
-        alert("メッセージは100文字以内で入力してください。");
-        return;
+    function sendChat() {
+      if (e.target && e.target.id === 'sendButton') {
+        alert("click ... OK");
+        const message = input.value.trim();
+        if (message.length > 100) {
+          alert("メッセージは100文字以内で入力してください。");
+          return;
+        }
+        if (message) {
+          socket.emit('chat message', message);
+          input.value = '';
+        }
       }
-      if (message) {
-        socket.emit('chat message', message);
-        input.value = '';
-      }
-    });
-  });
-  
+    }
+   
   function appendMessage(msg) {
     alert("addendMassage ... OK");
     const item = document.createElement('div');
@@ -199,6 +199,5 @@
     messages.scrollTop = messages.scrollHeight;
   });
 </script>
-<script src="/chat.js"></script>
 
 <%- include("settings/footer") %>

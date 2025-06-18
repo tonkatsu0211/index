@@ -68,7 +68,14 @@ io.on('connection', (socket) => {
     chatHistory.push(messageData);
     if (chatHistory.length > 100) chatHistory.shift();
     console.log("chatHistory: ", chatHistory);
-    fs.writeFile(path.join(__dirname, "chatHistory.json"), JSON.stringify(chatHistory, null, 2), "utf-8");
+    fs.writeFile(path.join(__dirname, "chatHistory.json"), JSON.stringify(chatHistory, null, 2), (err) => {
+      if (err) {
+        console.error("cannot saved chatHistory");
+      } else {
+        console.log("saved chatHistory");
+      }
+    });
+    io.emit('chat history', chatHistory)
     io.emit('chat update', chatHistory);
   });
   

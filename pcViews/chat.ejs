@@ -82,78 +82,20 @@
     }
     return null;
   }
-  
-  function logOnPage(message) {
-  const logDiv = document.getElementById('logDiv') || (() => {
-    const div = document.createElement('div');
-    div.id = 'logDiv';
-    div.style.position = 'fixed';
-    div.style.bottom = '0';
-    div.style.left = '0';
-    div.style.width = '100%';
-    div.style.maxHeight = '150px';
-    div.style.overflowY = 'scroll';
-    div.style.backgroundColor = 'rgba(0,0,0,0.7)';
-    div.style.color = 'white';
-    div.style.fontSize = '12px';
-    div.style.zIndex = '9999';
-    document.body.appendChild(div);
-    return div;
-  })();
 
-  const p = document.createElement('p');
-    p.textContent = message;
-    logDiv.appendChild(p);
-  }
-  
   const isAdmin = getCookie('isAdmin') === "true";
   const username = getCookie("user");
   const socket = io({
     auth: { username: username || 'username error' }
   });
-  
+
   if (isAdmin) {
-    document.getElementById("admin").style.display = "flex";
+    const adminDiv = document.getElementById("admin");
+    if (adminDiv) adminDiv.style.display = "flex";
   }
-  
+
   const input = document.getElementById('input');
   const messages = document.getElementById('messages');
-
-  socket.on('chat update', (msg) => {
-    appendMessage(msg);
-  });
-  
-  function sendChat() {
-    const message = document.getElementById("input").value;
-    if (message.length > 100) {
-      alert("メッセージは100文字以内で入力してください。");
-      return;
-    }
-    if (message) {
-      socket.emit('chat message', message);
-      document.getElementById("input").value = '';
-    }
-  }
-   
-  function appendMessage(msg) {
-    alert("addendMassage ... OK");
-    const item = document.createElement('div');
-    item.classList.add('message-item');
-    
-    const username = getCookie('user');
-    const isAdmin = getCookie('isAdmin');
-    
-    item.innerHTML = `
-      <div class="meta" style="color: #999; font-size: 0.8em;">
-        <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
-      </div>
-      <div class="text">${escapeHtml(msg.message)}</div>
-      ${(msg.username === username || isAdmin ) ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
-    `;
-    
-    messages.appendChild(item);
-    messages.scrollTop = messages.scrollHeight;
-  }
 
   function escapeHtml(text) {
     const div = document.createElement('div');
@@ -161,14 +103,50 @@
     return div.innerHTML;
   }
 
+  function appendMessage(msg) {
+    const item = document.createElement('div');
+    item.classList.add('message-item');
+
+    item.innerHTML = `
+      <div class="meta">
+        <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
+      </div>
+      <div class="text">${escapeHtml(msg.message)}</div>
+      ${(msg.username === username || isAdmin) ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
+    `;
+
+    messages.appendChild(item);
+    messages.scrollTop = messages.scrollHeight;
+  }
+
+  socket.on('chat history', (history) => {
+    messages.innerHTML = '';
+    history.forEach(msg => appendMessage(msg));
+  });
+
+  socket.on('chat update', (msg) => {
+    appendMessage(msg);
+  });
+
+  function sendChat() {
+    const message = input.value.trim();
+    if (message.length > 100) {
+      alert("メッセージは100文字以内で入力してください。");
+      return;
+    }
+    if (message) {
+      socket.emit('chat message', message);
+      input.value = '';
+    }
+  }
+
   document.addEventListener('click', function(e) {
     if (e.target.classList.contains('delete-btn')) {
-      
       const id = e.target.getAttribute('data-id');
-      const username = getCookie("user");
       const confirmed = confirm("本当にこのメッセージを削除しますか？");
-      if (!confirmed) return;
-      socket.emit('delete message', id, username);
+      if (confirmed) {
+        socket.emit('delete message', id, username);
+      }
     }
   });
 
@@ -181,7 +159,7 @@
       }
     });
   });
-  
+
   socket.on('system message', (text) => {
     const item = document.createElement('div');
     item.classList.add('message-item');

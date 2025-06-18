@@ -5,7 +5,11 @@ const path = require('path');
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
-const users = require('./users.json'); // { username: { passwordHash } }
+const fs = require('fs');
+const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
+
+users['newUser'] = { passwordHash: '...' };
+fs.writeFileSync('users.json', JSON.stringify(users, null, 2));
 
 app.use(session({
   secret: 'tonkatsu-0211',
@@ -27,15 +31,16 @@ app.post('/log', (req, res) => {
   res.json({ status: 'ok' });
 });
 
-app.post('/login', async (req, res) => {
+app.post('/login', (req, res) => {
   const { username, password } = req.body;
-  const user = users[username];
 
-  if (user && await bcrypt.compare(password, user.passwordHash)) {
-    req.session.user = username;
-    res.redirect('/');
+  const user = users.find(u => u.username === username && u.password === password);
+
+  if (user) {
+    res.cookie('user', user.username);
+    res.redirect('/empass');
   } else {
-    render(req, res, 'login', { title: "ログイン", err: "ユーザー名またはパスワードが違います"});
+    res.render('login', { err: "ユーザー名またはパスワードが違います。" });
   }
 });
 

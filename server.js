@@ -20,9 +20,9 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', (msg) => {
     const messageData = {
-      username: username,
-      message: msg,
-      timestamp: new Date().toLocaleString()
+    username: username,
+    message: msg,
+    timestamp: new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo', hour12: "false" })
     };
 
     chatHistory.push(messageData);

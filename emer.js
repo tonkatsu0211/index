@@ -3,6 +3,15 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const cookieParser = require("cookie-parser");
+const session = require('express-session');
+const bcrypt = require('bcrypt');
+const users = require('./users.json'); // { username: { passwordHash } }
+
+app.use(session({
+  secret: 'tonkatsu-0211',
+  resave: false,
+  saveUninitialized: false
+}));
 
 app.use(cookieParser());
 
@@ -16,6 +25,33 @@ app.use(express.json());
 app.post('/log', (req, res) => {
   console.log(req.body.message);
   res.json({ status: 'ok' });
+});
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = users[username];
+
+  if (user && await bcrypt.compare(password, user.passwordHash)) {
+    req.session.user = username;
+    res.redirect('/');
+  } else {
+    render(req, res, 'login', { title: "ログイン", err: "ユーザー名またはパスワードが違います" });
+  }
+});
+
+app.post('/signup', async (req, res) => {
+  const { username, password } = req.body;
+
+  if (users[username]) {
+    return render('signup', { title: "新規登録", err: "既に存在するユーザー名です" });
+  }
+
+  const passwordHash = await bcrypt.hash(password, 10);
+  users[username] = { passwordHash };
+  require('fs').writeFileSync('./users.json', JSON.stringify(users));
+
+  req.session.user = username;
+  res.redirect('/');
 });
 
 function render(req, res, view, data = {}, locate = "") {
@@ -85,6 +121,10 @@ app.get(["/empass/games", "/empass/games.html"], (req, res) => {
   render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
 });
 
+app.get(["/empass/login", "/empass/login.html"], (req, res) => {
+  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: "none"});
+});
+
 app.get(["/empass/games/:id", "/empass/games/:id.html"], (req, res) => {
   let gameId = req.params.id;
   gameId = gameId.replace(/\.(html|ejs)$/, "");
@@ -93,7 +133,7 @@ app.get(["/empass/games/:id", "/empass/games/:id.html"], (req, res) => {
 
 
 app.get(["/empass/error", "/empass/error/.html"], (req, res) => {
-  render(req, res, "error", { title: "404 Not Found", page: "error", ec: "none"});
+  render(req, res, "error", { title: "404 Not Found", page: "error", ec: null });
 });
 
 app.use((req, res) => {

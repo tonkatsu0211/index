@@ -1,11 +1,11 @@
 <%- include("settings/header") %>
 <%- include("settings/nav") %>
 <%- include("settings/top") %>
-  
-  <form method="POST" action="/login">
+
+<form method="POST" action="/signup">
   <input type="text" name="username" placeholder="ユーザー名" required>
   <input type="password" name="password" placeholder="パスワード" required>
-  <button type="submit">ログイン</button>
+  <button type="submit">登録</button>
 </form>
 <p><%= err %></p>
 

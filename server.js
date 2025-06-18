@@ -43,7 +43,7 @@ app.post('/signup', async (req, res) => {
   const { username, password } = req.body;
 
   if (users[username]) {
-    return res.render('signup', { title: "新規登録", err: "既に存在するユーザー名です" });
+    return render('signup', { title: "新規登録", err: "既に存在するユーザー名です" });
   }
 
   const passwordHash = await bcrypt.hash(password, 10);
@@ -122,7 +122,7 @@ app.get(["/games", "/games.html"], (req, res) => {
 });
 
 app.get(["/login", "/login.html"], (req, res) => {
-  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: "none"});
+  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: null });
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {

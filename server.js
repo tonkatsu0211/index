@@ -149,6 +149,7 @@ app.post('/signup', async (req, res) => {
   }
   
   const passwordHash = await bcrypt.hash(password, 10);
+  console.log("hashed password: ", passwordHash);
   const isAdmin = "false";
   users[username] = { passwordHash, isAdmin };
   

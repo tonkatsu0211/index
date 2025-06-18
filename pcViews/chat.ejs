@@ -104,6 +104,7 @@
   }
 
   function appendMessage(msg) {
+    if (!msg || !msg.username || !msg.message || !msg.timestamp) return;
     const item = document.createElement('div');
     item.classList.add('message-item');
 
@@ -121,7 +122,11 @@
 
   socket.on('chat history', (history) => {
     messages.innerHTML = '';
-    history.forEach(msg => appendMessage(msg));
+    history.forEach(msg => {
+      if (msg && msg.username && msg.message && msg.timestamp) {
+        appendMessage(msg);
+      }
+    });
   });
 
   socket.on('chat update', (msg) => {

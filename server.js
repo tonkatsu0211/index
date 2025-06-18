@@ -63,7 +63,8 @@ io.on('connection', (socket) => {
       message: msg,
       timestamp: new Date().toLocaleString('ja-JP', { hour12: false }),
     };
-
+    
+    console.log(messageData);
     chatHistory.push(messageData);
     if (chatHistory.length > 100) chatHistory.shift();
     io.emit('chat message', messageData);
@@ -121,7 +122,7 @@ app.post('/login', async (req, res) => {
   const match = await bcrypt.compare(password, users[username].passwordHash);
   
   if (match) {
-    res.cookie('user', username, { httpOnly: true });
+    res.cookie('user', username, { httpOnly: false, path: "/" });
     res.cookie('isAdmin', usersData.users[username].isAdmin === "true" ? 'true' : 'false', { httpOnly: false, path: "/" });
     console.log('Login:', username, 'isAdmin:', usersData.users[username].isAdmin);
     console.log("login success")
@@ -146,8 +147,8 @@ app.post('/signup', async (req, res) => {
   
   console.log("signup is success")
   
-  res.cookie('user', username);
-  res.cookie('isAdmin', "false")
+  res.cookie('user', username, { httpOnly: false, path: "/" });
+  res.cookie('isAdmin', "false", { httpOnly: false, path: "/" })
   res.redirect('/chat');
   console.log("login is success")
 });

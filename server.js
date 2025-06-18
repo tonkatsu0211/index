@@ -6,20 +6,20 @@ const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const fs = require('fs');
-const usersPath = path.join(__dirname, 'users.json');
+const usersData = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
 const http = require('http').createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(http);
 const historyPath = path.join(__dirname, 'chatHistory.json');
-const adminUsers = new Set(["_tonkatsu_"]);
 const { v4: uuidv4 } = require('uuid');
+const adminUsers = new Set();
+for (const [username, info] of Object.entries(usersData.users)) {
+  if (info.isAdmin === "true") {
+    adminUsers.add(username);
+  }
+};
 
 let chatHistory = [];
-
-function readUsers () {
-    const allData = fs.readFileSync(usersPath, 'utf-8');
-    return JSON.parse(allData);
-}
 
 try {
   const data = fs.readFileSync(historyPath, 'utf-8')
@@ -82,8 +82,8 @@ io.on('connection', (socket) => {
 });
 });
 
-usersPath['newUser'] = { passwordHash: '...' };
-fs.writeFileSync('users.json', JSON.stringify(usersPath, null, 2));
+usersData['newUser'] = { passwordHash: '...' };
+fs.writeFileSync('users.json', JSON.stringify(fs.readFileSync(__dirname, "users.json", "utf-8"), null, 2));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -110,22 +110,18 @@ app.post('/log', (req, res) => {
 
 app.post('/login', async (req, res) => {
   const { username, password } = req.body;
-  const data = readUsers();
-  const users = data.users;
-
+  const users = usersData.users;
+  
   if (!users[username]) {
     return render(req, res, "login", { title: "ログイン", page: "login", top: "チャットにログイン", err: 'ユーザー名が存在しません'});
   }
-
+  
   const match = await bcrypt.compare(password, users[username].passwordHash);
-
+  
   if (match) {
-    res.cookie('username', username, { httpOnly: true });
-    res.cookie('isAdmin', users[username].isAdmin ? 'true' : 'false', { httpOnly: true });
-
-    res.redirect('/chat');
-  } else {
-    render(req, res, "login", { title: "ログイン", page: "login", top: "チャットにログイン", err: 'パスワードが違います'});
+    res.cookie('user', username, { httpOnly: true });
+    res.cookie('isAdmin', users[username].isAdmin === "true" ? 'true' : 'false', { httpOnly: true });
+    return res.redirect('/chat');
   }
 });
 

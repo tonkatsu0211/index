@@ -106,7 +106,8 @@ body {
   padding-bottom: 0;
 }
 .option-noPadding-underline {
-  border-bottom: 1px solid #999999 !important;
+  text-decoration: underline !important;
+  text-decoration-color: #999999 !important;
   color: #999999 !important;
 }
 .option-left10-underline {

@@ -89,16 +89,8 @@ app.get(["/projects", "/projects.html"], (req, res) => {
   render(req, res, "projects", { title: "作品", page: "projects", top: "Scratchの作品"});
 });
 
-app.get("/const", (req, res) => {
-  render(req, res, "constructing", { title: "建設中のページ", page: "const", top: "建設中"});
-});
-
 app.get(["/constructing", "/const", "/constructing.html"], (req, res) => {
   render(req, res, "constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
-});
-
-app.get("/const1", (req, res) => {
-  render(req, res, "constructing", { title: "建設中のページ", page: "const1", top: "建設中"});
 });
 
 app.get(["/constructing1", "/const1", "/constructing1.html"], (req, res) => {
@@ -122,8 +114,12 @@ app.get(["/games", "/games.html"], (req, res) => {
 });
 
 app.get(["/login", "/login.html"], (req, res) => {
-  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: null });
+  render(req, res, "constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
 });
+
+//app.get(["/login", "/login.html"], (req, res) => {
+  //render(req, res, "constructing", { title: "ログイン", page: "chat", top: "チャットにログイン", err: null });
+//});
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {
   let gameId = req.params.id;

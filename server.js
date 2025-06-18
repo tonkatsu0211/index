@@ -24,6 +24,7 @@ try {
 } catch (err) {
   console.error("チャット履歴の読み込みに失敗しました:", err);
 }
+
 io.on('connection', (socket) => {
   const username = socket.handshake.auth.username;
 
@@ -33,6 +34,12 @@ io.on('connection', (socket) => {
   socket.emit('chat history', chatHistory);
   
     socket.on('chat message', (msg) => {
+    
+    if (msg.trim() === '/delete' && adminUsers.includes(username)) {
+      chatHistory = [];
+      io.emit('chat history', chatHistory);
+      return;
+    }
     
     if (msg.startsWith('/admin ')) {
       const targetUser = msg.slice(7).trim();
@@ -56,16 +63,17 @@ io.on('connection', (socket) => {
     if (chatHistory.length > 100) chatHistory.shift();
     io.emit('chat message', messageData);
   });
+  
   socket.on('delete message', (id) => {
+  const username = socket.handshake.auth.username;
+  const isAdmin = adminUsers.includes(username);
+
   const index = chatHistory.findIndex(msg => msg.id === id);
   if (index !== -1) {
-    const msg = chatHistory[index];
-    const isAdmin = adminUsers.has(socket.data.username);
-    const isOwner = msg.username === socket.data.username;
-
-    if (isAdmin || isOwner) {
+    const message = chatHistory[index];
+    if (message.username === username || isAdmin) {
       chatHistory.splice(index, 1);
-      io.emit('chat deleted', id);
+      io.emit('chat history', chatHistory);
     }
   }
 });
@@ -133,10 +141,11 @@ app.post('/signup', async (req, res) => {
 
   fs.writeFileSync('users.json', JSON.stringify({ users }, null, 2));
   
-  console.log("make a account is success")
+  console.log("signup is success")
   
-  req.session.user = username;
+  res.cookie('user', username);
   res.redirect('/chat');
+  console.log("login is success")
 });
 
 function render(req, res, view, data = {}, locate = "") {

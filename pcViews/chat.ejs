@@ -121,27 +121,21 @@
   function appendMessage(msg) {
     const item = document.createElement('div');
     item.classList.add('message-item');
-  
-    const currentUser = getCookie("user");
-    const isAdmin = currentUser === "admin"; // 管理者判定
-    const isOwner = currentUser === msg.username;
-  
-    let deleteButton = '';
-    if (isAdmin || isOwner) {
-      deleteButton = `<button class="delete-btn" data-id="${msg.id}">削除</button>`;
-    }
-  
+    
+    const username = getCookie('user');
+    const isAdmin = username && adminUsers.includes(username);
+    
     item.innerHTML = `
-      <div class="meta" style="color:#999;font-size:0.8em;">
+      <div class="meta" style="color: #999; font-size: 0.8em;">
         <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
       </div>
       <div class="text">${escapeHtml(msg.message)}</div>
-      ${deleteButton}
+      ${(msg.username === username || isAdmin) ? `<button class="delete-button" data-id="${msg.id}">削除</button>` : ''}
     `;
+    
     messages.appendChild(item);
     messages.scrollTop = messages.scrollHeight;
   }
-
 
   function escapeHtml(text) {
     const div = document.createElement('div');

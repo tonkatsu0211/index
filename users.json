@@ -6,5 +6,8 @@
     "たけ": {
       "passwordHash": "$2b$10$PieIThSZCJYupH7QrTBZjuzAI1wP.8c.ATeOJXsdj4xu.0CSqjimm"
     }
+  },
+  "newUser": {
+    "passwordHash": "..."
   }
 }

@@ -12,7 +12,7 @@ const { Server } = require('socket.io');
 const io = new Server(http);
 const historyPath = path.join(__dirname, 'chatHistory.json');
 
-const chatHistory = [];
+let chatHistory = [];
 
 try {
   if (fs.existsSync(historyPath)) {
@@ -28,21 +28,34 @@ io.on('connection', (socket) => {
 
   socket.on('chat message', (msg) => {
     const messageData = {
-    username: socket.handshake.auth.username,
-    message: msg,
-    timestamp: new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo', hour12: "false" })
+      id: Date.now().toString(),
+      username: socket.handshake.auth.username,
+      message: msg,
+      timestamp: new Date().toLocaleString("ja-JP", {
+        timeZone: "Asia/Tokyo",
+        hour12: false
+      })
     };
 
-  chatHistory.push(messageData);
-  if (chatHistory.length > 100) {
-    chatHistory.shift();
-  }
-
-  fs.writeFile(historyPath, JSON.stringify(chatHistory, null, 2), (err) => {
-    if (err) console.error("履歴の保存エラー:", err);
-  });
+    chatHistory.push(messageData);
+    if (chatHistory.length > 100) chatHistory.shift();
 
     io.emit('chat message', messageData);
+  });
+
+  socket.on('delete message', (id, requester) => {
+  
+    const index = chatHistory.findIndex(m => m.id === id);
+    if (index !== -1) {
+      const message = chatHistory[index];
+      const isAdmin = requester === 'admin';//!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      const isOwner = requester === message.username;
+
+      if (isAdmin || isOwner) {
+        chatHistory.splice(index, 1);
+        io.emit('delete message', id);
+      }
+    }
   });
 });
 

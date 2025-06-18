@@ -23,7 +23,7 @@ let chatHistory = [];
 
 try {
   const data = fs.readFileSync(historyPath, 'utf-8')
-  const chatHistory = JSON.parse(data)
+  chatHistory = JSON.parse(data)
 } catch (err) {
   console.error("チャット履歴の読み込みに失敗しました:", err);
 }
@@ -83,7 +83,7 @@ io.on('connection', (socket) => {
 });
 
 usersData['newUser'] = { passwordHash: '...' };
-fs.writeFileSync('users.json', JSON.stringify(fs.readFileSync(__dirname, "users.json", "utf-8"), null, 2));
+fs.writeFileSync(path.join(__dirname, "users.json"), JSON.stringify(usersData, null, 2), "utf-8")
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -128,17 +128,16 @@ app.post('/login', async (req, res) => {
 app.post('/signup', async (req, res) => {
   const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
   const users = allUsers.users || {};
-
   const { username, password } = req.body;
-
+  
   if (users[username]) {
     return render(req, res, 'signup', { title: "サインアップ", page: "signup", top: "サインアップ", err: "既に存在するユーザー名です" });
   }
-
+  
   const passwordHash = await bcrypt.hash(password, 10);
-  const isAdmin = "false"
-  users[username] = { passwordHash , isAdmin };
-
+  const isAdmin = "false";
+  users[username] = { passwordHash, isAdmin };
+  
   fs.writeFileSync('users.json', JSON.stringify({ users }, null, 2));
   
   console.log("signup is success")

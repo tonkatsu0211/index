@@ -81,7 +81,7 @@
     return null;
   }
   
-  const isAdmin = getCookie('isAdmin'); === "true"
+  const isAdmin = getCookie('isAdmin') === "true";
   const username = getCookie("user");
   const socket = io({
     auth: { username: username }

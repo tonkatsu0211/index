@@ -67,6 +67,7 @@
 <div id="messages"></div>
   <h2><input class="chatText" id="input" maxlength="100" autocomplete="off" /></h2>
   <button class="blueButton30" id="sendButton">送信</button>
+  <p id="admin" style="display: none;">管理者モード</p>
 <br>
 </div>
 </div>
@@ -80,12 +81,16 @@
     return null;
   }
   
-  const isAdmin = document.cookie.includes('isAdmin');
+  const isAdmin = getCookie('isAdmin');
   const username = getCookie("user");
   const socket = io({
     auth: { username: username }
   });
-
+  
+  if (isAdmin == "true") {
+    document.getElementById("admin").style.display = "flex";
+  }
+  
   const input = document.getElementById('input');
   const messages = document.getElementById('messages');
 

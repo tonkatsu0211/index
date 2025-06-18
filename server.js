@@ -109,7 +109,7 @@ app.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
   if (!users[username]) {
-    return res.send('ユーザー名が存在しません');
+    return render(req, res, "login", { title: "ログイン", page: "login", top: "チャットにログイン", err: 'ユーザー名が存在しません'});
   }
 
   const match = await bcrypt.compare(password, users[username].passwordHash);
@@ -120,7 +120,7 @@ app.post('/login', async (req, res) => {
 
     res.redirect('/chat');
   } else {
-    res.send('パスワードが違います');
+    render(req, res, "login", { title: "ログイン", page: "login", top: "チャットにログイン", err: 'パスワードが違います'});
   }
 });
 

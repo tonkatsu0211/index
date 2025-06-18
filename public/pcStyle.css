@@ -12,6 +12,7 @@ body {
   font-family: sans-serif;
   margin: 0px;
   overflow: visible;
+  overflow-x: hidden;
 }
 .toTopButton {
   all: unset;
@@ -105,8 +106,8 @@ body {
   padding-bottom: 0;
 }
 .option-noPadding-underline {
-  text-decoration: underline;
-  color: #999999;
+  border-bottom: 1px solid #999999 !important;
+  color: #999999 !important;
 }
 .option-left10-underline {
   background-color: #ffffff;
@@ -309,11 +310,12 @@ footer {
   background-color: #f1f1f1;
   color: #333333;
   text-align: center;
-  margin: 0;
-  padding: 0;
-  padding-top: 15px;
-  padding-bottom: 15px;
-  width: 100%;
+  margin: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  width: 100% !important;
   margin-top: 40px;
   font-size: 14px;
   border-top: 1px solid #cccccc;

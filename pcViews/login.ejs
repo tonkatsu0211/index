@@ -7,6 +7,13 @@
   <input type="password" name="password" placeholder="パスワード" required>
   <button type="submit">ログイン</button>
 </form>
-<p><%= err %></p>
+<p id="e"><%= err %></p>
 
+<script>
+  const e = "<%= err %>"
+  if (!e){
+    document.getElementById("e").style.display = none;
+  }
+</script>
+  
 <%- include("settings/footer") %>

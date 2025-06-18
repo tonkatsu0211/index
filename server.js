@@ -5,7 +5,7 @@ const path = require('path');
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const bcrypt = require('bcrypt');
-
+const users = require('./users.json'); // { username: { passwordHash } }
 
 app.use(session({
   secret: 'tonkatsu-0211',
@@ -25,6 +25,33 @@ app.use(express.json());
 app.post('/log', (req, res) => {
   console.log(req.body.message);
   res.json({ status: 'ok' });
+});
+
+app.post('/login', async (req, res) => {
+  const { username, password } = req.body;
+  const user = users[username];
+
+  if (user && await bcrypt.compare(password, user.passwordHash)) {
+    req.session.user = username;
+    res.redirect('/');
+  } else {
+    render(req, res, 'login', { title: "ログイン", err: "ユーザー名またはパスワードが違います" });
+  }
+});
+
+app.post('/signup', async (req, res) => {
+  const { username, password } = req.body;
+
+  if (users[username]) {
+    return res.render('signup', { title: "新規登録", err: "既に存在するユーザー名です" });
+  }
+
+  const passwordHash = await bcrypt.hash(password, 10);
+  users[username] = { passwordHash };
+  require('fs').writeFileSync('./users.json', JSON.stringify(users));
+
+  req.session.user = username;
+  res.redirect('/');
 });
 
 function render(req, res, view, data = {}, locate = "") {
@@ -95,7 +122,7 @@ app.get(["/games", "/games.html"], (req, res) => {
 });
 
 app.get(["/login", "/login.html"], (req, res) => {
-  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン"});
+  render(req, res, "login", { title: "ログイン", page: "chat", top: "チャットにログイン", err: "none"});
 });
 
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {

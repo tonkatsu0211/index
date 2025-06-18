@@ -61,7 +61,7 @@ app.get(["/empass/constructing", "/empass/const", "/empass/constructing.html"], 
   render(req, res, "constructing", { title: "建設中のページ", page: "constructing", top: "建設中"});
 });
 
-app.get("/const1", (req, res) => {
+app.get("/empass/const1", (req, res) => {
   render(req, res, "constructing", { title: "建設中のページ", page: "const1", top: "建設中"});
 });
 

@@ -128,15 +128,14 @@
   });
   
   function sendChat() {
-    const message = "test"; <!-- input.value.trim() -->
-    alert("click ... OK");
+    const message = document.getElementById("input").value;
     if (message.length > 100) {
       alert("メッセージは100文字以内で入力してください。");
       return;
     }
     if (message) {
       socket.emit('chat message', message);
-      input.value = '';
+      document.getElementById("input").value = '';
     }
   }
    

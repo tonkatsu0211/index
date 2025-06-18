@@ -30,6 +30,7 @@ try {
 
 io.on('connection', (socket) => {
   const username = socket.handshake.auth.username;
+  console.log("username:", username);
 
   socket.data.username = username;
   socket.data.isAdmin = adminUsers.has(username);
@@ -37,8 +38,9 @@ io.on('connection', (socket) => {
   socket.emit('chat history', chatHistory);
   
     socket.on('chat message', (msg) => {
+    console.log("message from: ", socket.data.username, ", message: ", msg);
     
-    if (msg.trim() === '/delete' && adminUsers.includes(username)) {
+    if (msg.trim() === '/delete' && adminUsers.has(username)) {
       chatHistory = [];
       io.emit('chat history', chatHistory);
       return;
@@ -69,7 +71,7 @@ io.on('connection', (socket) => {
   
   socket.on('delete message', (id) => {
   const username = socket.handshake.auth.username;
-  const isAdmin = adminUsers.includes(username);
+  const isAdmin = adminUsers.has(username);
 
   const index = chatHistory.findIndex(msg => msg.id === id);
   if (index !== -1) {
@@ -145,6 +147,7 @@ app.post('/signup', async (req, res) => {
   console.log("signup is success")
   
   res.cookie('user', username);
+  res.cookie('isAdmin', "false")
   res.redirect('/chat');
   console.log("login is success")
 });

@@ -169,6 +169,16 @@
       }
     });
   });
+  
+  socket.on('system message', (text) => {
+    const item = document.createElement('div');
+    item.classList.add('message-item');
+    item.style.color = '#888';
+    item.style.fontStyle = 'italic';
+    item.textContent = `[システム] ${text}`;
+    messages.appendChild(item);
+    messages.scrollTop = messages.scrollHeight;
+  });
 </script>
 <script src="/chat.js"></script>
 

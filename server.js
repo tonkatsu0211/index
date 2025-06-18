@@ -11,10 +11,10 @@ const http = require('http').createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(http);
 const historyPath = path.join(__dirname, 'chatHistory.json');
+const adminUsers = new Set(["_tonkatsu_"]);
+const { v4: uuidv4 } = require('uuid');
 
 let chatHistory = [];
-
-const { v4: uuidv4 } = require('uuid');
 
 try {
   if (fs.existsSync(historyPath)) {
@@ -24,40 +24,51 @@ try {
 } catch (err) {
   console.error("チャット履歴の読み込みに失敗しました:", err);
 }
-
 io.on('connection', (socket) => {
+  const username = socket.handshake.auth.username;
+
+  socket.data.username = username;
+  socket.data.isAdmin = adminUsers.has(username);
+
   socket.emit('chat history', chatHistory);
-
-  socket.on('chat message', (msg) => {
-    const username = socket.handshake.auth.username || '匿名';
-    const timestamp = new Date().toLocaleString('ja-JP', {
-      timeZone: 'Asia/Tokyo',
-      hour12: false
-  });
   
-  const messageData = {
-    id: uuidv4(), //ここ重要
-    username: username,
-    message: msg,
-    timestamp: timestamp
-  };
+    socket.on('chat message', (msg) => {
+    
+    if (msg.startsWith('/admin ')) {
+      const targetUser = msg.slice(7).trim();
+      if (socket.data.isAdmin) {
+        adminUsers.add(targetUser);
+        io.emit('system message', `${targetUser} さんに管理者権限が付与されました`);
+      } else {
+        socket.emit('system message', `あなたには管理者権限がありません`);
+      }
+      return;
+    }
 
-  chatHistory.push(messageData);
-  if (chatHistory.length > 100) chatHistory.shift();
+    const messageData = {
+      id: uuidv4(),
+      username: socket.data.username,
+      message: msg,
+      timestamp: new Date().toLocaleString('ja-JP', { hour12: false }),
+    };
+
+    chatHistory.push(messageData);
+    if (chatHistory.length > 100) chatHistory.shift();
     io.emit('chat message', messageData);
   });
+  socket.on('delete message', (id) => {
+  const index = chatHistory.findIndex(msg => msg.id === id);
+  if (index !== -1) {
+    const msg = chatHistory[index];
+    const isAdmin = adminUsers.has(socket.data.username);
+    const isOwner = msg.username === socket.data.username;
 
-  socket.on('delete message', (id, username) => {
-    const messageIndex = chatHistory.findIndex(m => m.id === id);
-    if (messageIndex !== -1) {
-      const message = chatHistory[messageIndex];
-      
-      if (message.username === username || username === 'admin') {
-        chatHistory.splice(messageIndex, 1);
-        io.emit('delete message', id);
-      }
+    if (isAdmin || isOwner) {
+      chatHistory.splice(index, 1);
+      io.emit('chat deleted', id);
     }
-  });
+  }
+});
 });
 
 users['newUser'] = { passwordHash: '...' };

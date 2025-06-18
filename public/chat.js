@@ -1,9 +1,36 @@
 "use strict";
-const io = require("io")
+const express = require('express');
+const app = express();
+const server = http.createServer(app);
 const socket = io();
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
+const chatHistory = [];
+const http = require('http').createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(http);
+
+io.on('connection', (socket) => {
+  const username = socket.handshake.auth.username || '匿名';
+
+  socket.emit('chat history', chatHistory);
+
+  socket.on('chat message', (msg) => {
+    const messageData = {
+      username: username,
+      message: msg,
+      timestamp: new Date().toLocaleString()
+    };
+
+    chatHistory.push(messageData);
+    if (chatHistory.length > 100) {
+      chatHistory.shift();
+    }
+
+    io.emit('chat message', messageData);
+  });
+});
 
 form.addEventListener('submit', function (e) {
   e.preventDefault();

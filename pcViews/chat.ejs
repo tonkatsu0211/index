@@ -2,19 +2,71 @@
 <%- include("settings/nav") %>
 <%- include("settings/top") %>
 
+<style>
+#chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+#messages {
+  flex: 1;
+  overflow-y: scroll;
+  padding: 10px;
+  width: 100%;
+  box-sizing: border-box;
+  background: #fafafa;
+}
+.message-bubble {
+  background-color: #e9f5ff;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 8px;
+  width: fit-content;
+  max-width: 90%;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.meta {
+  font-size: 0.8em;
+  color: #555;
+  margin-bottom: 5px;
+}
+.text {
+  word-break: break-word;
+}
+form {
+  display: inline;
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #ccc;
+}
+#input {
+  flex: 1;
+  padding: 10px;
+  font-size: 1em;
+  width: 1000px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-right: 10px;
+}
+button {
+  padding: 15px 20px !important;
+}
+</style>
+<div id="chat-container">
 <div id="messages"></div>
 <form id="form" action="">
   <h2><input class="chatText" id="input" maxlength="100" autocomplete="off" /></h2>
-  <button class="blueButton20">送信</button>
+  <button class="blueButton30">送信</button>
 </form>
 <br>
+</div>
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
   const socket = io({
     auth: {
-      username: "<%= username %>" // EJSで渡す
+      username: "<%= username %>"
     }
   });
 
@@ -45,6 +97,47 @@
     messages.appendChild(msgDiv);
     messages.scrollTop = messages.scrollHeight;
   });
+  
+  const socket = io({
+    auth: {
+      username: "<%= username %>"
+    }
+  });
+
+  const form = document.getElementById('form');
+  const input = document.getElementById('input');
+  const messages = document.getElementById('messages');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    if (input.value) {
+      socket.emit('chat message', input.value);
+      input.value = '';
+    }
+  });
+
+  socket.on('chat history', function (history) {
+    history.forEach(data => appendMessage(data));
+    messages.scrollTop = messages.scrollHeight;
+  });
+
+  socket.on('chat message', function (data) {
+    appendMessage(data);
+    messages.scrollTop = messages.scrollHeight;
+  });
+
+  function appendMessage(data) {
+    const msgDiv = document.createElement('div');
+    msgDiv.className = 'message-bubble';
+    msgDiv.innerHTML = `
+      <div class="meta">
+        <span class="username">${data.username}</span>
+        <span class="timestamp">${data.timestamp}</span>
+      </div>
+      <div class="text">${data.message}</div>
+    `;
+    messages.appendChild(msgDiv);
+  }
 </script>
 <script src="/chat.js"></script>
 

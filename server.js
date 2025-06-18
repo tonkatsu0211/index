@@ -10,25 +10,37 @@ const users = JSON.parse(fs.readFileSync('users.json', 'utf8'));
 const http = require('http').createServer(app);
 const { Server } = require('socket.io');
 const io = new Server(http);
+const historyPath = path.join(__dirname, 'chatHistory.json');
 
 const chatHistory = [];
 
-io.on('connection', (socket) => {
-  const username = socket.handshake.auth.username || '匿名';
+try {
+  if (fs.existsSync(historyPath)) {
+    const data = fs.readFileSync(historyPath, 'utf-8');
+    chatHistory = JSON.parse(data);
+  }
+} catch (err) {
+  console.error("チャット履歴の読み込みに失敗しました:", err);
+}
 
+io.on('connection', (socket) => {
   socket.emit('chat history', chatHistory);
 
   socket.on('chat message', (msg) => {
     const messageData = {
-    username: username,
+    username: socket.handshake.auth.username,
     message: msg,
     timestamp: new Date().toLocaleString('ja-JP', { timeZone: 'Asia/Tokyo', hour12: "false" })
     };
 
-    chatHistory.push(messageData);
-    if (chatHistory.length > 100) {
-      chatHistory.shift();
-    }
+  chatHistory.push(messageData);
+  if (chatHistory.length > 100) {
+    chatHistory.shift();
+  }
+
+  fs.writeFile(historyPath, JSON.stringify(chatHistory, null, 2), (err) => {
+    if (err) console.error("履歴の保存エラー:", err);
+  });
 
     io.emit('chat message', messageData);
   });

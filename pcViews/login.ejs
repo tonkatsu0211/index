@@ -12,6 +12,7 @@
   <h2>
     <button class="blueButton20" type="submit">ログイン</button>
   </h2>
+  <h3 id="f" style="color: #ff0000; display: none;">チャットを使用するにはログインが必要です。ログインしてください。</h3>
   <h3 id="e" style="color: #ff0000;"><%= err %></h3>
   <br>
   <p>
@@ -21,8 +22,14 @@
   <br>
 
 <script>
+  const params = new URLSearchParams(window.location.search);
+  const f = params.get("f");
+  
   if ( "<%= err %>" == "none" ){
     document.getElementById("e").style.display = "none";
+  }
+  if ( f == "chat" ){
+    document.getElementById("f").style.display = "inline";
   }
 </script>
   </div>

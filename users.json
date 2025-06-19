@@ -19,6 +19,14 @@
     "Uruhuierhiuiuherhiurec": {
       "passwordHash": "$2b$10$1WKHJSWoTJ/ofMdwPgInWugqHLjmRWuvTT2PPKl0qXCsw7ywOBZ2K",
       "isAdmin": "false"
+    },
+    "たけ": {
+      "passwordHash": "$2b$10$0Ce9fL88SVNLlgv8FS0CTOwqYtTqm.P//4ELCVcBxFjtDZa/U7iKu",
+      "isAdmin": "false"
+    },
+    "たけっち": {
+      "passwordHash": "$2b$10$qeew8AREi0sAlSQ/GEYPRukkC7/JKB7gRJiP5D12E1sEfzynk15sS",
+      "isAdmin": "false"
     }
   }
 }

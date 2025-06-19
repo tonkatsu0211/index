@@ -107,34 +107,34 @@
   }
   
   window.addEventListener('DOMContentLoaded', () => {
+    const enterToggle = document.getElementById('enterToggle');
     const saved = getCookie("enterToSend");
     if (saved === "true") {
       enterToggle.checked = true;
     }
-  });
   
-  enterToggle.addEventListener("change", () => {
-    setCookie("enterToSend", enterToggle.checked ? "true" : "false");
-  });
+    enterToggle.addEventListener("change", () => {
+      setCookie("enterToSend", enterToggle.checked ? "true" : "false", 365);
+    });
   
-  const inputEl = document.getElementById('input');
-  const enterToggle = document.getElementById('enterToggle');
-  const messages = document.getElementById('messages');
+    const inputEl = document.getElementById('input');
+    const messages = document.getElementById('messages');
 
-  input.addEventListener("keydown", function(e) {
-    const isEnter = e.key === "Enter";
-    const toggle = enterToggle.checked;
+    input.addEventListener("keydown", function(e) {
+      const isEnter = e.key === "Enter";
+      const toggle = enterToggle.checked;
 
-    if (isEnter) {
-      if (!toggle && e.shiftKey) {
-        e.preventDefault();
-        sendChat();
-      } else if (toggle && !e.shiftKey) {
-        e.preventDefault();
-        sendChat();
+      if (isEnter) {
+        if (!toggle && e.shiftKey) {
+          e.preventDefault();
+          sendChat();
+        } else if (toggle && !e.shiftKey) {
+          e.preventDefault();
+          sendChat();
+        }
+        
       }
-      
-    }
+    });
   });
 
   function escapeHtml(text) {

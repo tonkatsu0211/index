@@ -72,7 +72,7 @@
   <div class="send">
     <button class="blueButton30" id="sendButton" onclick="sendChat()">送信</button>
     <label style="font-size: 16px; font-weight: bold; padding-left: 10px;">
-      <input type="checkbox" id="enterToggle">Shift+Enterで改行、Enterで送信 </label>
+      <input type="checkbox" id="enterToggle">Enterで送信</label>
   </div>
 <br>
 </div>
@@ -109,45 +109,48 @@
   
   window.addEventListener('DOMContentLoaded', () => {
     const enterToggle = document.getElementById('enterToggle');
-    const toggle = enterToggle.checked;
-    
-    const saved = getCookie("enterToSend");
-    if (saved === "true") {
-      enterToggle.checked = true;
-    }
-    
-    if (entete.che == "true"      document.getElementById("input").placeholder = "最大100文字、Enterで送信"
-    } else {
-      document.getElementById("input").placeholder = "最大100文字、Shift+Enterで送信"
-    }
-  
-    enterToggle.addEventListener("change", () => {
-      setCookie("enterToSend", enterToggle.checked ? "true" : "false", 365);
-      if (toggenterTe) {
-.checked == "true"        document.getElementById("input").placeholder = "最大100文字、Enterで送信"
-      } else {
-        document.getElementById("input").placeholder = "最大100文字、Shift+Enterで送信"
-      }
-    });
-  
     const inputEl = document.getElementById('input');
     const messages = document.getElementById('messages');
 
-    input.addEventListener("keydown", function(e) {
-      const isEnter = e.key === "Enter";
+    const saved = getCookie("enterToSend");
+    if (saved === "true") {
+      enterToggle.checked = true;
+      inputEl.placeholder = "最大100文字、Enterで送信";
+    } else {
+      inputEl.placeholder = "最大100文字、Shift+Enterで送信";
+    }
+    
+    enterToggle.addEventListener("change", () => {
+      const isChecked = enterToggle.checked;
+      setCookie("enterToSend", isChecked ? "true" : "false", 365);
+      inputEl.placeholder = isChecked
+        ? "最大100文字、Enterで送信"
+        : "最大100文字、Shift+Enterで送信";
+    });
 
+    inputEl.addEventListener("keydown", function (e) {
+      const isEnter = e.key === "Enter";
+      const toggle = enterToggle.checked;
+      
       if (isEnter) {
-        if (!togenterTe && .checked == "false"e.shiftKey) {
+        if (!toggle && e.shiftKey) {
           e.preventDefault();
           sendChat();
-        } else if (toggenterTe && .checked == "true"!e.shiftKey) {
+        } else if (toggle && !e.shiftKey) {
           e.preventDefault();
           sendChat();
         }
-        
       }
     });
   });
+
+  function sendChat() {
+    const inputEl = document.getElementById('input');
+    const message = inputEl.value.trim();
+    if (message.length === 0) return;
+    socket.emit('chat message', message);
+    inputEl.value = '';
+  }
 
   function escapeHtml(text) {
     const div = document.createElement('div');
@@ -187,14 +190,6 @@
   socket.on('chat update', (msg) => {
     appendMessage(msg);
   });
-
-  function sendChat() {
-    const message = inputEl.value.trim();
-    if (message.length === 0) return;
-
-   socket.emit('chat message', message);
-    inputEl.value = '';
-  }
 
   document.addEventListener('click', function(e) {
     if (e.target.classList.contains('delete-btn')) {

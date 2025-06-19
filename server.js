@@ -160,6 +160,14 @@ app.post('/signup', async (req, res) => {
     }
   });
   
+  fs.writeFile(path.join(__dirname, "usersBackup.json"), JSON.stringify({users}, null, 2), (err) => {
+    if (err) {
+      console.error("cannot backup");
+    } else {
+      console.log("backup user data: ", {users});
+    }
+  });
+  
   console.log("signup is success")
   
   res.cookie('user', username, { httpOnly: false, path: "/" });

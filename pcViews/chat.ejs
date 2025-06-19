@@ -71,7 +71,9 @@
   <h2><textarea class="chatText" id="input" maxlength="100" autocomplete="off" placeholder="最大100文字"></textarea></h2>
   <div class="send">
     <button class="blueButton30" id="sendButton" onclick="sendChat()">送信</button>
-    <input type="checkbox" id="enterToggle">Shift+Enterで改行、Enterで送信
+    <label style="font-size: 16px; font-weight: bold; padding-left: 10px;">
+      <input type="checkbox" id="enterToggle">Shift+Enterで改行、Enterで送信
+    </label>
   </div>
 <br>
 </div>
@@ -102,7 +104,7 @@
   }
   
   function setCookie(name, value, days) {
-    const expires = new Date(Date.now() + days * 24 * 60 * 60).toUTCString();
+    const expires = new Date(Date.now() + days * 24 * 60 * 60 * 1000).toUTCString();
     document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
   }
   
@@ -112,9 +114,20 @@
     if (saved === "true") {
       enterToggle.checked = true;
     }
+    
+    if (enterToggle.checked == "true") {
+        document.getElementById("input").placeholder = "最大100文字、Enterで送信"
+    } else {
+      document.getElementById("input").placeholder = "最大100文字、Enterで送信"
+    }
   
     enterToggle.addEventListener("change", () => {
       setCookie("enterToSend", enterToggle.checked ? "true" : "false", 365);
+      if (enterToggle.checked == "true") {
+        document.getElementById("input").placeholder = "最大100文字、Enterで送信"
+      } else {
+        document.getElementById("input").placeholder = "最大100文字、Enterで送信"
+      }
     });
   
     const inputEl = document.getElementById('input');

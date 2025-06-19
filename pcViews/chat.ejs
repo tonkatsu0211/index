@@ -100,13 +100,36 @@
     const adminDiv = document.getElementById("admin");
     if (adminDiv) adminDiv.style.display = "flex";
   }
-
+  
+  function setCookie(name, value, days) {
+    const expires = new Date(Date.now() + days * 24 * 60 * 60).toUTCString();
+    document.cookie = name + '=' + encodeURIComponent(value) + '; expires=' + expires + '; path=/';
+  }
+  
+  window.addEventListener('DOMContentLoaded', () => {
+    const saved = getCookie("enterToSend");
+    if (saved === "true") {
+      enterToggle.checked = true;
+    }
+  });
+  
+  enterToggle.addEventListener("change", () => {
+    setCookie("enterToSend", enterToggle.checked ? "true" : "false");
+  });
+  
   const inputEl = document.getElementById('input');
+  const enterToggle = document.getElementById('enterToggle');
   const messages = document.getElementById('messages');
 
-  inputEl.addEventListener("keydown", function(e) {
-    if (e.key === "Enter") {
-      if (e.shiftKey) {
+  input.addEventListener("keydown", function(e) {
+    const isEnter = e.key === "Enter";
+    const toggle = enterToggle.checked;
+
+    if (isEnter) {
+      if (!toggle && e.shiftKey) {
+        e.preventDefault();
+        sendChat();
+      } else if (toggle && !e.shiftKey) {
         e.preventDefault();
         sendChat();
       }

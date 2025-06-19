@@ -39,6 +39,10 @@
     "takumak7": {
       "passwordHash": "$2b$10$kwchH09Hog5yoK.XTx5Y..eNcnKqhDlr9vIOG3ZQR2P9h6Y5cwZV6",
       "isAdmin": "false"
+    },
+    "玲雄": {
+      "passwordHash": "$2b$10$aVzUrfSaFJPMilR.UksdxeEOVtgj4LkgPFcZjMQQk2Zi6awsE17q.",
+      "isAdmin": "false"
     }
   }
 }

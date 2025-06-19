@@ -115,7 +115,7 @@
     const saved = getCookie("enterToSend");
     if (saved === "true") {
       enterToggle.checked = true;
-      inputEl.placeholder = "最大100文字、Enterで送信";
+      inputEl.placeholder = "最大100文字、Enterで送信、";
     } else {
       inputEl.placeholder = "最大100文字、Shift+Enterで送信";
     }
@@ -124,8 +124,8 @@
       const isChecked = enterToggle.checked;
       setCookie("enterToSend", isChecked ? "true" : "false", 365);
       inputEl.placeholder = isChecked
-        ? "最大100文字、Enterで送信"
-        : "最大100文字、Shift+Enterで送信";
+        ? "最大100文字、Enterで送信、Shift+Enterで改行"
+        : "最大100文字、Shift+Enterで送信、Enterで改行";
     });
 
     inputEl.addEventListener("keydown", function (e) {
@@ -153,14 +153,13 @@
       inputEl.value = '';
       alert(
         `使用できるコマンド一覧\n\n` +
-        `/b 太字/ → 太字表示\n` +
-        `/i イタリック(斜体)/ → イタリック表示\n` +
-        `/#rrggbb 色指定/ → 文字色変更（例: /#ff0000 赤/）\n` +
-        `/サイズ 数値/ → 文字サイズ指定（5〜30px）\n` +
-        `/help でこのコマンド一覧を表示\n\n` +
-        `※ すべて「/」で閉じてください\n` +
-        `※ 改行は Enter で可能\n` +
-        `※ 最大100文字まで`
+        `/b text/ → 太字表示\n` +
+        `/i text/ → イタリック(斜体)表示\n` +
+        `/#rrggbb text/ → 文字色変更（例: /#ff0000 赤/）\n` +
+        `/サイズ text/ → 文字サイズ指定（5〜30px）\n` +
+        `※ すべて「/」で閉じてください\n\n` +
+        `/help → コマンド一覧を表示\n` +
+        `/admin ユーザー名 → 管理者権限を付与(管理者か製作者のみ使用可能)\n\n`
       );
       return;
     }

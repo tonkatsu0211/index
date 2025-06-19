@@ -60,9 +60,69 @@
     "timestamp": "6/19/2025, 19:39:24"
   },
   {
-    "id": "a7b92d91-f873-4f3d-b7dc-87032898ae7f",
+    "id": "a2b9b4c2-4d2a-4d01-9112-ee19e46aa02f",
     "username": "_tonkatsu_",
-    "message": "test",
-    "timestamp": "06/19/2025, 19:47:13"
+    "message": "/b 太字テスト /",
+    "timestamp": "06/19/2025, 19:53:21"
+  },
+  {
+    "id": "74e5bbaf-24c5-4ec8-98ef-9f2f55e4e87a",
+    "username": "_tonkatsu_",
+    "message": "/30 リサイズテスト /",
+    "timestamp": "06/19/2025, 19:53:55"
+  },
+  {
+    "id": "e57ad5d4-e1f8-472f-81c4-85a9b57a44cb",
+    "username": "_tonkatsu_",
+    "message": "/30 👍 /",
+    "timestamp": "06/19/2025, 19:54:14"
+  },
+  {
+    "id": "9ab29a4c-1106-4fe0-a71f-9cfae7ddf1e7",
+    "username": "_tonkatsu_",
+    "message": "/5 test/",
+    "timestamp": "06/19/2025, 19:54:26"
+  },
+  {
+    "id": "268de5a8-3f46-469b-b41e-da3e57bb8b74",
+    "username": "_tonkatsu_",
+    "message": "/5 ちっちゃw/",
+    "timestamp": "06/19/2025, 19:54:37"
+  },
+  {
+    "id": "caf71227-4149-447c-b994-e4dd151e6e63",
+    "username": "_tonkatsu_",
+    "message": "\"/(5〜30) text/\"で文字サイズ変更、\"/b text/\"で太字",
+    "timestamp": "06/19/2025, 19:55:42"
+  },
+  {
+    "id": "86af0980-ed95-4d2e-83cb-d9be1def8ede",
+    "username": "_tonkatsu_",
+    "message": "\"/ b text/\"  /とbの間のスペースは消して",
+    "timestamp": "06/19/2025, 19:56:21"
+  },
+  {
+    "id": "55c18310-d9de-416a-b272-e95f60d250bb",
+    "username": "_tonkatsu_",
+    "message": "/b こんな感じ/",
+    "timestamp": "06/19/2025, 19:56:34"
+  },
+  {
+    "id": "4d3d497c-a080-458d-8bca-f49d2024e9d9",
+    "username": "_tonkatsu_",
+    "message": "/30 こういうことも//5 できる/",
+    "timestamp": "06/19/2025, 19:56:52"
+  },
+  {
+    "id": "764ca0bd-309b-4d06-967d-b8cb9d8e644b",
+    "username": "_tonkatsu_",
+    "message": "/b す//10 ご//30 い//b で//25 し//5 ょ/",
+    "timestamp": "06/19/2025, 19:57:39"
+  },
+  {
+    "id": "658e4f06-1f2e-48df-9b2d-d082cb844c93",
+    "username": "_tonkatsu_",
+    "message": "新聞切り抜き予告状みたいになった()",
+    "timestamp": "06/19/2025, 19:58:10"
   }
 ]

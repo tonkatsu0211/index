@@ -19,6 +19,21 @@ for (const [username, info] of Object.entries(usersData.users)) {
     adminUsers.add(username);
   }
 }
+const users = {};
+
+io.on("connection", (socket) => {
+  socket.on("join", (username) => {
+    users[socket.id] = username;
+
+    io.emit("updateUserList", Object.values(users));
+  });
+
+  socket.on("disconnect", () => {
+    delete users[socket.id];
+
+    io.emit("updateUserList", Object.values(users));
+  });
+});
 
 let chatHistory = [];
 

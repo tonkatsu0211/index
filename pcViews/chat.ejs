@@ -81,6 +81,16 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
+  socket.on("updateUserList", (userList) => {
+  const listElement = document.getElementById("userList");
+  listElement.innerHTML = "";
+  userList.forEach((user) => {
+    const li = document.createElement("li");
+    li.textContent = user;
+    listElement.appendChild(li);
+  });
+});
+
   function getCookie(name) {
     const cookies = document.cookie.split(';').map(c => c.trim());
     for (const cookie of cookies) {

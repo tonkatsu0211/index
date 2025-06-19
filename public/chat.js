@@ -5,6 +5,7 @@ const socket = io();
 const form = document.getElementById('form');
 const input = document.getElementById('input');
 const messages = document.getElementById('messages');
+socket.emit("join", username);
 
 socket.on('chat history', (history) => {
   messages.innerHTML = '';

@@ -1,16 +1,6 @@
 {
-  "users": {
-    "_tonkatsu_": {
-      "passwordHash": "$2b$10$TLJw5CaGFBM8MPt3yXmqlOeERGvlZOYwenhC9QLNfBlIj9XDiw9Bu",
-      "isAdmin": "true"
-    },
-    "たけ": {
-      "passwordHash": "$2b$10$PieIThSZCJYupH7QrTBZjuzAI1wP.8c.ATeOJXsdj4xu.0CSqjimm",
-      "isAdmin": "false"
-    },
-    "test1": {
-      "passwordHash": "$2b$10$5dAwy35XJSLfXg5xZsjG8eVoIl8qyoIg2dnDVyrw0yaEpu.mXmtha",
-      "isAdmin": "false"
-    }
+  "床": {
+    "passwordHash": "$2b$10$Sh6Y/tsGpxQ2BID5xbMixulG4w3z/roT72OR3KfS6thk3W8D.GYZ6",
+    "isAdmin": "false"
   }
 }

@@ -43,6 +43,10 @@
     "玲雄": {
       "passwordHash": "$2b$10$aVzUrfSaFJPMilR.UksdxeEOVtgj4LkgPFcZjMQQk2Zi6awsE17q.",
       "isAdmin": "false"
+    },
+    "ミッチー": {
+      "passwordHash": "$2b$10$kZTtDNKJ7FLnZcVmVAqxJOzjx5ZptK43Dz48TMsGquA7P8uuVguFW",
+      "isAdmin": "false"
     }
   }
 }

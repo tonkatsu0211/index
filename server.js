@@ -139,7 +139,7 @@ app.post('/login', async (req, res) => {
 
 app.post('/signup', async (req, res) => {
   const allUsers = JSON.parse(fs.readFileSync('users.json', 'utf8'));
-  const users = allUsers.users || {};
+  const users = allUsers.users
   const { username, password } = req.body;
   
   if (users[username]) {
@@ -152,11 +152,11 @@ app.post('/signup', async (req, res) => {
   
   const usersData = users
   
-  fs.writeFile(path.join(__dirname, "users.json"), JSON.stringify(users, null, 2), (err) => {
+  fs.writeFile(path.join(__dirname, "users.json"), JSON.stringify({users}, null, 2), (err) => {
     if (err) {
       console.error("cannot signed up");
     } else {
-      console.log("saved user data: ", users);
+      console.log("saved user data: ", {users});
     }
   });
   

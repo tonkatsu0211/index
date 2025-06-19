@@ -1,5 +1,9 @@
 {
   "users": {
+    "_tonkatsu_": {
+      "passwordHash": "$2b$10$LRYtlRZTHCak0SFrNUlknupYtlpPeBuIxxr501AATTX8ESuVff6cW",
+      "isAdmin": "true"
+    },
     "床": {
       "passwordHash": "$2b$10$Sh6Y/tsGpxQ2BID5xbMixulG4w3z/roT72OR3KfS6thk3W8D.GYZ6",
       "isAdmin": "false"

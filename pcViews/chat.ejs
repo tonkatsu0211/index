@@ -115,9 +115,9 @@
     const saved = getCookie("enterToSend");
     if (saved === "true") {
       enterToggle.checked = true;
-      inputEl.placeholder = "最大100文字、Enterで送信、";
+      inputEl.placeholder = "最大100文字、Enterで送信、Shift+Enterで改行";
     } else {
-      inputEl.placeholder = "最大100文字、Shift+Enterで送信";
+      inputEl.placeholder = "最大100文字、Shift+Enterで送信、Enterで改行";
     }
     
     enterToggle.addEventListener("change", () => {

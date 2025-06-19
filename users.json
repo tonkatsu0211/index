@@ -35,6 +35,10 @@
     "ぷれいやー1": {
       "passwordHash": "$2b$10$.iqDaP0QLTVvb3l819J.9uXqZRDJWgJJry8ZeNXnMaXlpubIMHhqS",
       "isAdmin": "false"
+    },
+    "takumak7": {
+      "passwordHash": "$2b$10$kwchH09Hog5yoK.XTx5Y..eNcnKqhDlr9vIOG3ZQR2P9h6Y5cwZV6",
+      "isAdmin": "false"
     }
   }
 }

@@ -72,8 +72,7 @@
   <div class="send">
     <button class="blueButton30" id="sendButton" onclick="sendChat()">送信</button>
     <label style="font-size: 16px; font-weight: bold; padding-left: 10px;">
-      <input type="checkbox" id="enterToggle">Shift+Enterで改行、Enterで送信
-    </label>
+      <input type="checkbox" id="enterToggle">Shift+Enterで改行、Enterで送信 </label>
   </div>
 <br>
 </div>
@@ -110,23 +109,24 @@
   
   window.addEventListener('DOMContentLoaded', () => {
     const enterToggle = document.getElementById('enterToggle');
+    const toggle = enterToggle.checked;
+    
     const saved = getCookie("enterToSend");
     if (saved === "true") {
       enterToggle.checked = true;
     }
     
-    if (enterToggle.checked == "true") {
-        document.getElementById("input").placeholder = "最大100文字、Enterで送信"
+    if (entete.che == "true"      document.getElementById("input").placeholder = "最大100文字、Enterで送信"
     } else {
-      document.getElementById("input").placeholder = "最大100文字、Enterで送信"
+      document.getElementById("input").placeholder = "最大100文字、Shift+Enterで送信"
     }
   
     enterToggle.addEventListener("change", () => {
       setCookie("enterToSend", enterToggle.checked ? "true" : "false", 365);
-      if (enterToggle.checked == "true") {
-        document.getElementById("input").placeholder = "最大100文字、Enterで送信"
+      if (toggenterTe) {
+.checked == "true"        document.getElementById("input").placeholder = "最大100文字、Enterで送信"
       } else {
-        document.getElementById("input").placeholder = "最大100文字、Enterで送信"
+        document.getElementById("input").placeholder = "最大100文字、Shift+Enterで送信"
       }
     });
   
@@ -135,13 +135,12 @@
 
     input.addEventListener("keydown", function(e) {
       const isEnter = e.key === "Enter";
-      const toggle = enterToggle.checked;
 
       if (isEnter) {
-        if (!toggle && e.shiftKey) {
+        if (!togenterTe && .checked == "false"e.shiftKey) {
           e.preventDefault();
           sendChat();
-        } else if (toggle && !e.shiftKey) {
+        } else if (toggenterTe && .checked == "true"!e.shiftKey) {
           e.preventDefault();
           sendChat();
         }
@@ -193,12 +192,7 @@
     const message = inputEl.value.trim();
     if (message.length === 0) return;
 
-    if (message.length > 100) {
-      alert("メッセージは100文字以内で入力してください。");
-      return;
-    }
-
-    socket.emit('chat message', message);
+   socket.emit('chat message', message);
     inputEl.value = '';
   }
 

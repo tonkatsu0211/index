@@ -15,6 +15,10 @@
     "lmnopmdanldb": {
       "passwordHash": "$2b$10$FTq0mFKGs7Q5s07BVt8Stetpb9I3RAXYryqMlIFZkkj6yMHQt8zKq",
       "isAdmin": "false"
+    },
+    "Uruhuierhiuiuherhiurec": {
+      "passwordHash": "$2b$10$1WKHJSWoTJ/ofMdwPgInWugqHLjmRWuvTT2PPKl0qXCsw7ywOBZ2K",
+      "isAdmin": "false"
     }
   }
 }

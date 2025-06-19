@@ -150,10 +150,21 @@
     if (message.length === 0) return;
 
     if (message === "/help") {
-      const helpText = "コマンド一覧";
-      alert(helpText);
-      return
+      inputEl.value = '';
+      alert(
+        `使用できるコマンド一覧\n\n` +
+        `/b 太字/ → 太字表示\n` +
+        `/i イタリック(斜体)/ → イタリック表示\n` +
+        `/#rrggbb 色指定/ → 文字色変更（例: /#ff0000 赤/）\n` +
+        `/サイズ 数値/ → 文字サイズ指定（5〜30px）\n` +
+        `/help でこのコマンド一覧を表示\n\n` +
+        `※ すべて「/」で閉じてください\n` +
+        `※ 改行は Enter で可能\n` +
+        `※ 最大100文字まで`
+      );
+      return;
     }
+    
     socket.emit('chat message', message);
     inputEl.value = '';
   }
@@ -169,7 +180,7 @@
 
     escaped = escaped.replace(/\/(\d{1,2}) (.*?)\//g, (match, size, content) => {
       const sizeNum = parseInt(size);
-      if (sizeNum < 5 || sizeNum > 40) return content; // 範囲外なら変換なし
+      if (sizeNum < 5 || sizeNum > 30) return content;
       return `<span style="font-size:${sizeNum}px">${content}</span>`;
     });
     

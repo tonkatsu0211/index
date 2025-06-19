@@ -148,5 +148,35 @@
     "username": "_tonkatsu_",
     "message": "/help でコマンド表示",
     "timestamp": "06/19/2025, 20:25:18"
+  },
+  {
+    "id": "6cc44eea-762b-4362-9b07-d7c5cb3c4cda",
+    "username": "たけ",
+    "message": "/b わ/",
+    "timestamp": "06/19/2025, 23:37:45"
+  },
+  {
+    "id": "f4dc6be5-e245-4fd7-8365-7b9ea52757c0",
+    "username": "たけ",
+    "message": "/i わ/",
+    "timestamp": "06/19/2025, 23:37:56"
+  },
+  {
+    "id": "d33b5a9a-74be-4324-9e2d-91952c9743b7",
+    "username": "たけ",
+    "message": "/1 わ/",
+    "timestamp": "06/19/2025, 23:38:19"
+  },
+  {
+    "id": "df0a3065-ce79-4885-8fc8-3e75f47600da",
+    "username": "たけ",
+    "message": "/30 わ/",
+    "timestamp": "06/19/2025, 23:38:39"
+  },
+  {
+    "id": "1530aaa0-75f2-4943-98d3-11f3e18c2ed0",
+    "username": "たけ",
+    "message": "/5 a/",
+    "timestamp": "06/19/2025, 23:39:06"
   }
 ]

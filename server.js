@@ -21,20 +21,6 @@ for (const [username, info] of Object.entries(usersData.users)) {
 }
 const users = {};
 
-io.on("connection", (socket) => {
-  socket.on("join", (username) => {
-    users[socket.id] = username;
-
-    io.emit("updateUserList", Object.values(users));
-  });
-
-  socket.on("disconnect", () => {
-    delete users[socket.id];
-
-    io.emit("updateUserList", Object.values(users));
-  });
-});
-
 let chatHistory = [];
 
 try {
@@ -44,24 +30,25 @@ try {
   console.error("チャット履歴の読み込みに失敗しました:", err);
 }
 
-io.on('connection', (socket) => {
+io.on("connection", (socket) => {
   const username = socket.handshake.auth.username;
-  console.log("username:", username);
-
   socket.data.username = username;
   socket.data.isAdmin = adminUsers.has(username);
 
+  users[socket.id] = username;
+  
+  io.emit("user count", Object.keys(users).length);
+  io.emit("user list", Object.values(users));
+  
   socket.emit('chat history', chatHistory);
   
-    socket.on('chat message', (msg) => {
-    console.log("message from: ", socket.data.username, ", message: ", msg);
-    
-    if (msg.trim() === '/delete' && adminUsers.has(username)) {
+  socket.on('chat message', (msg) => {
+    if (msg.trim() === '/delete' && socket.data.isAdmin) {
       chatHistory = [];
       io.emit('chat history', chatHistory);
       return;
     }
-    
+
     if (msg.startsWith('/admin ')) {
       const targetUser = msg.slice(7).trim();
       if (socket.data.isAdmin) {
@@ -72,7 +59,7 @@ io.on('connection', (socket) => {
       }
       return;
     }
-
+    
     const messageData = {
       id: uuidv4(),
       username: socket.data.username,
@@ -89,34 +76,32 @@ io.on('connection', (socket) => {
       }).format(new Date())
     };
     
-    console.log("messageData: ", messageData);
     chatHistory.push(messageData);
     if (chatHistory.length > 100) chatHistory.shift();
-    console.log("chatHistory: ", chatHistory);
+    
     fs.writeFile(path.join(__dirname, "chatHistory.json"), JSON.stringify(chatHistory, null, 2), (err) => {
-      if (err) {
-        console.error("cannot saved chatHistory");
-      } else {
-        console.log("saved chatHistory");
-      }
+      if (err) console.error("cannot saved chatHistory");
     });
-    io.emit('chat history', chatHistory)
-    io.emit('chat update', chatHistory);
+    
+    io.emit('chat update', messageData);
   });
   
   socket.on('delete message', (id) => {
-  const username = socket.handshake.auth.username;
-  const isAdmin = adminUsers.has(username);
-
-  const index = chatHistory.findIndex(msg => msg.id === id);
-  if (index !== -1) {
-    const message = chatHistory[index];
-    if (message.username === username || isAdmin) {
-      chatHistory.splice(index, 1);
-      io.emit('chat history', chatHistory);
+    const index = chatHistory.findIndex(msg => msg.id === id);
+    if (index !== -1) {
+      const message = chatHistory[index];
+      if (message.username === socket.data.username || socket.data.isAdmin) {
+        chatHistory.splice(index, 1);
+        io.emit('chat history', chatHistory);
+      }
     }
-  }
-});
+  });
+  
+  socket.on("disconnect", () => {
+    delete users[socket.id];
+    io.emit("user count", Object.keys(users).length);
+    io.emit("user list", Object.values(users));
+  });
 });
 
 app.use(express.urlencoded({ extended: true }));
@@ -263,8 +248,8 @@ app.get("/chat", (req, res) => {
   if (!req.cookies.user) {
     return res.redirect("/login?f=chat");
   }
-  const username = req.cookies.user || "匿名";
-  render(req, res, "chat", { title: "チャット", page: "chat", top: "チャット", username: req.cookies.user, username});
+  const username = req.cookies.user;
+  render(req, res, "chat", { title: "チャット", page: "chat", top: "チャット", username: username});
 });
 
 app.get(["/login", "/login.html"], (req, res) => {

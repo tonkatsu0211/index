@@ -67,6 +67,17 @@
 </style>
 
 <div id="chat-container">
+  <div style="margin: 10px 0;">
+  <strong>現在のオンライン人数：</strong>
+  <span id="userCount">0</span>人
+</div>
+
+<% if (getCookie("isAdmin") === "true") { %>
+  <div id="adminUserList" style="margin: 10px 0;">
+    <strong>オンラインユーザー一覧（管理者専用）：</strong>
+    <ul id="userList"></ul>
+  </div>
+<% } %>
 <div id="messages"></div>
   <h2><textarea class="chatText" id="input" maxlength="100" autocomplete="off" placeholder="最大100文字"></textarea></h2>
   <div class="send">
@@ -81,15 +92,23 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="/socket.io/socket.io.js"></script>
 <script>
-  socket.on("updateUserList", (userList) => {
-  const listElement = document.getElementById("userList");
-  listElement.innerHTML = "";
-  userList.forEach((user) => {
-    const li = document.createElement("li");
-    li.textContent = user;
-    listElement.appendChild(li);
+  socket.on('user count', (count) => {
+    const userCountEl = document.getElementById('userCount');
+    if (userCountEl) userCountEl.textContent = count;
   });
-});
+
+  socket.on('user list', (userList) => {
+    if (!isAdmin) return;
+    const userListEl = document.getElementById('userList');
+    if (userListEl) {
+      userListEl.innerHTML = '';
+      userList.forEach(user => {
+        const li = document.createElement('li');
+        li.textContent = user;
+        userListEl.appendChild(li);
+      });
+    }
+  });
 
   function getCookie(name) {
     const cookies = document.cookie.split(';').map(c => c.trim());

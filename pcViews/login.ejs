@@ -2,17 +2,6 @@
 <%- include("settings/nav") %>
 <%- include("settings/top") %>
   
-  <p style="font-size: 25px; font-weight: bold; color: #ff0000;">
-    セキュリティ上の観点から、当チャットは毎回パスワードを要求するようになっています。
-  </p>
-  <button class="normalButton" style="font-size: 10px;" id="hiddenB0" onclick="document.getElementById('hiddenB0').style.display = 'none'; document.getElementById('hidden0').style.display = 'inline';">
-    何もないボタン()
-  </button>
-  <p style="font-size: 10px; display: none;" id="hidden0">
-    ↑決してログアウトとかする時の処理が思いつかなかったとかめんどくさかったとかじゃないですよ?
-  </p>
-  <br>
-  <br>
   <form method="POST" action="/login">
   <h2>
     <input class="loginText" type="text" name="username" placeholder="ユーザー名" required>

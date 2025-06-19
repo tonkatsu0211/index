@@ -53,7 +53,7 @@ io.on("connection", (socket) => {
       const targetUser = msg.slice(7).trim();
       if (socket.data.isAdmin) {
         adminUsers.add(targetUser);
-        io.emit('system message', `${targetUser} さんに管理者権限が付与されました`);
+        io.emit('system message', `${targetUser} に管理者権限が付与されました`);
       } else {
         socket.emit('system message', `あなたには管理者権限がありません`);
       }
@@ -193,7 +193,7 @@ function render(req, res, view, data = {}, locate = "") {
   const name = locate ? `${locate}/${view}` : view;
   res.render(name, { ...data, em: "false"}, (err, html) => {
     if (err) {
-      console.log(`404 at /${name}`);
+      console.log(`404 at /${name} in render function`);
       res.status(404).render('error', {
         title: "404 Not Found",
         page: "error",
@@ -244,10 +244,11 @@ app.get(["/games", "/games.html"], (req, res) => {
   render(req, res, "games", { title: "_tonkatsu_のページ", page: "games", top: "ゲームをプレイ"});
 });
 
-app.get("/chat", (req, res) => {
+app.get(["/chat", "/chat.html"], (req, res) => {
   if (!req.cookies.user) {
     return res.redirect("/login?f=chat");
   }
+  
   const username = req.cookies.user;
   render(req, res, "chat", { title: "チャット", page: "chat", top: "チャット", username: username});
 });

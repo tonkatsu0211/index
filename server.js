@@ -12,7 +12,8 @@ const io = new Server(http);
 const historyPath = path.join(__dirname, 'chatHistory.json');
 const { v4: uuidv4 } = require('uuid');
 const adminUsers = new Set();
-const usersData = JSON.parse(fs.readFileSync('users.json', 'utf-8'));
+const usersPath = path.join(__dirname, 'users.json')
+const usersData = JSON.parse(fs.readFileSync(usersPath, 'utf-8'));
 for (const [username, info] of Object.entries(usersData.users)) {
   if (info.isAdmin === "true") {
     adminUsers.add(username);

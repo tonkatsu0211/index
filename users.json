@@ -1,6 +1,8 @@
 {
-  "床": {
-    "passwordHash": "$2b$10$Sh6Y/tsGpxQ2BID5xbMixulG4w3z/roT72OR3KfS6thk3W8D.GYZ6",
-    "isAdmin": "false"
+  "users": {
+    "床": {
+      "passwordHash": "$2b$10$Sh6Y/tsGpxQ2BID5xbMixulG4w3z/roT72OR3KfS6thk3W8D.GYZ6",
+      "isAdmin": "false"
+    }
   }
 }

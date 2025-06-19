@@ -51,6 +51,10 @@
     "aqqw": {
       "passwordHash": "$2b$10$niJrC3TNTXf5pi6TNsKUM.nHNE.8.gVgkuxpqZ7gh8m5/03pq3av.",
       "isAdmin": "false"
+    },
+    "tarko962": {
+      "passwordHash": "$2b$10$.5b2onGIQizSDGzKdA4cOuD9JYK6JzLzRzAYxKSrQRftEjvgqtHlu",
+      "isAdmin": "false"
     }
   }
 }

@@ -47,6 +47,10 @@
     "ミッチー": {
       "passwordHash": "$2b$10$kZTtDNKJ7FLnZcVmVAqxJOzjx5ZptK43Dz48TMsGquA7P8uuVguFW",
       "isAdmin": "false"
+    },
+    "aqqw": {
+      "passwordHash": "$2b$10$niJrC3TNTXf5pi6TNsKUM.nHNE.8.gVgkuxpqZ7gh8m5/03pq3av.",
+      "isAdmin": "false"
     }
   }
 }

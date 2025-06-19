@@ -246,6 +246,10 @@ app.get(["/rules", "/rules.html"], (req, res) => {
   render(req, res, "rules", { title: "利用規約", page: "rules", top: "利用規約"});
 });
 
+app.get(["/chatlobby", "/chatlobby.html"], (req, res) => {
+  render(req, res, "chatlobby", { title: "チャット", page: "chatlobby", top: "チャットへようこそ"});
+});
+
 app.get(["/games/:id", "/games/:id.html"], (req, res) => {
   let gameId = req.params.id;
   gameId = gameId.replace(/\.(html|ejs)$/, "");

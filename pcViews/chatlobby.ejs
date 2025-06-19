@@ -1,0 +1,30 @@
+<%- include("settings/header") %>
+<%- include("settings/nav") %>
+<%- include("settings/top") %>
+  
+      <p>下のボタンから各チャットページに移動できます。</p>
+      <br>
+      <h2>
+        <button onclick="location.href='chat'" class="blueButton30">
+          チャットページ(既にログインしている人向け)
+        </button>
+      </h2>
+      <h2>
+        <button onclick="location.href='rules'" class="warnButton3">
+          利用規約
+        </button>
+      </h2>
+      <h2>
+        <button onclick="location.href='login'" class="blueButton30">
+          ログイン(既にアカウントを作成している人向け)
+        </button>
+      </h2>
+      <h2>
+        <button onclick="location.href='signup'" class="blueButton30">
+          サインアップ(まだアカウントを持っていない人向け)
+        </button>  
+      </h2>
+      <br>
+    </div>
+
+<%- include("settings/footer") %>

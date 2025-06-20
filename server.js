@@ -51,6 +51,18 @@ io.on("connection", (socket) => {
     io.emit("user list", Object.values(users));
   });
   
+  setInterval(() => {
+    const now = Date.now();
+    for (const [id, last] of Object.entries(lastPing)) {
+      if (now - last > 10000) {
+        const socket = io.sockets.sockets.get(id);
+        if (socket) {
+          socket.disconnect(true);
+        }
+      }
+    }
+  }, 10000);
+  
   socket.data.username = username;
   socket.data.isAdmin = adminUsers.has(username);
 

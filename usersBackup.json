@@ -55,6 +55,10 @@
     "tarko962": {
       "passwordHash": "$2b$10$.5b2onGIQizSDGzKdA4cOuD9JYK6JzLzRzAYxKSrQRftEjvgqtHlu",
       "isAdmin": "false"
+    },
+    "2021s2403@sngwed.onmicrosoft.com": {
+      "passwordHash": "$2b$10$7T69upmFN1uaME8WkYxwy.Pm2HY1ttJ9/KsK6l37ST35w9bsmQq2.",
+      "isAdmin": "false"
     }
   }
 }

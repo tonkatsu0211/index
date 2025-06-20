@@ -185,6 +185,10 @@
     socket.emit('join', username);
   });
   
+  setInterval(() => {
+    socket.emit("client ping");
+  }, 10000);
+  
   socket.on('user count', (count) => {
     const userCountEl = document.getElementById('userCount');
     if (userCountEl) userCountEl.textContent = count;

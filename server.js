@@ -30,8 +30,27 @@ try {
   console.error("チャット履歴の読み込みに失敗しました:", err);
 }
 
+const lastPing = {}; // socket.id → timestamp
+
 io.on("connection", (socket) => {
   const username = socket.handshake.auth.username;
+  users[socket.id] = username;
+  lastPing[socket.id] = Date.now(); // 初期 ping 時刻記録
+
+  io.emit("user count", Object.keys(users).length);
+  io.emit("user list", Object.values(users));
+
+  socket.on("client ping", () => {
+    lastPing[socket.id] = Date.now(); // ping 受信時に記録
+  });
+
+  socket.on("disconnect", () => {
+    delete users[socket.id];
+    delete lastPing[socket.id];
+    io.emit("user count", Object.keys(users).length);
+    io.emit("user list", Object.values(users));
+  });
+  
   socket.data.username = username;
   socket.data.isAdmin = adminUsers.has(username);
 
@@ -69,6 +88,29 @@ io.on("connection", (socket) => {
         });
       } else {
         socket.emit('system message', `あなたには管理者権限がありません`);
+      }
+      return;
+    }
+    
+    if (msg.startsWith('/unadmin ')) {
+      const targetUser = msg.slice(7).trim();
+      if (socket.data.isAdmin) {
+        adminUsers.add(targetUser);
+      
+        if (!usersData.users[targetUser]) {
+          usersData.users[targetUser] = {};
+        }
+        usersData.users[targetUser].isAdmin = "false";
+        
+        fs.writeFile(usersPath, JSON.stringify(usersData, null, 2), (err) => {
+          if (err) {
+            console.error("users.json の保存に失敗:", err);
+            socket.emit('system message', '管理者設定の保存に失敗しました');
+          } else {
+            io.emit('system message', `${targetUser} から管理者権限が削除されました`);
+          }
+        });
+      } else {
       }
       return;
     }
@@ -261,8 +303,10 @@ app.get(["/chat", "/chat.html"], (req, res) => {
   if (!req.cookies.user) {
     return res.redirect("/login?f=chat");
   }
-  
   const username = req.cookies.user;
+  const userInfo = usersData.users[username];
+  const isAdminValue = (userInfo && userInfo.isAdmin === "true") ? 'true' : 'false';
+  res.cookie('isAdmin', isAdminValue, { httpOnly: false, path: "/" });
   render(req, res, "chat", { title: "チャット", page: "chat", top: "チャット", username: username});
 });
 

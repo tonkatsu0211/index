@@ -165,13 +165,14 @@
       inputEl.value = '';
       alert(
         `使用できるコマンド一覧\n\n` +
-        `/b text/ → 太字表示\n` +
-        `/i text/ → イタリック(斜体)表示\n` +
-        `/#rrggbb text/ → 文字色変更（例: /#ff0000 赤/）\n` +
-        `/サイズ text/ → 文字サイズ指定（5〜30px）\n` +
+        `\b text\ → 太字表示\n` +
+        `\i text\ → イタリック(斜体)表示\n` +
+        `\#rrggbb text\ → 文字色変更（例: \#ff0000 赤/）\n` +
+        `\サイズ text\ → 文字サイズ指定（5〜30px）\n` +
         `※ すべて「/」で閉じてください\n\n` +
         `/help → コマンド一覧を表示\n` +
-        `/admin ユーザー名 → 管理者権限を付与(管理者か製作者のみ使用可能)\n\n`
+        `/admin ユーザー名 → 管理者権限を付与(管理者か製作者のみ使用可能)\n` +
+        `/delete → チャット履歴全削除(管理者か製作者のみ使用可能)\n\n`
       );
       return;
     }
@@ -209,10 +210,10 @@ function parseCommands(text) {
     let i = start;
 
     while (i < str.length) {
-      if (str[i] === '/') {
-        const cmdMatch = str.slice(i).match(/^\/(b|i|\d{1,2}|#[0-9a-fA-F]{6})\s/);
+      if (str[i] === '\\') {
+        const cmdMatch = str.slice(i).match(/^\\(b|i|\d{1,2}|#[0-9a-fA-F]{6})\s/);
         if (!cmdMatch) {
-          result += '/';
+          result += '\\';
           i++;
           continue;
         }
@@ -221,33 +222,30 @@ function parseCommands(text) {
         const cmdLen = cmdMatch[0].length;
         i += cmdLen;
 
-        // コマンドの内容を探す（ネスト対応）
         let content = '';
         let depth = 1;
-        while (i < str.length) {
-          // サブコマンドの開始
-          const subCmd = str.slice(i).match(/^\/(b|i|\d{1,2}|#[0-9a-fA-F]{6})\s/);
-          if (str[i] === '/' && subCmd) {
-            depth++;
-            content += str[i]; // "/" を含める
-            i++;
-            continue;
-          }
 
-          // 閉じスラッシュ
-          if (str[i] === '/' && depth > 0) {
-            depth--;
-            if (depth === 0) {
-              i++; // skip closing /
-              break;
+        while (i < str.length) {
+          if (str[i] === '\\') {
+            const subCmd = str.slice(i).match(/^\\(b|i|\d{1,2}|#[0-9a-fA-F]{6})\s/);
+            if (subCmd) {
+              depth++;
+              content += str[i];
+              i++;
+              continue;
+            }
+            if (depth > 0) {
+              depth--;
+              if (depth === 0) {
+                i++; // skip closing \
+                break;
+              }
             }
           }
-
           content += str[i];
           i++;
         }
 
-        // ネストを再帰的に解析
         const parsedInner = parseRecursive(content.trim(), 0)[0];
 
         switch (true) {
@@ -292,7 +290,8 @@ function parseCommands(text) {
   
   function parseTextWithCommands(text) {
     const escaped = escapeHtml(text);
-    return parseCommands(escaped);
+    const parsed = parseCommands(escaped);
+    return parsed.replace(/\n/g, "<br>");
   }
   
   function appendMessage(msg) {

@@ -53,7 +53,20 @@ io.on("connection", (socket) => {
       const targetUser = msg.slice(7).trim();
       if (socket.data.isAdmin) {
         adminUsers.add(targetUser);
-        io.emit('system message', `${targetUser} に管理者権限が付与されました`);
+      
+        if (!usersData.users[targetUser]) {
+          usersData.users[targetUser] = {};
+        }
+        usersData.users[targetUser].isAdmin = "true";
+        
+        fs.writeFile(usersPath, JSON.stringify(usersData, null, 2), (err) => {
+          if (err) {
+            console.error("users.json の保存に失敗:", err);
+            socket.emit('system message', '管理者設定の保存に失敗しました');
+          } else {
+            io.emit('system message', `${targetUser} に管理者権限が付与されました`);
+          }
+        });
       } else {
         socket.emit('system message', `あなたには管理者権限がありません`);
       }

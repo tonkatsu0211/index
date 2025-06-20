@@ -26,7 +26,7 @@
     },
     "たけ": {
       "passwordHash": "$2b$10$0Ce9fL88SVNLlgv8FS0CTOwqYtTqm.P//4ELCVcBxFjtDZa/U7iKu",
-      "isAdmin": "false"
+      "isAdmin": "true"
     },
     "たけっち": {
       "passwordHash": "$2b$10$qeew8AREi0sAlSQ/GEYPRukkC7/JKB7gRJiP5D12E1sEfzynk15sS",
@@ -62,10 +62,6 @@
     },
     "らん": {
       "passwordHash": "$2b$10$Hc8EXYBCF3hT4LGukPqnp.l6v7qgyLgmGs/6vw0ajNpbzSZs9mz6y",
-      "isAdmin": "false"
-    },
-    "skw": {
-      "passwordHash": "$2b$10$jXqxqu8W7gInhy1Ppli6Jufwladt0OWLvQrZISJRZ4ixtoN6Aa1hK",
       "isAdmin": "false"
     }
   }

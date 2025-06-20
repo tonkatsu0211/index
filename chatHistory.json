@@ -4,5 +4,23 @@
     "username": "_tonkatsu_",
     "message": "文字オプションの仕様を変更しました。/ではなく\\にしてください。\nただし、/help、/adminはそのままです。",
     "timestamp": "06/20/2025, 13:20:11"
+  },
+  {
+    "id": "8ffae8a8-8ea0-4d33-bfaf-2ba6ee45adb4",
+    "username": "_tonkatsu_",
+    "message": "\\25 お、誰かいる\\",
+    "timestamp": "06/20/2025, 13:26:26"
+  },
+  {
+    "id": "0423bc9d-0f38-4a03-8fda-047af8c91c85",
+    "username": "たけ",
+    "message": "Hi",
+    "timestamp": "06/20/2025, 13:26:56"
+  },
+  {
+    "id": "1dddaa92-d81f-4284-bf67-519ba8d01613",
+    "username": "たけ",
+    "message": "/b /i あ//",
+    "timestamp": "06/20/2025, 13:27:39"
   }
 ]

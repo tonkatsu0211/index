@@ -67,6 +67,14 @@
     "skw": {
       "passwordHash": "$2b$10$jXqxqu8W7gInhy1Ppli6Jufwladt0OWLvQrZISJRZ4ixtoN6Aa1hK",
       "isAdmin": "false"
+    },
+    "ひず": {
+      "passwordHash": "$2b$10$SuXA7/SGXh1gziYXhnaSJuGLnkEMvSe/PuXuTMf.mjQF.QMIKFg52",
+      "isAdmin": "false"
+    },
+    "ひずkamone": {
+      "passwordHash": "$2b$10$AnhlsItgO/UftEi1VBIzNu2LvqY7Y0LFW3UIPLISkUXKExWXkUoj6",
+      "isAdmin": "false"
     }
   }
 }

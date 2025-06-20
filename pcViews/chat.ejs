@@ -203,50 +203,52 @@
   });
   
 function parseCommands(text) {
-  function parseRecursive(str, start=0) {
+  function parseRecursive(str, start = 0) {
     let result = '';
     let i = start;
 
     while (i < str.length) {
       if (str[i] === '/') {
-        // コマンド検出 (例: /b 、 /30 、 /#ff0000 )
         const cmdMatch = str.slice(i).match(/^\/(b|i|\d{1,2}|#[0-9a-fA-F]{6})\s/);
         if (!cmdMatch) {
-          // コマンドでなければ単なるスラッシュとして追加
           result += '/';
           i++;
           continue;
         }
 
         const cmd = cmdMatch[1];
-        const cmdLen = cmdMatch[0].length; // 例: "/b "は3文字
+        const cmdLen = cmdMatch[0].length;
+        i += cmdLen;
 
-        i += cmdLen; // コマンド部分を読み飛ばす
-
-        // 閉じスラッシュ1つまでをコマンドの範囲として取得
-        let argStart = i;
-        let argEnd = -1;
+        // コマンドの内容を探す（ネスト対応）
+        let content = '';
+        let depth = 1;
         while (i < str.length) {
-          if (str[i] === '/') {
-            argEnd = i;
-            break;
+          // サブコマンドの開始
+          const subCmd = str.slice(i).match(/^\/(b|i|\d{1,2}|#[0-9a-fA-F]{6})\s/);
+          if (str[i] === '/' && subCmd) {
+            depth++;
+            content += str[i]; // "/" を含める
+            i++;
+            continue;
           }
+
+          // 閉じスラッシュ
+          if (str[i] === '/' && depth > 0) {
+            depth--;
+            if (depth === 0) {
+              i++; // skip closing /
+              break;
+            }
+          }
+
+          content += str[i];
           i++;
         }
 
-        if (argEnd === -1) {
-          // 閉じスラッシュがない＝不正な構文なので残り全部追加して終了
-          result += str.slice(start);
-          return [result, str.length];
-        }
+        // ネストを再帰的に解析
+        const parsedInner = parseRecursive(content.trim(), 0)[0];
 
-        let innerText = str.slice(argStart, argEnd);
-        i = argEnd + 1; // 閉じスラッシュの次へ
-
-        // 再帰的に内部テキストをパース
-        const [parsedInner] = parseRecursive(innerText, 0);
-
-        // コマンドごとにHTML生成
         switch (true) {
           case cmd === 'b':
             result += `<strong>${parsedInner}</strong>`;
@@ -256,10 +258,10 @@ function parseCommands(text) {
             break;
           case /^\d+$/.test(cmd):
             const size = parseInt(cmd, 10);
-            if (size < 5 || size > 30) {
-              result += parsedInner;
-            } else {
+            if (size >= 5 && size <= 30) {
               result += `<span style="font-size:${size}px">${parsedInner}</span>`;
+            } else {
+              result += parsedInner;
             }
             break;
           case /^#[0-9a-fA-F]{6}$/.test(cmd):
@@ -268,8 +270,8 @@ function parseCommands(text) {
           default:
             result += parsedInner;
         }
+
       } else {
-        // 通常テキストを追加
         result += str[i];
         i++;
       }
@@ -278,8 +280,7 @@ function parseCommands(text) {
     return [result, i];
   }
 
-  const [parsed] = parseRecursive(text, 0);
-  return parsed;
+  return parseRecursive(text, 0)[0];
 }
   
   function escapeHtml(text) {

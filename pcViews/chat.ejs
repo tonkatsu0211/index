@@ -202,91 +202,96 @@
     }
   });
   
-  function parseCommands(text) {
-    
-    function parseRecursive(str, start=0) {
-      let result = '';
-      let i = start;
+function parseCommands(text) {
+  function parseRecursive(str, start=0) {
+    let result = '';
+    let i = start;
 
-      while (i < str.length) {
-        if (str[i] === '/') {
-          let cmdMatch = str.slice(i).match(/^\/(b|i|(\d{1,2})|#([0-9a-fA-F]{6})) /);
-          if (!cmdMatch) {
-            result += '/';
-            i++;
-            continue;
-          }
-          
-          let cmd = cmdMatch[1];
-          let cmdLen = cmdMatch[0].length;
-          
-          i += cmdLen;
-          
-          let depth = 1;
-          let argStart = i;
-          while (i < str.length && depth > 0) {
-            if (str[i] === '/' && str[i-1] !== '\\') {
-              depth--;
-              if (depth === 0) break;
-            }
-            i++;
-          }
-          
-          if (depth !== 0) {
-            result += str.slice(start);
-            return [result, str.length];
-          }
-          
-          let arg = str.slice(argStart, i);
+    while (i < str.length) {
+      if (str[i] === '/') {
+        // コマンド検出 (例: /b 、 /30 、 /#ff0000 )
+        const cmdMatch = str.slice(i).match(/^\/(b|i|\d{1,2}|#[0-9a-fA-F]{6})\s/);
+        if (!cmdMatch) {
+          // コマンドでなければ単なるスラッシュとして追加
+          result += '/';
           i++;
-          
-          let [parsedArg] = parseRecursive(arg, 0);
-          
-          switch (true) {
-            case cmd === 'b':
-              result += `<strong>${parsedArg}</strong>`;
-              break;
-            case cmd === 'i':
-              result += `<em>${parsedArg}</em>`;
-              break;
-            case /^\d+$/.test(cmd):  // サイズ指定
-              let sizeNum = parseInt(cmd);
-              if (sizeNum < 5 || sizeNum > 30) {
-                result += parsedArg;
-              } else {
-                result += `<span style="font-size:${sizeNum}px">${parsedArg}</span>`;
-              }
-              break;
-            case /^#[0-9a-fA-F]{6}$/.test(cmd): // 色指定
-              result += `<span style="color:${cmd}">${parsedArg}</span>`;
-              break;
-            default:
-              result += parsedArg;
-              break;
+          continue;
+        }
+
+        const cmd = cmdMatch[1];
+        const cmdLen = cmdMatch[0].length; // 例: "/b "は3文字
+
+        i += cmdLen; // コマンド部分を読み飛ばす
+
+        // 閉じスラッシュ1つまでをコマンドの範囲として取得
+        let argStart = i;
+        let argEnd = -1;
+        while (i < str.length) {
+          if (str[i] === '/') {
+            argEnd = i;
+            break;
           }
-        
-        } else {
-          result += str[i];
           i++;
         }
+
+        if (argEnd === -1) {
+          // 閉じスラッシュがない＝不正な構文なので残り全部追加して終了
+          result += str.slice(start);
+          return [result, str.length];
+        }
+
+        let innerText = str.slice(argStart, argEnd);
+        i = argEnd + 1; // 閉じスラッシュの次へ
+
+        // 再帰的に内部テキストをパース
+        const [parsedInner] = parseRecursive(innerText, 0);
+
+        // コマンドごとにHTML生成
+        switch (true) {
+          case cmd === 'b':
+            result += `<strong>${parsedInner}</strong>`;
+            break;
+          case cmd === 'i':
+            result += `<em>${parsedInner}</em>`;
+            break;
+          case /^\d+$/.test(cmd):
+            const size = parseInt(cmd, 10);
+            if (size < 5 || size > 30) {
+              result += parsedInner;
+            } else {
+              result += `<span style="font-size:${size}px">${parsedInner}</span>`;
+            }
+            break;
+          case /^#[0-9a-fA-F]{6}$/.test(cmd):
+            result += `<span style="color:${cmd}">${parsedInner}</span>`;
+            break;
+          default:
+            result += parsedInner;
+        }
+      } else {
+        // 通常テキストを追加
+        result += str[i];
+        i++;
       }
-      return [result, i];
     }
-    
-    const [parsed] = parseRecursive(text, 0);
-    return parsed;
+
+    return [result, i];
   }
+
+  const [parsed] = parseRecursive(text, 0);
+  return parsed;
+}
   
   function escapeHtml(text) {
-  const div = document.createElement('div');
-  div.textContent = text;
-  return div.innerHTML;
-}
-
-function parseTextWithCommands(text) {
-  const escaped = escapeHtml(text);
-  return parseCommands(escaped);
-}
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+  
+  function parseTextWithCommands(text) {
+    const escaped = escapeHtml(text);
+    return parseCommands(escaped);
+  }
   
   function appendMessage(msg) {
     if (!msg || !msg.username || !msg.message || !msg.timestamp) return;
@@ -294,14 +299,14 @@ function parseTextWithCommands(text) {
     item.classList.add('message-item');
     
     item.innerHTML = `
-  <div class="message-bubble">
-    <div class="meta">
-      <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
-    </div>
-    <div class="text">${parseTextWithCommands(msg.message)}</div>
-      ${(msg.username === username || isAdmin) ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
-    </div>
-  `;
+      <div class="message-bubble">
+        <div class="meta">
+          <strong>${escapeHtml(msg.username)}</strong> [${escapeHtml(msg.timestamp)}]
+        </div>
+        <div class="text">${parseTextWithCommands(msg.message)}</div>
+        ${(msg.username === username || isAdmin) ? `<button class="delete-btn" data-id="${msg.id}">削除</button>` : ''}
+      </div>
+    `;
     
     messages.appendChild(item);
     messages.scrollTop = messages.scrollHeight;

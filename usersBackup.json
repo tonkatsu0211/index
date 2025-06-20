@@ -59,6 +59,10 @@
     "2021s2403@sngwed.onmicrosoft.com": {
       "passwordHash": "$2b$10$7T69upmFN1uaME8WkYxwy.Pm2HY1ttJ9/KsK6l37ST35w9bsmQq2.",
       "isAdmin": "false"
+    },
+    "らん": {
+      "passwordHash": "$2b$10$Hc8EXYBCF3hT4LGukPqnp.l6v7qgyLgmGs/6vw0ajNpbzSZs9mz6y",
+      "isAdmin": "false"
     }
   }
 }

@@ -70,5 +70,23 @@
     "username": "_tonkatsu_",
     "message": "bye",
     "timestamp": "06/20/2025, 11:44:13"
+  },
+  {
+    "id": "a588fe21-757c-4acb-b78a-0fd2a5e5d155",
+    "username": "たけ",
+    "message": "/b i あ/",
+    "timestamp": "06/20/2025, 12:26:57"
+  },
+  {
+    "id": "b19a43fb-43b8-4a9f-bc40-c1c1f2f4047b",
+    "username": "たけ",
+    "message": "/help/",
+    "timestamp": "06/20/2025, 12:27:12"
+  },
+  {
+    "id": "50442804-f047-410a-ad34-d878daa440c3",
+    "username": "たけ",
+    "message": "これどうやって重複させるの？",
+    "timestamp": "06/20/2025, 12:28:20"
   }
 ]

@@ -71,7 +71,7 @@
   <span id="userCount">0</span>人
 </div>
   <div id="adminUserList" style="margin: 10px 0;">
-    <strong>オンラインユーザー一覧（管理者専用）：</strong>
+    <strong id="userListText" style="display: none;">オンラインユーザー一覧（管理者専用）：</strong>
     <ul id="userList"></ul>
   </div>
 <div id="chat-container">
@@ -192,6 +192,7 @@
   socket.on('user list', (userList) => {
     if (!isAdmin) return;
     const userListEl = document.getElementById('userList');
+    document.getElementById("userListText").style.display = "flex";
     if (userListEl) {
       userListEl.innerHTML = '';
       userList.forEach(user => {

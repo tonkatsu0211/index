@@ -1,242 +1,74 @@
 [
   {
-    "id": "20d725f5-fb4c-47c1-9af4-25421b59e062",
-    "username": "_tonkatsu_",
-    "message": "皆さんどうぞご自由に(荒らしはやめてね)",
-    "timestamp": "6/19/2025, 09:09:20"
-  },
-  {
-    "id": "17afc7be-e0a1-4a54-8580-e19647eb81fe",
-    "username": "_tonkatsu_",
-    "message": "誰もいなくて草",
-    "timestamp": "6/19/2025, 11:30:04"
-  },
-  {
-    "id": "1c0c26ef-b99c-4f4e-96a6-1afdd178a7b7",
-    "username": "床",
-    "message": "いとかなし",
-    "timestamp": "6/19/2025, 12:16:27"
-  },
-  {
-    "id": "9c34463f-9639-4264-a861-b127aa3b0481",
-    "username": "_tonkatsu_",
-    "message": "いとうれし",
-    "timestamp": "6/19/2025, 13:30:27"
-  },
-  {
-    "id": "ab953682-ba76-4d91-973d-9aefbde106f8",
-    "username": "たけ",
-    "message": "/color #38b48b",
-    "timestamp": "6/19/2025, 15:47:51"
-  },
-  {
-    "id": "28c6e09f-9a63-40cf-b157-2045cefd5b31",
-    "username": "たけ",
-    "message": "見て分かる。何をしようとしていたのか",
-    "timestamp": "6/19/2025, 15:48:32"
-  },
-  {
-    "id": "b67b4c30-5ac1-48c3-bb70-605be970f956",
+    "id": "0c80fb7a-e2ab-4b92-ac50-915913916870",
     "username": "takumak7",
-    "message": "よろしくお願いします。\nアカウント作りました。",
-    "timestamp": "6/19/2025, 16:03:55"
+    "message": "コマンドの種類が知りたいです。",
+    "timestamp": "06/20/2025, 11:40:39"
   },
   {
-    "id": "43511627-11da-4671-82af-d92b79209d5c",
-    "username": "玲雄",
-    "message": "youtube見れるサイトないですか？",
-    "timestamp": "6/19/2025, 18:16:30"
-  },
-  {
-    "id": "1f2d554c-8578-4254-845f-1247289976ac",
-    "username": "aqqw",
-    "message": "こんちゃす",
-    "timestamp": "6/19/2025, 19:18:29"
-  },
-  {
-    "id": "113961b8-84ab-4771-9860-12b542531a9b",
+    "id": "58c99e45-7918-41e4-b7c1-d6365d086e56",
     "username": "_tonkatsu_",
-    "message": "aqqw...!?",
-    "timestamp": "6/19/2025, 19:39:24"
+    "message": "/b /30 /helpで確認できるよ//",
+    "timestamp": "06/20/2025, 11:40:43"
   },
   {
-    "id": "a2b9b4c2-4d2a-4d01-9112-ee19e46aa02f",
-    "username": "_tonkatsu_",
-    "message": "/b 太字テスト /",
-    "timestamp": "06/19/2025, 19:53:21"
-  },
-  {
-    "id": "74e5bbaf-24c5-4ec8-98ef-9f2f55e4e87a",
-    "username": "_tonkatsu_",
-    "message": "/30 リサイズテスト /",
-    "timestamp": "06/19/2025, 19:53:55"
-  },
-  {
-    "id": "e57ad5d4-e1f8-472f-81c4-85a9b57a44cb",
-    "username": "_tonkatsu_",
-    "message": "/30 👍 /",
-    "timestamp": "06/19/2025, 19:54:14"
-  },
-  {
-    "id": "9ab29a4c-1106-4fe0-a71f-9cfae7ddf1e7",
-    "username": "_tonkatsu_",
-    "message": "/5 test/",
-    "timestamp": "06/19/2025, 19:54:26"
-  },
-  {
-    "id": "268de5a8-3f46-469b-b41e-da3e57bb8b74",
-    "username": "_tonkatsu_",
-    "message": "/5 ちっちゃw/",
-    "timestamp": "06/19/2025, 19:54:37"
-  },
-  {
-    "id": "caf71227-4149-447c-b994-e4dd151e6e63",
-    "username": "_tonkatsu_",
-    "message": "\"/(5〜30) text/\"で文字サイズ変更、\"/b text/\"で太字",
-    "timestamp": "06/19/2025, 19:55:42"
-  },
-  {
-    "id": "86af0980-ed95-4d2e-83cb-d9be1def8ede",
-    "username": "_tonkatsu_",
-    "message": "\"/ b text/\"  /とbの間のスペースは消して",
-    "timestamp": "06/19/2025, 19:56:21"
-  },
-  {
-    "id": "55c18310-d9de-416a-b272-e95f60d250bb",
-    "username": "_tonkatsu_",
-    "message": "/b こんな感じ/",
-    "timestamp": "06/19/2025, 19:56:34"
-  },
-  {
-    "id": "4d3d497c-a080-458d-8bca-f49d2024e9d9",
-    "username": "_tonkatsu_",
-    "message": "/30 こういうことも//5 できる/",
-    "timestamp": "06/19/2025, 19:56:52"
-  },
-  {
-    "id": "764ca0bd-309b-4d06-967d-b8cb9d8e644b",
-    "username": "_tonkatsu_",
-    "message": "/b す//10 ご//30 い//b で//25 し//5 ょ/",
-    "timestamp": "06/19/2025, 19:57:39"
-  },
-  {
-    "id": "658e4f06-1f2e-48df-9b2d-d082cb844c93",
-    "username": "_tonkatsu_",
-    "message": "新聞切り抜き予告状みたいになった()",
-    "timestamp": "06/19/2025, 19:58:10"
-  },
-  {
-    "id": "3fcc5f63-3ec8-41de-97a8-d5d87ca2ad36",
-    "username": "_tonkatsu_",
-    "message": "/i イタリック(斜体)テスト/\n/#ff0000 赤色テスト/\n/#ffffff 白色テスト/",
-    "timestamp": "06/19/2025, 20:21:01"
-  },
-  {
-    "id": "0670ad29-9d1f-4f30-8b0f-933029da1dfa",
-    "username": "_tonkatsu_",
-    "message": "/#0000ff ロ/\n/#ff0000 シ/\n/#ffffff ア/",
-    "timestamp": "06/19/2025, 20:23:06"
-  },
-  {
-    "id": "6f3a9ece-6ff6-473c-be4a-2ff269d36510",
-    "username": "_tonkatsu_",
-    "message": "謎 み 縦\nの た 読\nや い み\nつ な",
-    "timestamp": "06/19/2025, 20:24:05"
-  },
-  {
-    "id": "cc0677bd-baf4-4cbb-a0d1-7c9666dc7350",
-    "username": "_tonkatsu_",
-    "message": "/help でコマンド表示",
-    "timestamp": "06/19/2025, 20:25:18"
-  },
-  {
-    "id": "6cc44eea-762b-4362-9b07-d7c5cb3c4cda",
-    "username": "たけ",
-    "message": "/b わ/",
-    "timestamp": "06/19/2025, 23:37:45"
-  },
-  {
-    "id": "f4dc6be5-e245-4fd7-8365-7b9ea52757c0",
-    "username": "たけ",
-    "message": "/i わ/",
-    "timestamp": "06/19/2025, 23:37:56"
-  },
-  {
-    "id": "d33b5a9a-74be-4324-9e2d-91952c9743b7",
-    "username": "たけ",
-    "message": "/1 わ/",
-    "timestamp": "06/19/2025, 23:38:19"
-  },
-  {
-    "id": "df0a3065-ce79-4885-8fc8-3e75f47600da",
-    "username": "たけ",
-    "message": "/30 わ/",
-    "timestamp": "06/19/2025, 23:38:39"
-  },
-  {
-    "id": "1530aaa0-75f2-4943-98d3-11f3e18c2ed0",
-    "username": "たけ",
-    "message": "/5 a/",
-    "timestamp": "06/19/2025, 23:39:06"
-  },
-  {
-    "id": "3563de97-c20d-4a4e-87b3-3456da1ee214",
-    "username": "_tonkatsu_",
-    "message": "誰かいませんか〜?()",
-    "timestamp": "06/20/2025, 09:05:36"
-  },
-  {
-    "id": "86ff4144-8cbd-4029-824c-5477bd6621f5",
-    "username": "_tonkatsu_",
-    "message": "/b 誰かいませんか〜?/(CV: HIKAKIN)",
-    "timestamp": "06/20/2025, 09:06:01"
-  },
-  {
-    "id": "3c3a001d-30a4-4035-8830-ffe564a72261",
-    "username": "2021s2403@sngwed.onmicrosoft.com",
-    "message": "こんにちは",
-    "timestamp": "06/20/2025, 09:14:40"
-  },
-  {
-    "id": "bf5e65a4-e185-4b7f-b9e5-53bccf5f90ad",
-    "username": "_tonkatsu_",
-    "message": "あ、はい",
-    "timestamp": "06/20/2025, 09:20:34"
-  },
-  {
-    "id": "ec17605c-e52b-4580-a323-0d2af364fbb2",
-    "username": "_tonkatsu_",
-    "message": "何故にメールアドレス...",
-    "timestamp": "06/20/2025, 09:20:50"
-  },
-  {
-    "id": "ccaa155d-e8ca-46de-8334-8506bd3c136a",
-    "username": "_tonkatsu_",
-    "message": "メールアドレスではなくていいんですけど...",
-    "timestamp": "06/20/2025, 09:21:21"
-  },
-  {
-    "id": "f13df85e-8556-43be-aa1e-e1b0dd4e5956",
-    "username": "_tonkatsu_",
-    "message": "/b /30 /#ff0000 大きく太い赤字///",
-    "timestamp": "06/20/2025, 10:33:15"
-  },
-  {
-    "id": "5650e216-f602-4487-bf3e-09b011e04750",
-    "username": "_tonkatsu_",
-    "message": "/b /30 /#ff0000 赤い//#22ccff 彗星///",
-    "timestamp": "06/20/2025, 10:34:26"
-  },
-  {
-    "id": "855722cb-17cb-4ee1-bebf-03fb44756cd1",
+    "id": "931a6981-0810-4d44-9c8e-2186362226db",
     "username": "takumak7",
-    "message": "やっほー",
-    "timestamp": "06/20/2025, 10:36:43"
+    "message": "ありがとうございます。",
+    "timestamp": "06/20/2025, 11:40:56"
   },
   {
-    "id": "740be4a5-0d47-4812-93c8-beed0c23944a",
+    "id": "da357584-557a-4873-9d33-c494c6ec233f",
     "username": "_tonkatsu_",
-    "message": "/b /30 やっほーーーーーーーー//",
-    "timestamp": "06/20/2025, 10:37:00"
+    "message": "/i イタリック(斜体)/",
+    "timestamp": "06/20/2025, 11:41:37"
+  },
+  {
+    "id": "deb738ea-9087-4ca5-a282-934f46495647",
+    "username": "_tonkatsu_",
+    "message": "/b ボールド(太字のこと。洗濯洗剤ではありません)/",
+    "timestamp": "06/20/2025, 11:42:00"
+  },
+  {
+    "id": "7b5e125f-d95f-4ccc-8058-9f5f3d52790d",
+    "username": "_tonkatsu_",
+    "message": "/5 5pxの文字/",
+    "timestamp": "06/20/2025, 11:42:11"
+  },
+  {
+    "id": "d34a90f1-2af9-4f2b-8f6b-ddfc22be7d6c",
+    "username": "_tonkatsu_",
+    "message": "/30 30pxの文字/",
+    "timestamp": "06/20/2025, 11:42:21"
+  },
+  {
+    "id": "cda12fbe-b4ff-461d-a5b5-7365807a1577",
+    "username": "_tonkatsu_",
+    "message": "/#ff0000 赤文字/",
+    "timestamp": "06/20/2025, 11:42:30"
+  },
+  {
+    "id": "95a9004b-d9be-4f55-85a8-ca5ef29b667c",
+    "username": "takumak7",
+    "message": "ギャハハハハハ",
+    "timestamp": "06/20/2025, 11:42:30"
+  },
+  {
+    "id": "c8b1f87d-7cd1-4d59-97de-a518846c52e3",
+    "username": "_tonkatsu_",
+    "message": "/b /#ff0000 太い赤文字//",
+    "timestamp": "06/20/2025, 11:42:41"
+  },
+  {
+    "id": "8f0f7df4-d63e-45a9-a07e-9f6c501abf98",
+    "username": "_tonkatsu_",
+    "message": "/b /30 /#ff0000 太い30pxの赤文字///",
+    "timestamp": "06/20/2025, 11:42:57"
+  },
+  {
+    "id": "f0110b9c-e603-4d62-8765-1c672d6564ee",
+    "username": "_tonkatsu_",
+    "message": "bye",
+    "timestamp": "06/20/2025, 11:44:13"
   }
 ]

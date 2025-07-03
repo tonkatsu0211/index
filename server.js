@@ -780,10 +780,10 @@ app.get(["/beforeBreak", "/beforeBreak.html"], (req, res) => {
 });
 
 app.get(["/updates", "/updates.html"], (req, res) => {
-  render(req, res, "updates", {
-    title: "ページ更新履歴",
-    page: "updates",
-    top: "ページ更新履歴",
+  render(req, res, "constructing", {
+    title: "建設中のページ",
+    page: "constructing",
+    top: "建設中",
   });
 });
 

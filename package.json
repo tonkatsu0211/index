@@ -1,6 +1,6 @@
 {
   "name": "tonkatsu-page",
-  "version": "1.0.14",
+  "version": "1.1.1",
   "description": "_tonkatsu_ / tonkatsu0211's Page",
   "main": "server.js",
   "scripts": {

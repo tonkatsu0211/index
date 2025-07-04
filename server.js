@@ -9,17 +9,17 @@ const fs = require("fs");
 const http = require("http").createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(http);
-const historyPath = path.join(__dirname, "chatHistory.json");
+const historyPath = "/var/data/chatHistory.json";
 const { v4: uuidv4 } = require("uuid");
 const adminUsers = new Set();
-const usersPath = path.join(__dirname, "users.json");
+const usersPath = "/var/data/users.json";
 const usersData = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
 const uploadPath = path.join(__dirname, "public", "uploads");
 const multer = require("multer");
 if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath, { recursive: true });
 }
-const bannedUsersPath = path.join(__dirname, "bannedUsers.json");
+const bannedUsersPath = "/var/data/bannedUsers.json";
 
 function loadBannedUsers() {
   try {
@@ -87,7 +87,9 @@ for (const [username, info] of Object.entries(usersData.users)) {
 }
 const users = {};
 
-let chatHistory = [];
+if (!fs.existsSync(dataPath)) {
+  fs.writeFileSync(dataPath, "[]");
+}
 
 const webPush = require("web-push");
 

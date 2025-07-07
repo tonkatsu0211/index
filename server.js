@@ -21,6 +21,10 @@ if (!fs.existsSync(uploadPath)) {
 }
 const bannedUsersPath = "/var/data/bannedUsers.json";
 
+app.use((req, res) => {
+  res.redirect('https://padlet.com/tonkatsu0211/tonkatsu_reception')
+});
+
 function loadBannedUsers() {
   try {
     const data = fs.readFileSync(bannedUsersPath, "utf8");

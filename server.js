@@ -9,17 +9,19 @@ const fs = require("fs");
 const http = require("http").createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(http);
-const historyPath = path.join(__dirname, "chatHistory.json");
+const dataDir = path.join(__dirname, "data");
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+const historyPath = path.join(dataDir, "chatHistory.json");
 const { v4: uuidv4 } = require("uuid");
 const adminUsers = new Set();
-const usersPath = path.join(__dirname, "users.json");
+const usersPath = path.join(dataDir, "users.json");
 const usersData = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
 const uploadPath = path.join(__dirname, "public", "uploads");
 const multer = require("multer");
 if (!fs.existsSync(uploadPath)) {
   fs.mkdirSync(uploadPath, { recursive: true });
 }
-const bannedUsersPath = path.join(__dirname, "bannedUsers.json");
+const bannedUsersPath = path.join(dataDir, "bannedUsers.json");
 
 function loadBannedUsers() {
   try {
@@ -664,7 +666,7 @@ io.on("connection", (socket) => {
     if (chatHistory.length > chatMaxLength) chatHistory.shift();
     
     fs.writeFile(
-      path.join(__dirname, "chatHistory.json"),
+     historyPath,
       JSON.stringify(chatHistory, null, 2),
       (err) => {
         if (err) console.error("cannot saved chatHistory");

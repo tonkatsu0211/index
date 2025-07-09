@@ -4,26 +4,18 @@ const app = express();
 const router = express.Router();
 const path = require("path");
 const fs = require("fs");
-const usersPath = path.join(__dirname, "..", "users.json");
+const dataDir = path.join(__dirname, "..", "data");
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+const usersPath = path.join(dataDir, "users.json");
 let usersData = JSON.parse(fs.readFileSync(usersPath, "utf-8"));
-const bannedIPsPath = path.join(__dirname, "..", "bannedIP.json");
 const bcrypt = require("bcrypt");
 const http = require("http").createServer(app);
 const { Server } = require("socket.io");
 const io = new Server(http);
 
-function loadBannedIPs() {
-  try {
-    const data = fs.readFileSync(bannedIPsPath, "utf8");
-    return new Set(JSON.parse(data).ips);
-  } catch (e) {
-    return new Set();
-  }
-}
-
 console.log("chat.js loaded");
 
-const bannedUsersPath = path.join(__dirname, "bannedUsers.json");
+const bannedUsersPath = path.join(dataDir, "bannedUsers.json");
 
 function loadBannedUsers() {
   try {
@@ -166,7 +158,7 @@ router.post("/signup", async (req, res) => {
   try {
     fs.writeFileSync(usersFilePath, JSON.stringify({ users }, null, 2));
     fs.writeFileSync(
-      path.join(__dirname, "..", "usersBackup.json"),
+      path.join(dataDir, "usersBackup.json"),
       JSON.stringify({ users }, null, 2)
     );
     console.log("ユーザー登録＆バックアップ成功:", username);
